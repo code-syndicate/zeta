@@ -6,6 +6,7 @@ var logger = require('morgan');
 var sessions = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(sessions);
 var flashMessages = require('connect-flash');
+var middlewares = require('./middlewares');
 var routes = require('./routes');
 
 const app = express();
@@ -14,7 +15,11 @@ app.use(express.static('public'));
 app.use(express.json());
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
-app.set('view options', {delimilter: '%'});
+app.set('view options', {
+	delimiter: '/',
+	openDelimiter: '{',
+	closeDelimiter: '}',
+});
 
 const sessionStore = new MongoDBStore({
 	uri: process.env.DATABASE_URL,
@@ -45,6 +50,8 @@ app.use(flashMessages());
 passport.use(Customer.createStrategy());
 passport.serializeUser(Customer.serializeUser());
 passport.deserializeUser(Customer.deserializeUser());
+
+app.use(middlewares);
 
 app.use(routes);
 
