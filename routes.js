@@ -1,7 +1,32 @@
 var router = require('express').Router();
 var IndexControllers = require('./controllers/index');
+var bankingControllers = require('./controllers/banking');
+var connectEnsureLogIn = require('connect-ensure-login');
 
 // Paths
 router.get('/', IndexControllers.Index);
+router.get(
+	'/auth/sign-in',
+	connectEnsureLogIn.ensureLoggedOut({redirectTo: '/app/home'}),
+	bankingControllers.signInPage
+);
+router.get('/auth/sign-up', bankingControllers.signUpPage);
+router.post(
+	'/auth/sign-in',
+	connectEnsureLogIn.ensureLoggedOut({redirectTo: '/app/home'}),
+	bankingControllers.signUpPOST
+);
+router.post('/auth/sign-up', bankingControllers.signUpPOST);
+router.get(
+	'/app/home',
+	connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
+	bankingControllers.appIndex
+);
+
+router.get(
+	'/auth/sign-out',
+	connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
+	bankingControllers.logOut
+);
 
 module.exports = router;

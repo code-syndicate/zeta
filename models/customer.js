@@ -1,6 +1,14 @@
 var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 
+
+
+
+function genAcctNum() {
+	const seed = Math.floor(Math.random() * 10000000000);
+	return '' + seed;
+}
+
 const customerSchema = mongoose.Schema({
 	firstname: String,
 	lastname: String,
@@ -22,6 +30,17 @@ const customerSchema = mongoose.Schema({
 	balance: {type: Number, min: 0, default: 0},
 });
 
+customerSchema.methods.populateAccountNumber = async function () {
+	const acctnum = genAcctNum();
+
+	const acctExists = await Customer.exists({accountNumber: acctnum});
+	if (acctExists) {
+		this.populateAccountNumber();
+	} else {
+		this.accountNumber = acctnum;
+		await this.save();
+	}
+};
 customerSchema.plugin(passportLocalMongoose);
 
 const Customer = mongoose.model('Customer', customerSchema);
