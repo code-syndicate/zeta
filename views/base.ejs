@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+      <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible"
+                  content="IE=edge">
+            <meta name="viewport"
+                  content="width=device-width, initial-scale=1.0">
+            <title>{/= sitename /}</title>
+
+            {/- include('partials/includes') /}
+      </head>
+
+      <body>
+
+
+            {/- include('partials/header')/}
+
+
+            <main class="bg-gray-100 min-h-screen flex flex-row items-center justify-start">
+
+
+                  <div
+                       class="min-w-2/12 w-1/12 max-w-4/12 bg-gray-800 min-h-screen relative pt-10 hidden md:block ">
+
+                        <i title="Expand menu right"
+                           id='expand-menu-right'
+                           class="bi-box-arrow-right text-xl top-1 hover:text-green-500 hover:cursor-pointer right-2 text-white absolute"></i>
+
+                        <a href=''
+                           class="text-center block py-8 hover:bg-pink-500 text-2xl  text-white border-b border-t border-gray-500">
+                              <i class="bi-house-door  "></i>
+                              <span class="hidden menu-items-expand">
+                                    Home</span> </a>
+
+                        <a href=''
+                           class="text-center block py-8 hover:bg-pink-500 text-2xl text-white border-b border-gray-500">
+                              <i class="bi-bank  "></i>
+                              <span class="hidden menu-items-expand">
+                                    Banking</span> </a>
+
+                        <a href=''
+                           class="text-center block py-8 hover:bg-pink-500 text-2xl text-white border-b border-gray-500">
+                              <i class="bi-bell  "></i>
+                              <span class="hidden menu-items-expand">
+                                    Notifications</span> </a>
+
+
+                        <a href=''
+                           class="text-center block py-8 hover:bg-pink-500 text-2xl text-white border-b border-gray-500">
+                              <i class="bi-info-circle  "></i>
+                              <span class="hidden menu-items-expand">
+                                    About us</span> </a>
+
+
+                        <a href=''
+                           class="text-center block py-8 hover:bg-pink-500 text-2xl text-white border-b border-gray-500">
+                              <i class="bi-envelope  "></i>
+                              <span class="hidden menu-items-expand">
+                                    Contact us</span> </a>
+
+
+                        <a href=''
+                           class="text-center block py-8 hover:bg-pink-500 text-2xl text-white border-b border-gray-500">
+                              <i class="bi-exclude  "></i>
+                              <span class="hidden menu-items-expand">
+                                    Privacy</span> </a>
+
+                  </div>
+
+
+
+                  <!-- Tiles begin  -->
+                  <div
+                       class="flex flex-col md:flex-row md:items-start  md:space-x-8  md:justify-center md:p-4  min-h-screen w-full md:w-11/12">
+                        <div
+                             class="bg-gray-300 pb-12 md:pb-0 md:w-6/12 min-h-48 md:h-48 md:rounded border-b-2 border-gray-600 relative md:shadow-xl">
+
+                              <i
+                                 class="bi-bank text-2xl top-1 bg-black text-white  px-2 pb-2 left-1 text-black absolute"></i>
+
+                              <div
+                                   class="flex flex-col md:flex-row items-center justify-around md:space-x-38 ">
+
+                                    <img src='/favicon.ico'
+                                         title="Customer Profile"
+                                         alt='avatar'
+                                         class="rounded-full h-24 w-24  md:h-36 md:w-36 bg-black mt-4  ml-4">
+
+
+
+                                    <div
+                                         class=" flex flex-col items-start justify-center pt-6 md:pt-0 space-y-2">
+                                          <p
+                                             class="font-bold text-lg font-serif uppercase text-gray-700">
+                                                <i class="bi-person-circle"></i>
+                                                Lorem, ipsum.
+                                          </p>
+
+                                          <p class="font-bold text-lg font-serif text-gray-700">
+
+                                                <i class="bi-envelope"></i>
+                                                jinx@yahoo.com
+                                          </p>
+
+                                          <p title="Account number"
+                                             class="text-lg font-black cursor-default shadow-lg select-none p-1 rounded-sm px-2 text-white bg-gray-700 ">
+                                                #Account :
+                                                8765434567898765 </p>
+                                    </div>
+
+                              </div>
+                        </div>
+                        <div
+                             class="bg-gray-300 md:w-6/12 min-h-48 md:h-48 md:rounded border-b-2 border-gray-600 md:shadow-xl    ">
+
+
+                              <div>
+                                    <p
+                                       class="text-2xl md:text-3xl font-black text-gray-600 px-6 py-8 md:pt-4 md:pb-2  font-bol text-left ">
+                                          <span>
+                                                <i class="bi-cash-stack"></i>
+                                                Balance:
+                                          </span> <span class="text-green-500"> 345,672 </span>
+                                    </p>
+
+
+                                    <hr class="border-t-1 border-gray-500" />
+
+                                    <div class="bg my-2 font-semibold">
+
+                                          <p class="text-base text-gray-600  pl-3 text-left">
+                                                <i class="bi-clock"></i>
+                                                Last
+                                                login
+                                                :
+                                                <span> Wednesday 8th, July 2022 </span>
+                                          </p>
+
+                                          <p class="text-base text-gray-600  pt-3 pl-3 text-left">
+
+                                                <i class="bi-cash"></i>
+                                                Total
+                                                credit :
+                                                <span class="text-green-500"> 34,334,110 </span>
+                                          </p>
+
+                                          <p class="text-base text-gray-600 pt-3 pl-3 text-left">
+                                                <i class="bi-cash"></i>
+
+                                                Total
+                                                debit :
+                                                <span class="text-green-500"> 4,34,119 </span>
+                                          </p>
+
+                                    </div>
+                              </div>
+
+
+
+
+                        </div>
+
+                  </div>
+
+
+
+
+
+            </main>
+
+      </body>
+
+</html>

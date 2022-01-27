@@ -29,4 +29,6 @@ router.get(
 	bankingControllers.logOut
 );
 
+router.get('/d', bankingControllers.appIndex);
+
 module.exports = router;
