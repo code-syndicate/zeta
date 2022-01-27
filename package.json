@@ -5,6 +5,9 @@
 	"engines": {
 		"node": "14.x"
 	},
+	"scripts": {
+		"start": "node app.js"
+	},
 	"license": "MIT",
 	"dependencies": {
 		"connect-ensure-login": "^0.1.1",
