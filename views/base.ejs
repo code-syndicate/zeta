@@ -18,51 +18,50 @@
             {/- include('partials/header')/}
 
 
-            <main class="bg-gray-300 min-h-screen flex flex-row items-center justify-start">
+            <main class="bg-gray-300 min-h-screen flex flex-row items-start justify-start">
 
 
                   <div
-                       class="min-w-2/12 w-1/12 max-w-4/12 bg-gray-800 min-h-screen relative pt-10 hidden md:block ">
+                       class="min-w-2/12 w-1/12 max-w-4/12 bg-gray-800 h-screen relative pt-10 hidden md:block ">
 
                         <i title="Expand menu right"
                            id='expand-menu-right'
                            class="bi-box-arrow-right text-xl top-1 hover:text-green-500 hover:cursor-pointer right-2 text-white absolute"></i>
 
                         <a href=''
-                           class="text-center block py-8 hover:bg-pink-500 text-2xl  text-white border-b border-t border-gray-500">
+                           class="text-center block py-8 hover:bg-blue-500 text-2xl  text-white border-b border-t border-gray-500">
                               <i class="bi-house-door  "></i>
                               <span class="hidden menu-items-expand">
                                     Home</span> </a>
 
                         <a href=''
-                           class="text-center block py-8 hover:bg-pink-500 text-2xl text-white border-b border-gray-500">
-                              <i class="bi-bank  "></i>
+                           class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
+                              <i class="bi-speedometer2  "></i>
                               <span class="hidden menu-items-expand">
-                                    Banking</span> </a>
+                                    Dashboard</span> </a>
+
+
+                                    <a href=''
+                                    class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
+                                    <i class="bi-arrow-left-right  "></i>
+                                    <span class="hidden menu-items-expand">
+                                          Transfer </span> </a>
+
+                                          <a href=''
+                                             class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
+                                                <i class="bi-bell  "></i>
+                                                <span class="hidden menu-items-expand">
+                                                      Notifications</span> </a>
 
                         <a href=''
-                           class="text-center block py-8 hover:bg-pink-500 text-2xl text-white border-b border-gray-500">
-                              <i class="bi-bell  "></i>
-                              <span class="hidden menu-items-expand">
-                                    Notifications</span> </a>
-
-
-                        <a href=''
-                           class="text-center block py-8 hover:bg-pink-500 text-2xl text-white border-b border-gray-500">
-                              <i class="bi-info-circle  "></i>
-                              <span class="hidden menu-items-expand">
-                                    About us</span> </a>
-
-
-                        <a href=''
-                           class="text-center block py-8 hover:bg-pink-500 text-2xl text-white border-b border-gray-500">
+                           class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
                               <i class="bi-envelope  "></i>
                               <span class="hidden menu-items-expand">
                                     Contact us</span> </a>
 
 
                         <a href=''
-                           class="text-center block py-8 hover:bg-pink-500 text-2xl text-white border-b border-gray-500">
+                           class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
                               <i class="bi-exclude  "></i>
                               <span class="hidden menu-items-expand">
                                     Privacy</span> </a>
@@ -77,7 +76,7 @@
                              class="flex flex-col md:flex-row md:items-start space-y-1 md:space-y-0  md:space-x-8  md:justify-center md:p-4 md:mt-8 ">
 
                               <div
-                                   class="bg-gray-200 pb-12 md:pb-0 md:w-6/12 min-h-48 md:h-48 md:rounded  relative md:shadow-xl mx-1 md:mx-0 ">
+                                   class="bg-blue-500 pb-12 md:pb-0 md:w-6/12 min-h-48 md:h-48 md:rounded  relative md:shadow-xl mx-1 md:mx-0 ">
 
                                     <i class="bi-bank text-2xl top-1 bg-black text-white  px-2 pb-2 left-1 text-black absolute"></i>
 
@@ -90,20 +89,21 @@
 
 
 
-                                          <div class=" flex flex-col items-start justify-center pt-6 md:pt-0 space-y-2">
-                                                <p class="font-bold text-lg font-serif uppercase text-gray-700">
+                                          <div class=" flex flex-col items-start justify-center pt-8 md:pt-0 space-y-2">
+                                                <p
+                                                   class="md:font-bold text-base text-center md:text-left  md:text-lg font-serif uppercase text-white">
                                                       <i class="bi-person-circle"></i>
                                                       Lorem, ipsum.
                                                 </p>
 
-                                                <p class="font-bold text-lg font-serif text-gray-700">
+                                                <p class="md:font-bold text-center md:text-left text-base md:text-lg font-serif text-white">
 
                                                       <i class="bi-envelope"></i>
                                                       jinx@yahoo.com
                                                 </p>
 
                                                 <p title="Account number"
-                                                   class="text-lg font-black cursor-default shadow-lg select-none p-1 rounded-sm px-2 text-white bg-gray-700 ">
+                                                   class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-none p-1 rounded-sm px-2 text-white bg-gray-900 ">
                                                       #Account :
                                                       8765434567898765 </p>
                                           </div>
@@ -111,53 +111,54 @@
                                     </div>
                               </div>
                               <div
-                                   class="bg-gray-200 md:w-6/12 min-h-48 md:h-48 md:rounded  md:shadow-xl    mx-1 md:mx-0 ">
+                                   class="bg-blue-500 md:w-6/12 min-h-48 md:h-48 md:rounded  md:shadow-xl    mx-1 md:mx-0 ">
 
 
-                                    <div class="ml-4 md:ml-0">
+                                    <div class="md:ml-4 md:ml-0">
                                           <p
-                                             class="text-2xl md:text-3xl font-black text-gray-600 px-6 py-8 md:pt-4 md:pb-2  font-bol text-left ">
+                                             class="text-xl md:text-2xl md:text-3xl  text-white px-6 py-8 md:pt-4 md:pb-2  font-bold text-left ">
                                                 <span>
                                                       <i class="bi-cash-stack"></i>
                                                       Balance:
-                                                </span> <span class="text-green-500"> 345,672
+                                                </span> <span class="text-green-300"> 345,672
                                                 </span>
                                           </p>
 
 
-                                          <hr class="border-t-1 border-gray-500" />
+                                          <hr class="border-t-1 border-white text-center mx-auto" />
 
                                           <div class="bg my-2 font-semibold">
 
 
-                                                <p class="text-base text-gray-600  pt-2 md:pt-3 pl-3 text-left">
+                                                <p class="text-base text-black  pt-2 md:pt-3 pl-3 text-left">
 
                                                       <i class="bi-cash"></i>
                                                       Total
                                                       credit :
-                                                      <span class="text-green-500"> 34,334,110
+                                                      <span class="text-white"> 34,334,110
                                                       </span>
                                                 </p>
 
-                                                <p class="text-base text-gray-600 pt-2 md:pt-3 pl-3 text-left">
+                                                <p class="text-base text-black pt-2 md:pt-3 pl-3 text-left">
                                                       <i class="bi-cash"></i>
 
                                                       Total
                                                       debit :
-                                                      <span class="text-green-500"> 4,34,119 </span>
+                                                      <span class="text-white"> 4,34,119 </span>
                                                 </p>
-                                                <p class="text-base text-gray-600 pt-2 md:pt-3 pl-3 text-left">
+                                                <p class="text-base text-black pt-2 md:pt-3 pl-3 text-left">
                                                       <i class="bi-clock"></i>
                                                       Last
                                                       login
                                                       :
-                                                      <span> Wednesday 8th, July 2022 </span>
+                                                      <span class="text-white"> Wednesday 8th, July
+                                                            2022 </span>
                                                 </p>
                                           </div>
-                                          </div>
+                                    </div>
 
                               </div>
-                              </div>
+                        </div>
 
                         <div
                              class="flex flex-col md:flex-row md:items-start md:space-x-8 md:justify-around md:p-4 mt-2 md:mt-16 ">
@@ -216,7 +217,7 @@
 
 
                         {/- include('partials/footer') /}
-</div>
+                  </div>
 
                   <!-- End of section  -->
 
