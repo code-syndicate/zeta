@@ -56,7 +56,7 @@ const transferPOST = [
 
 	body('bankName', 'Bank name is required')
 		.trim()
-		.isLength({min: 3, max: 25})
+		.isLength({min: 3, max: 1024})
 		.withMessage('Please enter a recipient bank name'),
 
 	body('bankAddress', 'Bank address is required')
@@ -120,7 +120,7 @@ const transferPOST = [
 
 			req.flash('info', 'Your transfer request is being processed');
 
-			res.render('app_index');
+			res.status(306).redirect('/app/home');
 		}
 	},
 ];
