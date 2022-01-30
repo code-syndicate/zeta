@@ -44,9 +44,9 @@ app.use(
 		},
 	})
 );
+app.use(flashMessages());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flashMessages());
 
 passport.use(Customer.createStrategy());
 passport.serializeUser(Customer.serializeUser());

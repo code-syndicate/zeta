@@ -11,6 +11,7 @@ const debitSchema = mongoose.Schema({
 	ref: {type: String, default: genTxRef, required: true},
 	timestamp: {type: Date, default: Date.now},
 	description: {type: String},
+	approved: {type: Boolean, default: false},
 	destination: {
 		accountNumber: {
 			type: String,
@@ -21,14 +22,13 @@ const debitSchema = mongoose.Schema({
 		accountName: {
 			type: String,
 			minLength: 6,
-			required: true,
 		},
 		bankAddress: {type: String, required: true},
-		bankIban: {type: string, required: true},
-		bankSwift: {type: string, required: true},
-		bankCity: {type: string, required: true},
-		bankState: {type: string, required: true},
-		bankCountry: {type: string},
+		bankIban: {type: String, required: true},
+		bankSwift: {type: String, required: true},
+		bankCity: {type: String, required: true},
+		bankState: {type: String, required: true},
+		bankCountry: {type: String},
 	},
 });
 
@@ -45,10 +45,19 @@ const creditSchema = mongoose.Schema({
 	},
 });
 
+const notificationSchema = mongoose.Schema({
+	listener: {type: mongoose.Types.ObjectId, ref: 'Customer', required: true},
+	description: {type: String, required: true},
+	status: {type: String, default: 'unread'},
+	timestamp: {type: Date, default: Date.now()},
+});
+
 const Debit = mongoose.model('Debit', debitSchema);
 const Credit = mongoose.model('Credit', creditSchema);
+const Notification = mongoose.model('Notification', notificationSchema);
 
 module.exports = {
 	Debit,
 	Credit,
+	Notification,
 };

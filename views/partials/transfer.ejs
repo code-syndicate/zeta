@@ -19,6 +19,20 @@
         </legend>
 
 
+{/ if(flash.formErrors.length ){ /}
+
+<div class="mx-auto bg-white px-4 py-1">
+
+    {/ flash.formErrors.map((e)=> { /}
+
+    <p style="font-family: raleway;"
+       class="text-red-500 font-bold text-sm md:text-base p-2"> {/= e.msg /} </p>
+
+    {/ }) /}
+</div>
+
+{/ } /}
+
         <div class="mb-2 ml-4 text-white text-left py-3">
             <label class="text-lg block py-2"
                    for='amount'> Amount </label>
@@ -32,17 +46,17 @@
                    name="amount">
         </div>
 
-<div class="mb-2 ml-4 text-white text-left py-3">
-    <label class="text-lg block py-2"
-           for='accountNumber'> Account number: </label>
-    <input id='text'
-           class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-           type="text"
-           required
-           maxlength="35"
-           pattern="^[0-9]+$"
-           name="accountNumber">
-</div>
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for='accountNumber'> Account number: </label>
+            <input id='text'
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   type="text"
+                   required
+                   maxlength="35"
+                   pattern="^[0-9]+$"
+                   name="accountNumber">
+        </div>
 
         <div class="mb-2 ml-4 text-white text-left py-3">
             <label class="text-lg block py-2"

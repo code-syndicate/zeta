@@ -2,6 +2,7 @@ var passport = require('passport');
 var Customer = require('./../models/customer');
 require('dotenv').config();
 var {body, validationResult} = require('express-validator');
+var {Debit, Notification, Credit} = require('../models/transactions');
 
 function appIndex(req, res) {
 	let ref2 = req.query.ref2 || null;
@@ -32,12 +33,22 @@ function logOut(req, res) {
 	res.status(306).redirect('/auth/sign-in');
 }
 
-
 const transferPOST = [
 	body('amount', 'Amount is required')
 		.trim()
 		.isNumeric({locale: 'en-GB'})
 		.withMessage('Please enter a valid amount to transfer'),
+	body('amount').custom(function (inputValue, {req}) {
+		if (req.user.balance < inputValue) {
+			throw Error('Insufficient funds!');
+		}
+
+		if (inputValue < 10) {
+			throw Error('Minimum amount for transfer is $10');
+		}
+
+		return true;
+	}),
 	body('accountNumber', 'Account number is required')
 		.trim()
 		.isNumeric()
@@ -76,14 +87,39 @@ const transferPOST = [
 		.trim()
 		.isLength({min: 3})
 		.withMessage('Please enter a valid country'),
-	function (req, res) {
+	async function (req, res) {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			req.flash('formErrors', errors.array());
 
-			res.status(306).redirect(req.url);
+			res.status(306).redirect('/app/home?ref2=TX');
 		} else {
-			next();
+			const newDebit = await new Debit({
+				issuer: req.user._id,
+				amount: req.body.amount,
+				description: `Transfer of $${req.body.amount} to account ${req.body.accountNumber}`,
+				destination: {
+					accountNumber: req.body.accountNumber,
+					bankAddress: req.body.bankAddress,
+					bankIban: req.body.iban,
+					bankSwift: req.body.swift,
+					bankCity: req.body.city,
+					bankState: req.body.state,
+					bankCountry: req.body.country,
+				},
+			}).save();
+
+			req.user.balance -= newDebit.amount;
+			req.user.totalDebit += newDebit.amount;
+			await req.user.save();
+
+			await new Notification({
+				listener: req.user._id,
+				description: `Debit of $${req.body.amount} by account ${req.body.accountNumber}`,
+			}).save();
+
+			req.flash('info', 'Your transfer request is being processed');
+
 			res.render('app_index');
 		}
 	},
@@ -96,6 +132,7 @@ const signInPOST = [
 		.withMessage('Please enter a valid email address'),
 
 	body('password', 'Password is required')
+		.trim()
 		.isLength({min: 8, max: 35})
 		.withMessage('Password must be 8 characters or more'),
 
@@ -204,6 +241,7 @@ function signInPage(req, res) {
 	const flash = {
 		formErrors: req.flash('formErrors'),
 		info: req.flash('info'),
+		error: req.flash('error'),
 	};
 
 	const context = {
