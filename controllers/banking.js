@@ -211,7 +211,7 @@ const signUpPOST = [
 
 		return true;
 	}),
-	function (req, res) {
+	async function (req, res) {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			req.flash('formErrors', errors.array());
