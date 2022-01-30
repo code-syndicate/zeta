@@ -13,7 +13,6 @@ function appIndex(req, res) {
 		ref1: null,
 		flash,
 		avatar: req.user.gender === 'male' ? '/user_m.png' : '/user_f.png',
-		customer: req.user,
 	};
 	res.render('app_index', context);
 }

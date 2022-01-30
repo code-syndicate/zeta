@@ -3,6 +3,9 @@ require('dotenv').config();
 function context(req, res, next) {
 	res.locals.sitename = process.env.SITENAME;
 	res.locals.user = req.user || null;
+	res.locals.customer = req.user || {
+		lastLogin: {},
+	};
 
 	if (req.user) {
 		if (req.user.gender === 'male') {
