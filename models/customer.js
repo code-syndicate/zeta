@@ -16,7 +16,6 @@ const customerSchema = mongoose.Schema({
 	city: {type: String},
 	state: {type: String},
 	country: {type: String},
-	avatar: {type: String, unique: true},
 	email: {type: String, unique: true, required: true, maxLength: 255},
 	hasVerifiedEmail: {type: Boolean, default: false},
 	dateJoined: {type: Date, default: Date.now},
