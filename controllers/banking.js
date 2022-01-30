@@ -32,6 +32,63 @@ function logOut(req, res) {
 	res.status(306).redirect('/auth/sign-in');
 }
 
+
+const transferPOST = [
+	body('amount', 'Amount is required')
+		.trim()
+		.isNumeric({locale: 'en-GB'})
+		.withMessage('Please enter a valid amount to transfer'),
+	body('accountNumber', 'Account number is required')
+		.trim()
+		.isNumeric()
+		.withMessage('Please enter a valid account number '),
+
+	body('bankName', 'Bank name is required')
+		.trim()
+		.isLength({min: 3, max: 25})
+		.withMessage('Please enter a recipient bank name'),
+
+	body('bankAddress', 'Bank address is required')
+		.trim()
+		.isLength({min: 25, max: 1024})
+		.withMessage('Please enter a valid address'),
+
+	body('iban', 'Bank IBAN is required')
+		.trim()
+		.isLength({min: 3})
+		.withMessage('Please enter a valid bank IBAN'),
+
+	body('swift', 'Bank SWIFT is required')
+		.trim()
+		.isLength({min: 3})
+		.withMessage('Please enter a valid bank SWIFT'),
+
+	body('state', 'State is required')
+		.trim()
+		.isLength({min: 3})
+		.withMessage('Please enter a valid state'),
+
+	body('city', 'City is required')
+		.trim()
+		.isLength({min: 3})
+		.withMessage('Please enter a valid city'),
+	body('country', 'Country is required')
+		.trim()
+		.isLength({min: 3})
+		.withMessage('Please enter a valid country'),
+	function (req, res) {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			req.flash('formErrors', errors.array());
+
+			res.status(306).redirect(req.url);
+		} else {
+			next();
+			res.render('app_index');
+		}
+	},
+];
+
 const signInPOST = [
 	body('email', 'Email address is required')
 		.trim()
@@ -185,4 +242,5 @@ module.exports = {
 	signUpPage,
 	appIndex,
 	logOut,
+	transferPOST,
 };

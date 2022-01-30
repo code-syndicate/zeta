@@ -17,6 +17,12 @@ router.post(
 	bankingControllers.signInPOST
 );
 router.post('/auth/sign-up', bankingControllers.signUpPOST);
+router.post(
+	'/app/transfer',
+	connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
+	bankingControllers.transferPOST
+);
+
 router.get(
 	'/app/home',
 	connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
