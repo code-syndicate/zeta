@@ -16,15 +16,16 @@ async function context(req, res, next) {
 			.lean()
 			.exec();
 
-		res.locals.updatesCount = updates.length === 0 ? '' : updates.length;
+		 = updates.length === 0 ? '' : updates.length;
 
 		if (req.user.gender === 'male') {
 			res.locals.avatar = '/user_m.png';
 		} else if (req.user.gender === 'female') {
-			res.locals.avatar = '/user_f.png';
+			res.locals.avatar = '/user_f.res.locals.updatesCountpng';
 		}
 	} else {
 		res.locals.avatar = '/user_m.png';
+		res.locals.updatesCount = 0;
 	}
 
 	next();
