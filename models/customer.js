@@ -41,7 +41,7 @@ customerSchema.methods.populateAccountNumber = async function () {
 		await this.save();
 	}
 };
-customerSchema.plugin(passportLocalMongoose);
+customerSchema.plugin(passportLocalMongoose, {usernameField: 'email'});
 
 const Customer = mongoose.model('Customer', customerSchema);
 

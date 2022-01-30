@@ -28,7 +28,7 @@ const signInPOST = [
 		if (!errors.isEmpty()) {
 			req.flash('formErrors', errors.array());
 
-			res.status(306).redirect(req.originalUrl);
+			res.status(306).redirect(req.url);
 		} else {
 			next();
 		}
@@ -37,7 +37,7 @@ const signInPOST = [
 	passport.authenticate('local', {
 		failureFlash: 'Invalid login credentials',
 		successRedirect: '/app/home',
-		failureRedirect: '/auth/sign-in',
+		failureRedirect: '/auth/sign-in?ref1=SI',
 	}),
 ];
 
@@ -57,7 +57,7 @@ const signUpPOST = [
 		.isEmail()
 		.withMessage('Please enter a valid email'),
 
-	body('dateOfBirth').isDate().withMessage('Please enter a valid date'),
+	body('dob').isDate().withMessage('Please enter a valid date'),
 
 	body('state', 'State is required')
 		.trim()
@@ -118,10 +118,27 @@ const signUpPOST = [
 ];
 
 function signInPage(req, res) {
-	res.render('sign_in');
+	let ref1 = req.query.ref1 || null;
+	const validRef1 = ['SU', 'SI'];
+
+	if (!validRef1.includes(ref1)) {
+		ref1 = null;
+	}
+
+	const flash = {
+		formErrors: req.flash('formErrors'),
+		info: req.flash('info'),
+	};
+
+	const context = {
+		ref1,
+		flash,
+	};
+
+	res.render('app_index', context);
 }
 function signUpPage(req, res) {
-	res.render('sign_up');
+	res.render('app_index');
 }
 
 module.exports = {

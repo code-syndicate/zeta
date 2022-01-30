@@ -14,7 +14,7 @@ router.get('/auth/sign-up', bankingControllers.signUpPage);
 router.post(
 	'/auth/sign-in',
 	connectEnsureLogIn.ensureLoggedOut({redirectTo: '/app/home'}),
-	bankingControllers.signUpPOST
+	bankingControllers.signInPOST
 );
 router.post('/auth/sign-up', bankingControllers.signUpPOST);
 router.get(

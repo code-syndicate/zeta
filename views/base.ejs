@@ -42,13 +42,18 @@
             </script>
 
             <!-- Overlay  -->
-            <div id='overlay'
-                 class="fixed top-0 z-30 left-0 right-0 bottom-0 bg-gray-100 opacity-80">
+            <!-- <div id='overlay'
+                                                                             class="fixed hidden top-0 z-30 left-0 right-0 bottom-0 bg-gray-100 opacity-80">
+            
+                                    </div> -->
 
-            </div>
+            {/ if(ref1 === 'SI'){ /}
 
+            {/- include('partials/sign_in')/}
 
-      {/- include('partials/sign_up')/}
+            {/ } else if( ref1 === 'SU') { /}
+            {/- include('partials/sign_up')/}
+            {/ } /}
 
             {/- include('partials/header')/}
 
@@ -172,7 +177,8 @@
                                                 <span>
                                                       <i class="bi-cash-stack"></i>
                                                       Balance:
-                                                </span> <span class="text-green-300"> &dollar;345,672
+                                                </span> <span class="text-green-300">
+                                                      &dollar;345,672
                                                 </span>
                                           </p>
 
@@ -196,7 +202,8 @@
 
                                                       Total
                                                       debit ->
-                                                      <span class="text-white"> &dollar;4,34,119 </span>
+                                                      <span class="text-white"> &dollar;4,34,119
+                                                      </span>
                                                 </p>
                                                 <p class="text-lg text-white  pt-2 md:pt-3  ">
                                                       <i class="bi-clock"></i>

@@ -8,6 +8,7 @@ var MongoDBStore = require('connect-mongodb-session')(sessions);
 var flashMessages = require('connect-flash');
 var middlewares = require('./middlewares');
 var routes = require('./routes');
+var connectDB = require('./models/connect');
 
 const app = express();
 app.use(logger('dev'));
@@ -35,7 +36,7 @@ app.use(
 	sessions({
 		secret: process.env.COOKIE_SECRET,
 		resave: false,
-		saveUninitialized: false,
+		saveUninitialized: true,
 		store: sessionStore,
 		cookie: {
 			signed: true,
@@ -54,6 +55,8 @@ passport.deserializeUser(Customer.deserializeUser());
 app.use(middlewares);
 
 app.use(routes);
+
+connectDB();
 
 app.listen(app.get('port'), () => {
 	console.log('\n  --> Server listening on port', app.get('port'), ' <--');
