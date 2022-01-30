@@ -1,8 +1,12 @@
 require('dotenv').config();
 var {Notification} = require('./models/transactions');
+var numeral = require('numeral');
 
 async function context(req, res, next) {
 	res.locals.sitename = process.env.SITENAME;
+	res.locals.numeral = function (number) {
+		return numeral(number).format('0,0.00');
+	};
 	res.locals.user = req.user || null;
 	res.locals.customer = req.user || {
 		lastLogin: {},
