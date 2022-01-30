@@ -1,0 +1,36 @@
+<!-- Sign In Form  -->
+<div id='sign-in-form'
+     class="max-w-xl mx-auto rounded mt-16 z-40 fixed top-0 left-0 right-0 bg-blue-500 p-2 ">
+
+    <i id='close-sign-in-form'
+       class="bi-x  text-3xl absolute top-2 right-2 text-white hover:scale-110 transform cursor-pointer"></i>
+    <form>
+
+        <legend class="text-2xl py-4 text-center text-white"
+                style="font-family: comforter;"> Sign in </legend>
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for='email'> Email Address: </label>
+            <input id='email'
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   type="email"
+                   maxlength="255"
+                   name="email">
+        </div>
+
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for="password"> Password: </label>
+            <input type="password"
+                   minlength="8"
+                   maxlength="35"
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   id='password'
+                   name="password">
+        </div>
+
+        <input type="submit"
+               value="Sign in"
+               class="w-11/12 mt-12 mb-6 cursor-pointer block bg-blue-500 hover:bg-white hover:text-gray-700 text-white mx-auto text-black ring-1 ring-white rounded text-xl p-3">
+    </form>
+</div>
