@@ -38,6 +38,18 @@
                               $('#overlay').fadeIn('fast');
                               $('#sign-up-form').slideDown();
                         })
+
+
+                        $('#close-transfer-form').click(() => {
+                              $('#transfer-form').slideUp('fast');
+                              $('#overlay').fadeOut('slow');
+                        })
+
+
+                        $('.open-transfer-form').click(() => {
+                              $('#overlay').fadeIn('fast');
+                              $('#transfer-form').slideDown();
+                        })
                   })
             </script>
 
@@ -53,6 +65,12 @@
 
             {/ } else if( ref1 === 'SU') { /}
             {/- include('partials/sign_up')/}
+            {/ } /}
+
+            {/ if(ref2 === 'TX'){ /}
+            
+            {/- include('partials/transfer')/}
+            
             {/ } /}
 
             {/- include('partials/header')/}
@@ -85,12 +103,11 @@
                                     Dashboard</span> </a>
 
 
-                        <a href=''
-                           title="Transact"
-                           class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
+                        <a title="Transfer funds"
+                           class=" open-transfer-form cursor-pointer text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
                               <i class="bi-arrow-left-right  "></i>
                               <span class="hidden menu-items-expand">
-                                    Transact </span> </a>
+                                    Transfer </span> </a>
 
                         <a href=''
                            title="Notifications"
@@ -149,7 +166,8 @@
                                                 <p
                                                    class="md:font-bold text-base text-center md:text-left  md:text-lg font-serif uppercase text-white">
                                                       <i class="bi-person-circle"></i>
-                                                      {/= customer.firstname + " " + customer.lastname /}
+                                                      {/= customer.firstname + " " +
+                                                      customer.lastname /}
                                                 </p>
 
                                                 <p class="md:font-bold text-center md:text-left text-base md:text-lg font-serif text-white">
@@ -193,7 +211,8 @@
                                                       <i class="bi-cash"></i>
                                                       Total
                                                       credit ->
-                                                      <span class="text-white"> &dollar;{/= customer.totalCredit /}
+                                                      <span class="text-white"> &dollar;{/=
+                                                            customer.totalCredit /}
                                                       </span>
                                                 </p>
 
@@ -202,14 +221,17 @@
 
                                                       Total
                                                       debit ->
-                                                      <span class="text-white"> &dollar;{/= customer.totalDebit /}
+                                                      <span class="text-white"> &dollar;{/=
+                                                            customer.totalDebit /}
                                                       </span>
                                                 </p>
                                                 <p class="text-lg text-white  pt-2 md:pt-3  ">
                                                       <i class="bi-clock"></i>
                                                       Last
                                                       login ->
-                                                      <span class="text-white"> {/= customer.lastLogin.toLocaleString() /} </span>
+                                                      <span class="text-white"> {/=
+                                                            customer.lastLogin.toLocaleString() /}
+                                                      </span>
                                                 </p>
                                           </div>
                                     </div>
@@ -228,7 +250,7 @@
                                          class="w-full min-h-48 md:h-56 md:rounded ">
 
 
-                                    <a href=""
+                                    <a href="/"
                                        class="absolute bottom-6 left-6 bg-gray-600 text-white text-left p-2 px-4 rounded shadow-2xl hover:bg-white hover:text-gray-600 font-bold ">
                                           Online banking </a>
 
@@ -251,8 +273,8 @@
                                          src="/p8.jpg"
                                          class="w-full min-h-48 md:h-56 md:rounded">
 
-                                    <a href=""
-                                       class="absolute bottom-6 left-6 bg-gray-600 text-white text-left p-2 px-4 rounded shadow-2xl hover:bg-white hover:text-gray-600 font-bold ">
+                                    <a
+                                       class="  open-transfer-form cursor-pointer  absolute bottom-6 left-6 bg-gray-600 text-white text-left p-2 px-4 rounded shadow-2xl hover:bg-white hover:text-gray-600 font-bold ">
                                           Withdraw online </a>
 
                               </div>

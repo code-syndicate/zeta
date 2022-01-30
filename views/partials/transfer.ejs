@@ -1,0 +1,130 @@
+<!-- Transfer funds Form  -->
+<!-- Overlay  -->
+<div id='overlay'
+     class="fixed top-0 z-20 left-0 right-0 bottom-0 bg-gray-50 opacity-75  ">
+
+</div>
+<div id='transfer-form'
+     style="height:150vh;padding-bottom: 550px;"
+     class="max-w-xl mx-auto rounded mt-10 z-30 fixed top-0 left-0 right-0 bottom-0 bg-blue-500 p-2 overflow-y-scroll  ">
+
+    <i id='close-transfer-form'
+       class="bi-x  text-3xl absolute top-2 right-2 text-white hover:scale-110 transform cursor-pointer"></i>
+    <form method="post"
+          action="/auth/sign-up"
+          class="">
+
+        <legend class="text-2xl py-4 text-center text-white"
+                style="font-family: comforter;"> <i class="bi-arrow-left-right"></i> Transfer funds
+        </legend>
+
+
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for='amount'> Amount </label>
+            <input id='amount'
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   type="text"
+                   pattern="^(\d+(\.\d{0,9})?|\.?\d{1,2})$"
+                   max='{/=customer.balance/}'
+                   required
+                   min="10"
+                   name="amount">
+        </div>
+
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for='bankName'> Bank name: </label>
+            <input id='text'
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   type="text"
+                   required
+                   maxlength="35"
+                   name="bankName">
+        </div>
+
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for='bankAddress'> Bank address: </label>
+            <input id='bankAddress'
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   required
+                   maxlength="35"
+                   name="bankAddress">
+        </div>
+
+
+
+
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for='swift'> Bank SWIFT: </label>
+            <input id='swift'
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   type="text"
+                   required
+                   maxlength="35"
+                   minlength="2"
+                   name="swift">
+        </div>
+
+
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for='iban'> Bank IBAN: </label>
+            <input id='iban'
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   type="text"
+                   maxlength="35"
+                   required
+                   minlength="2"
+                   name="iban">
+        </div>
+
+
+
+
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for="city"> City </label>
+            <input type="text"
+                   minlength="3"
+                   maxlength="55"
+                   required
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   id='city'
+                   name="city">
+        </div>
+
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for="state"> State </label>
+            <input type="text"
+                   minlength="3"
+                   maxlength="55"
+                   required
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   id='state'
+                   name="state">
+        </div>
+
+        <div class="mb-2 ml-4 text-white text-left py-3">
+            <label class="text-lg block py-2"
+                   for="country"> Country </label>
+            <input type="text"
+                   minlength="3"
+                   maxlength="55"
+                   required
+                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                   id='country'
+                   name="country">
+        </div>
+
+
+
+
+        <input type="submit"
+               value="Proceed"
+               class="w-11/12 mt-12 mb-6 cursor-pointer block bg-blue-500 hover:bg-white hover:text-gray-700 text-white mx-auto text-black ring-1 ring-white rounded text-xl p-3">
+    </form>
+</div>

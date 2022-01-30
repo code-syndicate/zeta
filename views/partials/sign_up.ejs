@@ -1,11 +1,11 @@
 <!-- Sign up Form  -->
 <!-- Overlay  -->
 <div id='overlay'
-     class="fixed top-0 z-20 left-0 right-0 bottom-0 bg-gray-300 opacity-50  ">
+     class="fixed top-0 z-20 left-0 right-0 bottom-0 bg-gray-50 opacity-75  ">
 
 </div>
 <div id='sign-up-form'
-style="height:150vh;padding-bottom: 550px;"
+     style="height:150vh;padding-bottom: 550px;"
      class="max-w-xl mx-auto rounded mt-10 z-30 fixed top-0 left-0 right-0 bottom-0 bg-blue-500 p-2 overflow-y-scroll  ">
 
        <!-- <i id='close-sign-up-form'
@@ -24,6 +24,7 @@ style="height:150vh;padding-bottom: 550px;"
                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                             type="text"
                             maxlength="35"
+                            required
                             name="firstname">
               </div>
 
@@ -33,6 +34,7 @@ style="height:150vh;padding-bottom: 550px;"
                      <input id='lastname'
                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                             type="text"
+                            required
                             maxlength="35"
                             name="lastname">
               </div>
@@ -46,6 +48,7 @@ style="height:150vh;padding-bottom: 550px;"
                      <input id='email'
                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                             type="email"
+                            required
                             maxlength="255"
                             name="email">
               </div>
@@ -56,6 +59,7 @@ style="height:150vh;padding-bottom: 550px;"
                      <label class="text-lg block py-2"
                             for='gender'> Gender: </label>
                      <select id='gender'
+                             required
                              class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                              name="gender">
                             <option selected
@@ -74,6 +78,7 @@ style="height:150vh;padding-bottom: 550px;"
                      <label class="text-lg block py-2"
                             for='dob'> Date of birth: </label>
                      <input id='dob'
+                            required
                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                             type="date"
                             name="dob">
@@ -85,6 +90,7 @@ style="height:150vh;padding-bottom: 550px;"
                             for="city"> City </label>
                      <input type="text"
                             minlength="3"
+                            required
                             maxlength="55"
                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                             id='city'
@@ -96,6 +102,7 @@ style="height:150vh;padding-bottom: 550px;"
                             for="state"> State </label>
                      <input type="text"
                             minlength="3"
+                            required
                             maxlength="55"
                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                             id='state'
@@ -107,6 +114,7 @@ style="height:150vh;padding-bottom: 550px;"
                             for="country"> Country </label>
                      <input type="text"
                             minlength="3"
+                            required
                             maxlength="55"
                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                             id='country'
@@ -123,6 +131,7 @@ style="height:150vh;padding-bottom: 550px;"
                      <input type="password"
                             minlength="8"
                             maxlength="35"
+                            required
                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                             id='password1'
                             name="password1">
@@ -133,6 +142,7 @@ style="height:150vh;padding-bottom: 550px;"
                             for="password2">Confirm Password: </label>
                      <input type="password"
                             minlength="8"
+                            required
                             maxlength="35"
                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                             id='password2'

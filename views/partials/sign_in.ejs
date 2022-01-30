@@ -1,7 +1,7 @@
 <!-- Sign In Form  -->
 <!-- Overlay  -->
 <div id='overlay'
-     class="fixed top-0 z-30 left-0 right-0 bottom-0 bg-gray-50 opacity-75">
+     class="fixed top-0 z-30 left-0 right-0 bottom-0 bg-white opacity-90">
 
 </div>
 
@@ -25,6 +25,8 @@
             <input id='email'
                    class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                    type="email"
+                   required
+
                    maxlength="255"
                    name="email">
         </div>
@@ -34,6 +36,8 @@
                    for="password"> Password: </label>
             <input type="password"
                    minlength="8"
+                   required
+
                    maxlength="35"
                    class="block w-10/12 py-2 rounded outline-none text-black pl-6"
                    id='password'

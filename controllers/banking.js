@@ -4,6 +4,14 @@ require('dotenv').config();
 var {body, validationResult} = require('express-validator');
 
 function appIndex(req, res) {
+	let ref2 = req.query.ref2 || null;
+
+	const validRefs = ['TX'];
+
+	if (!validRefs.includes(ref2)) {
+		ref2 = null;
+	}
+
 	const flash = {
 		formErrors: req.flash('formErrors'),
 		info: req.flash('info'),
@@ -11,6 +19,7 @@ function appIndex(req, res) {
 
 	const context = {
 		ref1: null,
+		ref2,
 		flash,
 		avatar: req.user.gender === 'male' ? '/user_m.png' : '/user_f.png',
 	};
@@ -142,6 +151,7 @@ function signInPage(req, res) {
 
 	const context = {
 		ref1,
+		ref2: null,
 		flash,
 	};
 
@@ -162,6 +172,7 @@ function signUpPage(req, res) {
 
 	const context = {
 		ref1,
+		ref2: null,
 		flash,
 	};
 	res.render('app_index', context);
