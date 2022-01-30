@@ -112,8 +112,9 @@
 
                         <a href='/app/notifications'
                            title="Notifications"
-                           class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
-                              <i class="bi-bell  "></i>
+                           class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500 relative">
+                              <i class="bi-bell  "></i> {/ if(updatesCount ) { /} <i style="font-family: work sans;" class="bg-red-500 text-white rounded-full px-2 py-1 font-bold absolute top-6 left-22 text-sm">  {/= updatesCount
+                                    /}</i> {/ } /}
                               <span class="hidden menu-items-expand">
                                     Notifications</span> </a>
 
