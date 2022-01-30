@@ -8,7 +8,7 @@ async function context(req, res, next) {
 		lastLogin: {},
 	};
 
-	if (req.isAuthenticated) {
+	if (req.isAuthenticated()) {
 		const updates = await Notification.find({
 			status: 'unread',
 			listener: req.user,
