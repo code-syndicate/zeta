@@ -311,13 +311,13 @@
 
                                     </table>
                                     {/ } else { /}
-                                    
+
                                     <p class="text-2xl text-center p-6 pt-12 text-white self-center "
                                        style="font-family: raleway;"> <i class="bi-exclamation-diamond text-3xl"></i> &nbsp;No
                                           debit
                                           transaction is
                                           available </p>
-                                    
+
                                     {/ } /}
                               </div>
 
@@ -337,7 +337,7 @@
 
                                           </tr>
                                           {/ credits.map((d)=>{ /}
-                                          
+
                                           <tr style="font-family: raleway;"
                                               class="text-white py-4 md:py-2 text-center bg-blue-400 hover:bg-blue-300 cursor-pointer">
                                                 <td class="px-4"> {/= d.ref /}</td>
@@ -345,20 +345,20 @@
                                                 <td class="px-4"> {/= d.timestamp.toLocaleString()
                                                       /}</td>
                                                 <td class="px-4"> {/= d.description /}</td>
-                                          
+
                                           </tr>
-                                          
+
                                           {/ }) /}
 
                                     </table>
                                     {/ } else { /}
-                                    
+
                                     <p class="text-2xl text-center p-6 pt-12 text-white self-center "
                                        style="font-family: raleway;"> <i class="bi-exclamation-diamond text-3xl"></i> &nbsp;No
                                           credit
                                           transaction is
                                           available </p>
-                                    
+
                                     {/ } /}
                               </div>
 
@@ -377,9 +377,9 @@
                                          class="w-full min-h-48 md:h-56 md:rounded ">
 
 
-                                    <a href="/"
+                                    <a href="/app/home"
                                        class="absolute bottom-6 left-6 bg-gray-600 text-white text-left p-2 px-4 rounded shadow-2xl hover:bg-white hover:text-gray-600 font-bold ">
-                                          Home </a>
+                                          Dashboard </a>
 
                               </div>
                               <div class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative">

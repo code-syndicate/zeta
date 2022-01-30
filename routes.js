@@ -4,6 +4,11 @@ var bankingControllers = require('./controllers/banking');
 var connectEnsureLogIn = require('connect-ensure-login');
 
 // Paths
+
+router.get('/about', IndexControllers.about);
+router.get('/contact-us', IndexControllers.contact);
+router.get('/our-services', IndexControllers.services);
+
 router.get('/', IndexControllers.Index);
 router.get(
 	'/auth/sign-in',
