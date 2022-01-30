@@ -52,9 +52,9 @@ passport.use(Customer.createStrategy());
 passport.serializeUser(Customer.serializeUser());
 passport.deserializeUser(Customer.deserializeUser());
 
-app.use(middlewares);
+app.use(middlewares.context, routes);
 
-app.use(routes);
+// app.use(routes);
 
 connectDB();
 

@@ -1,5 +1,4 @@
 require('dotenv').config();
-var router = require('express').Router();
 
 function context(req, res, next) {
 	res.locals.sitename = process.env.SITENAME;
@@ -18,6 +17,4 @@ function context(req, res, next) {
 	next();
 }
 
-router.use(context);
-
-module.exports = router;
+module.exports = {context};

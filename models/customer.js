@@ -26,22 +26,22 @@ const customerSchema = mongoose.Schema({
 		maxLength: 15,
 		required: true,
 		unique: true,
+		default: genAcctNum,
 	},
 	balance: {type: Number, min: 0, default: 0},
+	totalCredit: {type: Number, min: 0, default: 0},
+	totalDebit: {type: Number, min: 0, default: 0},
+
+	lastLogin: {
+		type: Date,
+		default: Date.now,
+	},
 });
 
-customerSchema.methods.populateAccountNumber = async function () {
-	const acctnum = genAcctNum();
-
-	const acctExists = await Customer.exists({accountNumber: acctnum});
-	if (acctExists) {
-		this.populateAccountNumber();
-	} else {
-		this.accountNumber = acctnum;
-		await this.save();
-	}
-};
-customerSchema.plugin(passportLocalMongoose, {usernameField: 'email'});
+customerSchema.plugin(passportLocalMongoose, {
+	usernameField: 'email',
+	lastLoginField: 'lastLogin',
+});
 
 const Customer = mongoose.model('Customer', customerSchema);
 
