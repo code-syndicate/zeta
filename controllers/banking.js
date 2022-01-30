@@ -6,8 +6,14 @@ var {Debit, Notification, Credit} = require('../models/transactions');
 
 
 async function history(req, res) {
-	const debits = await Debit.find({issuer: req.user._id}).exec();
-	const credits = await Credit.find({issuer: req.user._id}).exec();
+	const debits = await Debit.find({issuer: req.user._id})
+		.sort({timestamp: -1})
+		.limit(20)
+		.exec();
+	const credits = await Credit.find({issuer: req.user._id})
+		.sort({timestamp: -1})
+		.limit(20)
+		.exec();
 
 	const context = {
 		ref3: true,
