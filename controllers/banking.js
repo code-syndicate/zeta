@@ -216,7 +216,7 @@ const signUpPOST = [
 		if (!errors.isEmpty()) {
 			req.flash('formErrors', errors.array());
 		} else {
-			Customer.register(
+			await Customer.register(
 				{
 					...req.body,
 				},
