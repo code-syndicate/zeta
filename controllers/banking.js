@@ -4,6 +4,24 @@ require('dotenv').config();
 var {body, validationResult} = require('express-validator');
 var {Debit, Notification, Credit} = require('../models/transactions');
 
+
+async function history(req, res) {
+	const debits = await Debit.find({issuer: req.user._id}).exec();
+	const credits = await Credit.find({issuer: req.user._id}).exec();
+
+	const context = {
+		ref3: true,
+		ref2: null,
+		ref1: null,
+		debits,
+		credits,
+		flash: {
+			info: req.flash('info'),
+		},
+	};
+	res.render('app_index', context);
+}
+
 function appIndex(req, res) {
 	let ref2 = req.query.ref2 || null;
 
@@ -281,4 +299,5 @@ module.exports = {
 	appIndex,
 	logOut,
 	transferPOST,
+	history,
 };

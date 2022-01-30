@@ -4,6 +4,7 @@ var numeral = require('numeral');
 
 async function context(req, res, next) {
 	res.locals.sitename = process.env.SITENAME;
+	res.locals.ref3 = false;
 	res.locals.numeral = function (number) {
 		return numeral(number).format('0,0.00');
 	};

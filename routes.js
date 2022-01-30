@@ -24,6 +24,12 @@ router.post(
 );
 
 router.get(
+	'/app/history',
+	connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
+	bankingControllers.history
+);
+
+router.get(
 	'/app/home',
 	connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
 	bankingControllers.appIndex
