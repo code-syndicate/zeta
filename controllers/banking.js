@@ -4,6 +4,14 @@ require('dotenv').config();
 var {body, validationResult} = require('express-validator');
 var {Debit, Notification, Credit} = require('../models/transactions');
 
+async function markAsRead(req, res) {
+	await Notification.deleteOne({
+		_id: req.params.notificationId,
+	}).exec();
+
+	req.flash('info', 'Notification marked as read');
+	res.status(306).redirect('/app/home');
+}
 
 async function history(req, res) {
 	const debits = await Debit.find({issuer: req.user._id})
@@ -306,4 +314,5 @@ module.exports = {
 	logOut,
 	transferPOST,
 	history,
+	markAsRead,
 };

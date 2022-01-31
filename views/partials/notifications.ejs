@@ -1,13 +1,13 @@
 <!--Notifications  -->
 <!-- Overlay  -->
 <div id='notifications-board-overlay'
-     class="fixed top-0 z-20 left-0 right-0 bottom-0 bg-white opacity-75">
+     class="fixed hidden top-0 z-20 left-0 right-0 bottom-0 bg-white opacity-75">
 
 </div>
 
 <div id='notifications-board'
      style="height:150vh;padding-bottom: 550px;"
-     class="max-w-xl mx-auto rounded mt-10 md:mt-16 z-30 fixed top-0 left-0 right-0 bg-gray-50  shadow-2xl p-2 min-h-screen overflow-y-scroll ">
+     class="max-w-xl mx-auto hidden rounded mt-10 md:mt-16 z-30 fixed top-0 left-0 right-0 bg-gray-50  shadow-2xl p-2 min-h-screen overflow-y-scroll ">
 
     <p class="text-base text-gray-600 md:text-xl font-bold text-center p-4"
        style="font-family: work sans;"> Notifications </p>
@@ -27,8 +27,9 @@
         <p class="text-left text-base md:text-lg"> {/= n.description /} </p>
 
         <div class="mt-2">
-            <button class="bg-blue-500 hover:bg-blue-600 rounded px-4 py-2 tex-center "> Mark as
-                read </button>
+        <a href='/app/notifications/mark-as-read/{/= n._id /}'> <button
+                    class="bg-blue-500 hover:bg-blue-600 rounded px-4 py-2 tex-center "> Mark as
+                read </button> </a>
         </div>
 
     </div>

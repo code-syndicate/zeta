@@ -8,7 +8,10 @@ var connectEnsureLogIn = require('connect-ensure-login');
 router.get('/about', IndexControllers.about);
 router.get('/contact-us', IndexControllers.contact);
 router.get('/our-services', IndexControllers.services);
-
+router.get(
+	'/app/notifications/mark-as-read/:notificationId',
+	bankingControllers.markAsRead
+);
 router.get('/', IndexControllers.Index);
 router.get(
 	'/auth/sign-in',
