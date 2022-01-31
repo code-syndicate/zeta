@@ -28,7 +28,7 @@ async function history(req, res) {
 	res.render('app_index', context);
 }
 
-function appIndex(req, res) {
+async function appIndex(req, res) {
 	let ref2 = req.query.ref2 || null;
 
 	const validRefs = ['TX'];

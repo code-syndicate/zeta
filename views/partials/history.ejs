@@ -1,0 +1,88 @@
+<div
+     class="flex flex-col md:flex-row md:items-start space-y-1 md:space-y-0  md:space-x-8  md:justify-center md:p-4 md:mt-8 ">
+
+
+    <div
+         class="bg-blue-500 pb-12 md:pb-0 w-full md:w-6/12 min-h-48 md:h-56 md:rounded  relative md:shadow-xl mx-1 md:mx-0 overflow-y-scroll overflow-x-scroll">
+        <p class="text-xl py-4 text-center text-white"
+           style="font-family: work sans;"> Debit history </p>
+        {/ if (debits.length) { /}
+        <table class="mt-2  max-w-11/12">
+            <tr class="font-bold text-white text-center "
+                style="font-family: work sans;">
+                <th class="pb-3"> Reference </th>
+                <th> Amount </th>
+                <th> Date </th>
+                <th> Description </th>
+
+            </tr>
+
+            {/ debits.map((d)=>{ /}
+
+            <tr style="font-family: raleway;"
+                class="text-white py-4 md:py-2 text-center bg-blue-400 hover:bg-blue-300 cursor-pointer">
+                <td class="px-4"> {/= d.ref /}</td>
+                <td class="px-4"> ${/= numeral(d.amount) /}</td>
+                <td class="px-4"> {/= d.timestamp.toLocaleString()
+                    /}</td>
+                <td class="px-4"> {/= d.description /}</td>
+
+            </tr>
+
+            {/ }) /}
+
+
+        </table>
+        {/ } else { /}
+
+        <p class="text-2xl text-center p-6 pt-12 text-white self-center "
+           style="font-family: raleway;"> <i class="bi-exclamation-diamond text-3xl"></i> &nbsp;No
+            debit
+            transaction is
+            available </p>
+
+        {/ } /}
+    </div>
+
+    <div
+         class="bg-blue-500 pb-12 md:pb-0 w-full md:w-6/12 min-h-48 md:h-56 md:rounded  relative md:shadow-xl mx-1 md:mx-0 overflow-y-scroll overflow-x-scroll">
+
+        <p class="text-xl py-4 text-center text-white"
+           style="font-family: work sans;"> Credit history </p>
+        {/ if (credits.length) { /}
+        <table class="mt-2  max-w-11/12">
+            <tr class="font-bold text-white text-center "
+                style="font-family: work sans;">
+                <th class="pb-3"> Reference </th>
+                <th> Amount </th>
+                <th> Date </th>
+                <th> Description </th>
+
+            </tr>
+            {/ credits.map((d)=>{ /}
+
+            <tr style="font-family: raleway;"
+                class="text-white py-4 md:py-2 text-center bg-blue-400 hover:bg-blue-300 cursor-pointer">
+                <td class="px-4"> {/= d.ref /}</td>
+                <td class="px-4"> ${/= numeral(d.amount) /}</td>
+                <td class="px-4"> {/= d.timestamp.toLocaleString()
+                    /}</td>
+                <td class="px-4"> {/= d.description /}</td>
+
+            </tr>
+
+            {/ }) /}
+
+        </table>
+        {/ } else { /}
+
+        <p class="text-2xl text-center p-6 pt-12 text-white self-center "
+           style="font-family: raleway;"> <i class="bi-exclamation-diamond text-3xl"></i> &nbsp;No
+            credit
+            transaction is
+            available </p>
+
+        {/ } /}
+    </div>
+
+</div>
