@@ -4,7 +4,19 @@ var bankingControllers = require('./controllers/banking');
 var connectEnsureLogIn = require('connect-ensure-login');
 var adminRouter = require('./routes_admin');
 
-router.use('/manage/', adminRouter);
+router.use(
+	'/manage/',
+	connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
+	(req, res, next) => {
+		if (!req.user.isAdmin) {
+			req.flash('info', 'Welcome home!');
+			res.redirect('/app/home/');
+		} else {
+			next();
+		}
+	},
+	adminRouter
+);
 
 // Paths
 
