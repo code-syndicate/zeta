@@ -114,7 +114,7 @@
 
 
             <!-- Notifications Board  -->
-            
+
             {/- include('partials/notifications') /}
 
             <main class="bg-gray-300 min-h-screen flex flex-row items-start justify-start">
@@ -151,7 +151,7 @@
                               <span class="hidden menu-items-expand">
                                     Transfer </span> </a>
 
-                        <a href='/app/notifications'
+                        <a id='open-notifications-board'
                            title="Notifications"
                            class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500 relative">
                               <i class="bi-bell  "></i> {/ if(updatesCount ) { /} <i style="font-family: work sans;"
@@ -308,7 +308,7 @@
 
 
                                     <a href="/app/home"
-                                       class="absolute bottom-6 left-6 bg-gray-600 text-white text-left p-2 px-4 rounded shadow-2xl hover:bg-white hover:text-gray-600 font-bold ">
+                                       class="absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow-2xl bg-white text-gray-600 font-bold ">
                                           Dashboard </a>
 
                               </div>
@@ -318,7 +318,7 @@
                                          class="w-full min-h-48 md:h-56 md:rounded">
 
                                     <a href="/app/history"
-                                       class="absolute bottom-6 left-6 bg-gray-600 text-white text-left p-2 px-4 rounded shadow-2xl hover:bg-white hover:text-gray-600 font-bold ">
+                                       class="absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow-2xl bg-white text-gray-600 font-bold ">
                                           Track your transactions </a>
 
                               </div>
@@ -331,7 +331,7 @@
                                          class="w-full min-h-48 md:h-56 md:rounded">
 
                                     <a href='/app/home?ref2=TX'
-                                       class="  cursor-pointer  absolute bottom-6 left-6 bg-gray-600 text-white text-left p-2 px-4 rounded shadow-2xl hover:bg-white hover:text-gray-600 font-bold ">
+                                       class="  cursor-pointer  absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow-2xl bg-white text-gray-600 font-bold ">
                                           Transfer funds </a>
 
                               </div>
@@ -343,7 +343,7 @@
                                          class="w-full min-h-48 md:h-56 md:rounded">
 
                                     <a href="/our-services"
-                                       class="absolute bottom-6 left-6 bg-gray-600 text-white text-left p-2 px-4 rounded shadow-2xl hover:bg-white hover:text-gray-600 font-bold ">
+                                       class="absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow bg-white text-gray-600 font-bold ">
                                           Services</a>
 
                               </div>
