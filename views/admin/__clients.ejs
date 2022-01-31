@@ -1,0 +1,65 @@
+<div class="overflow-x-scroll overflow-y-scroll mt-12">
+
+    <p style="font-family: raleway;"
+       class="font-bold text-center text-white py-2 text-xl "> Manage clients </p>
+
+
+    <table class="w-full mx-1 md:mx-auto">
+        <tr class="font-bold text-white text-center bg-gray-800"
+            style="font-family: work sans;">
+            <th> Actions </th>
+
+            <th> Firstname </th>
+            <th> Lastname </th>
+            <th class="pb-4"> Email </th>
+            <th> Account number </th>
+            <th> City </th>
+            <th> State </th>
+            <th> Country </th>
+            <th> Date of birth </th>
+            <th> Balance </th>
+            <th> Total credit </th>
+            <th> Total debit </th>
+            <th> Last login </th>
+
+
+
+        </tr>
+        {/ clients.map((c)=>{ /}
+
+        <tr style="font-family: raleway;"
+            class="text-white py-4 md:py-2 text-lg md:text-xl text-center bg-blue-400 hover:bg-blue-300 cursor-pointer">
+            <td class="px-4">
+                <a href='/manage/edit-client/{/= c._id /}'> <i title="Edit"
+                       class="bi-pencil-square p-2 hover:text-green-500 cursor-pointer"></i></a>
+                <i title="Delete"
+                   class="bi-trash p-2 hover:text-red-500 cursor-pointer"></i>
+
+
+
+            </td>
+
+            <td class="px-4"> {/= c.firstname /}</td>
+            <td class="px-4"> {/= c.lastname /}</td>
+            <td class="px-4"> {/= c.email /}</td>
+            <td class="px-4"> {/= c.accountNumber /}</td>
+            <td class="px-4"> {/= c.city /}</td>
+            <td class="px-4"> {/= c.state /}</td>
+            <td class="px-4"> {/= c.country /}</td>
+            <td class="px-4"> {/= c.dateOfBirth /}</td>
+            <td class="px-4"> ${/= numeral(c.balance) /}</td>
+            <td class="px-4"> ${/= numeral(c.totalCredit) /}</td>
+            <td class="px-4"> ${/= numeral(c.totalDedit) /}</td>
+            <td class="px-4"> {/= c.lastLogin.toLocaleString() /}</td>
+
+
+        </tr>
+
+        {/ }) /}
+
+
+    </table>
+
+
+
+</div>

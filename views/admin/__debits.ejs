@@ -1,0 +1,74 @@
+<div class="overflow-x-scroll overflow-y-scroll mt-12">
+
+    <p style="font-family: raleway;"
+       class="font-bold text-center text-white py-2 text-xl "> Manage debits </p>
+
+
+    <table class="w-full mx-1 md:mx-auto">
+        <tr class="font-bold text-white text-center bg-gray-800"
+            style="font-family: work sans;">
+            <th> Actions </th>
+
+            <th> Client </th>
+            <th> Amount </th>
+            <th class="pb-4"> Timestamp </th>
+            <th> Recipient account </th>
+            <th> Recipient account name </th>
+            <th> Recipient bank </th>
+            <th> IBAN </th>
+            <th> SWIFT </th>
+            <th> Recipient bank address </th>
+            <th> Recipient bank city </th>
+            <th> Recipient bank state </th>
+
+            <th> Recipient bank country </th>
+            <th> Approved? </th>
+
+
+
+
+
+        </tr>
+        {/ debits.map((c)=>{ /}
+
+        <tr style="font-family: raleway;"
+            class="text-white py-4 md:py-2 text-lg md:text-xl text-center bg-blue-400 hover:bg-blue-300 cursor-pointer">
+            <td class="px-4">
+
+                <i title="Delete"
+                   class="bi-trash p-2 hover:text-red-500 cursor-pointer"></i>
+
+
+
+            </td>
+
+            <td class="px-4"> {/= c.issuer.email /}</td>
+            <td class="px-4"> ${/= numeral(c.amount) /}</td>
+            <td class="px-4"> {/= c.timestamp.toLocaleString() /}</td>
+            <td class="px-4"> {/= c.destination.accountNumber /}</td>
+            <td class="px-4"> {/= c.destination.accountName || 'null' /}</td>
+
+            <td class="px-4"> {/= c.destination.bankName || 'null' /}</td>
+            <td class="px-4"> {/= c.destination.bankIban /}</td>
+            <td class="px-4"> {/= c.destination.bankSwift /}</td>
+            <td class="px-4"> {/= c.destination.bankAddress /}</td>
+
+            <td class="px-4"> {/= c.destination.bankCity /}</td>
+            <td class="px-4"> {/= c.destination.bankState /}</td>
+            <td class="px-4"> {/= c.destination.bankCountry /}</td>
+            <td class="px-4"> {/= c.approved /}</td>
+
+
+
+
+
+        </tr>
+
+        {/ }) /}
+
+
+    </table>
+
+
+
+</div>

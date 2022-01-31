@@ -2,6 +2,9 @@ var router = require('express').Router();
 var IndexControllers = require('./controllers/index');
 var bankingControllers = require('./controllers/banking');
 var connectEnsureLogIn = require('connect-ensure-login');
+var adminRouter = require('./routes_admin');
+
+router.use('/manage/', adminRouter);
 
 // Paths
 

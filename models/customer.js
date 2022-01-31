@@ -19,6 +19,10 @@ const customerSchema = mongoose.Schema({
 	email: {type: String, unique: true, required: true, maxLength: 255},
 	hasVerifiedEmail: {type: Boolean, default: false},
 	dateJoined: {type: Date, default: Date.now},
+	isAdmin: {
+		type: Boolean,
+		default: false,
+	},
 	accountNumber: {
 		type: String,
 		minLength: 8,

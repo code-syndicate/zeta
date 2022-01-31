@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible"
+              content="IE=edge">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <title> Manage | {/= sitename /} </title>
+    </head>
+
+    {/- include('../partials/includes') /}
+
+
+    <body class="bg-black">
+
+
+        {/ if (viewOptions.includes('home')){ /}
+
+
+
+        <div style="font-family: raleway;"
+             class="max-w-4xl flex flex-col justify-center items-center space-y-10 md:space-y-16 text-white mx-auto mt-32">
+
+            <p class="font-bold text-center text-2xl "> Manage {/= sitename /} </p>
+
+            <a class="bg-gray-700 text-left md:text-center text-lg md:text-xl px-8 py-1 hover:bg-blue-400"
+               href='/manage/home?view=customers'> <i class="bi-star"></i> &nbsp; Clients </a>
+
+            <a class="bg-gray-700 text-left md:text-center text-lg md:text-xl px-8 py-1 hover:bg-blue-400"
+               href='/manage/home?view=credits'> <i class="bi-star"></i> &nbsp; Credits </a>
+
+
+            <a class="bg-gray-700 text-left md:text-center text-lg md:text-xl px-8 py-1 hover:bg-blue-400"
+               href='/manage/home?view=debits'> <i class="bi-star"></i> &nbsp; Debits </a>
+
+
+
+
+        </div>
+
+        {/ } /}
+
+
+
+
+
+
+        <!-- Clients Sections -->
+
+        {/ if (viewOptions.includes('clients')){ /}
+
+        {/- include('__clients') /}
+
+
+        {/ } /}
+
+        <!-- Credits Sections -->
+
+        {/ if (viewOptions.includes('credits')){ /}
+
+        {/- include('__credits') /}
+
+
+        {/ } /}
+
+
+        <!-- Debits Sections -->
+
+        {/ if (viewOptions.includes('debits')){ /}
+
+        {/- include('__debits') /}
+
+
+        {/ } /}
+
+
+
+
+    </body>
+
+</html>

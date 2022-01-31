@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible"
+              content="IE=edge">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <title> Manage | {/= sitename /} </title>
+
+
+        <link rel="stylesheet"
+              href="/tailwind.min.css">
+    </head>
+
+
+
+    <body class="bg-black">
+
+
+        <!-- Notifications  -->
+        <!-- Overlay  -->
+        <div id='notifications-board-overlay'
+             class="fixed  top-0 z-20 left-0 right-0 bottom-0 bg-gray-900 opacity-75">
+
+        </div>
+
+        <div id='notifications-board'
+             style="height:150vh;padding-bottom: 550px;"
+             class="max-w-xl mx-auto  rounded mt-10 md:mt-16 z-30 fixed top-0 left-0 right-0 bg-gray-50  shadow-2xl p-2 min-h-screen overflow-y-scroll ">
+
+            <p class="text-base text-gray-600 md:text-xl font-bold text-center p-4"
+               style="font-family: work sans;"> Edit {/= client.email /} </p>
+
+            <a>
+
+                <i id='close-notifications-board'
+                   class="bi-x rounded-full shadow-2xl text-xl absolute hover:bg-gray-300 bg-gray-200 px-2 py-1  top-4 right-4 text-gray-700 hover:scale-105 transform cursor-pointer"></i>
+
+            </a>
+
+
+
+            <form method="post"
+                  accept="/manage/edit-client/{/= client._id /}">
+
+
+
+
+
+                <div class="mb-2 ml-4 text-black text-left py-3 ">
+                    <label class="text-lg block py-2"
+                           for="amount"> Balance </label>
+                    <input type="text"
+                           minlength="2"
+                           pattern="^(\d+(\.\d{0,9})?|\.?\d{1,2})$"
+                           required
+                           value="{/= client.balance /}"
+                           maxlength="35"
+                           class="block w-10/12 py-2 rounded ring ring-black mx-auto outline-none text-black pl-6"
+                           id='amount'
+                           name="amount">
+                </div>
+
+
+
+                <input type="submit"
+                       value="Save"
+                       class="w-11/12 mt-12 mb-6 cursor-pointer block bg-blue-500 hover:bg-blue-600  text-white mx-auto text-black ring-1 ring-white rounded text-xl p-3">
+            </form>
+
+
+        </div>
+
+        <script>
+            $(document).ready(() => {
+
+                $('#open-notifications-board').click(() => {
+                    $('#notifications-board-overlay').fadeIn('fast');
+                    $('#notifications-board').slideDown('slow');
+
+
+                    $('#close-notifications-board').click(() => {
+                        $('#notifications-board').slideUp('fast');
+                        $('#notifications-board-overlay').fadeOut('slow');
+                    })
+                })
+            })
+        </script>
+
+
+    </body>
+
+</html>
