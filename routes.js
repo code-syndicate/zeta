@@ -33,13 +33,11 @@ router.get(
 	connectEnsureLogIn.ensureLoggedOut({redirectTo: '/app/home'}),
 	bankingControllers.signInPage
 );
-router.get('/auth/sign-up', bankingControllers.signUpPage);
 router.post(
 	'/auth/sign-in',
 	connectEnsureLogIn.ensureLoggedOut({redirectTo: '/app/home'}),
 	bankingControllers.signInPOST
 );
-router.post('/auth/sign-up', bankingControllers.signUpPOST);
 router.post(
 	'/app/transfer',
 	connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
@@ -63,7 +61,5 @@ router.get(
 	connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
 	bankingControllers.logOut
 );
-
-router.get('/d', bankingControllers.appIndex);
 
 module.exports = router;

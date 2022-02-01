@@ -126,10 +126,10 @@
                        class="min-w-2/12 w-1/12 max-w-4/12 bg-gray-800 h-screen relative pt-10 hidden md:block ">
 
                         {/ if (customer.isAdmin ){ /}
-                        
+
                         <a href='/manage/home'
                            class="absolute top-1 right-2 text-red-500 hover:underline text-sm">
-                        
+
                               Visit admin
                               <i title="Expand menu right"
                                  id='expand-menu-right'
@@ -165,7 +165,8 @@
                         <a id='open-notifications-board'
                            title="Notifications"
                            class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500 relative">
-                              <i class="bi-bell  "></i> {/ if(updatesCount ) { /} <i style="font-family: work sans;"
+                              <i class="bi-bell  "></i> {/ if(updatesCount ) { /} <i
+                                 style="font-family: work sans;"
                                  class="bg-red-500 text-white rounded-full px-2 py-1 font-bold absolute top-6 left-22 text-sm">
                                     {/= updatesCount
                                     /}</i> {/ } /}
@@ -210,11 +211,13 @@
 
 
                               <div
-                                   class="bg-blue-500 pb-12 md:pb-0 md:w-6/12 min-h-48 md:h-56 md:rounded  relative md:shadow-xl mx-1 md:mx-0 ">
+                                   class="bg-blue-500 pb-12 md:pb-0 md:w-6/12 min-h-48 md:h- self-stretch md:rounded  relative md:shadow-xl mx-1 md:mx-0 ">
 
-                                    <i class="bi-bank text-2xl top-1 bg-black text-white  px-2 pb-2 left-1 text-black absolute"></i>
+                                    <i
+                                       class="bi-bank text-2xl top-1 bg-black text-white  px-2 pb-2 left-1 text-black absolute"></i>
 
-                                    <div class="flex flex-col md:flex-row items-center justify-around md:space-x-38 ">
+                                    <div
+                                         class="flex flex-col md:flex-row items-center justify-around md:space-x-38 ">
 
                                           <img src='{/= avatar/}'
                                                title="Customer Profile"
@@ -224,7 +227,7 @@
 
 
                                           <div style="font-family: roboto;"
-                                               class=" flex flex-col items-start justify-center pt-8 md:pt-0 space-y-2">
+                                               class=" flex md:mt-6 flex-col items-start justify-center pt-8 md:pt-0 space-y-2">
                                                 <p
                                                    class="md:font-bold text-base text-center md:text-left  md:text-lg font-serif uppercase text-white">
                                                       <i class="bi-person-circle"></i>
@@ -232,7 +235,10 @@
                                                       customer.lastname /}
                                                 </p>
 
-                                                <p class="md:font-bold text-center md:text-left text-base md:text-lg font-serif text-white">
+
+
+                                                <p
+                                                   class="md:font-bold text-center md:text-left text-base md:text-lg font-serif text-white">
 
                                                       <i class="bi-envelope"></i>
                                                       {/= customer.email /}
@@ -240,36 +246,124 @@
 
                                                 <p title="Account number"
                                                    class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-none p-1 rounded-sm px-2 text-white bg-blue-400 ">
-                                                      #Account :
+                                                      #Account ID :
+                                                      {/= customer.accountId /} </p>
+
+                                                <p title="Account number"
+                                                   class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-none p-1 rounded-sm px-2 text-white bg-blue-400 ">
+                                                      #Account number :
                                                       {/= customer.accountNumber /} </p>
+
+
+
+                                                <div style="font-family: 'work sans';"
+                                                     class="ml-16 hidden md:block md:ml-0 my-2 md:font-semibold py-8 md:py-4 md:py-0 text-left">
+
+
+                                                      <p
+                                                         class="text-lg text-white   pt-2 md:pt-3  ">
+
+                                                            <i class="bi-cash"></i>
+                                                            Total
+                                                            credit -
+                                                            <span class="text-white"> &dollar;{/=
+                                                                  numeral( customer.totalCredit ) /}
+                                                            </span>
+                                                      </p>
+
+                                                      <p class="text-lg text-white  pt-2 md:pt-3  ">
+                                                            <i class="bi-cash"></i>
+
+                                                            Total
+                                                            debit -
+                                                            <span class="text-white"> &dollar;{/=
+                                                                  numeral( customer.totalDebit) /}
+                                                            </span>
+                                                      </p>
+                                                      <p class="text-lg text-white  pt-2 md:pt-3  ">
+                                                            <i class="bi-clock"></i>
+                                                            Last
+                                                            login -
+                                                            <span class="text-white"> {/=
+                                                                  customer.lastLogin.toLocaleString()
+                                                                  /}
+                                                            </span>
+                                                      </p>
+                                                </div>
                                           </div>
 
                                     </div>
                               </div>
                               <div
-                                   class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded  md:shadow-xl    mx-1 md:mx-0 ">
+                                   class="bg-blue-500 md:w-6/12 min-h-48 md:h- md:rounded  md:shadow-xl    mx-1 md:mx-0 ">
 
 
                                     <div style="font-family: roboto;"
                                          class="md:ml-4 md:ml-0">
                                           <p style="font-family: comfortaa;"
                                              class="text-2xl  md:text-3xl  text-white px-6 py-12 md:py-8 md:pt-4 md:pb-2  md:font-bold text-center md:text-left ">
-                                                <span>
-                                                      <i class="bi-cash-stack"></i>
-                                                      Balance:
-                                                </span> <span class="text-green-300">
-                                                      &dollar;{/= numeral(customer.balance) /}
+
+                                                <span class="text-white py-2 inline-block">
+                                                      {/= customer.currency /} {/=
+                                                      numeral(customer.balance) /}
+                                                </span>
+
+                                                <br />
+                                                <span class="font-normal opacity-60">
+                                                      <i class="bi-cash "></i>
+                                                      CURRENT BALANCE
                                                 </span>
                                           </p>
 
 
                                           <hr class="border-t-1 border-white text-center mx-auto" />
 
+
+
+                                          <p style="font-family: comfortaa;"
+                                             class="text-2xl  md:text-3xl  text-white px-6 py-12 md:py-8 md:pt-4 md:pb-2  md:font-bold text-center md:text-left ">
+
+                                                <span class="text-white py-2 inline-block">
+                                                      {/= customer.currency /} {/=
+                                                      numeral(customer.balance) /}
+                                                </span>
+
+                                                <br />
+                                                <span class="font-normal opacity-60">
+                                                      <i class="bi-cash-stack "></i>
+                                                      TOTAL BALANCE
+                                                </span>
+                                          </p>
+
+
+                                          <hr class="border-t-1 border-white text-center mx-auto" />
+
+
+                                          <p style="font-family: comfortaa;"
+                                             class="text-2xl  md:text-3xl  text-white px-6 py-12 md:py-8 md:pt-4 md:pb-2  md:font-bold text-center md:text-left ">
+
+                                                <span
+                                                      class="text-white py-2 capitalize inline-block">
+                                                      {/= customer.accountType /}
+                                                </span>
+
+                                                <br />
+                                                <span class="font-normal opacity-60">
+                                                      <i class="bi-person-badge "></i>
+                                                      ACCOUNT TYPE
+                                                </span>
+                                          </p>
+
+
+
+
+
+
                                           <div style="font-family: 'work sans';"
-                                               class="ml-16 md:ml-4 my-2 md:font-semibold py-8 md:py-4 md:py-0 text-left">
+                                               class=" md:hidden md:ml-4 my-2 md:font-semibold py-8 md:py-4 md:py-0 text-center md:text-left">
 
 
-                                                <p class="text-lg text-white   pt-2 md:pt-3  ">
+                                                <p class="text-xl text-white   pt-2 md:pt-3  ">
 
                                                       <i class="bi-cash"></i>
                                                       Total
@@ -279,7 +373,7 @@
                                                       </span>
                                                 </p>
 
-                                                <p class="text-lg text-white  pt-2 md:pt-3  ">
+                                                <p class="text-xl text-white  pt-2 md:pt-3  ">
                                                       <i class="bi-cash"></i>
 
                                                       Total
@@ -288,7 +382,7 @@
                                                             numeral( customer.totalDebit) /}
                                                       </span>
                                                 </p>
-                                                <p class="text-lg text-white  pt-2 md:pt-3  ">
+                                                <p class="text-xl text-white  pt-2 md:pt-3  ">
                                                       <i class="bi-clock"></i>
                                                       Last
                                                       login -
@@ -325,7 +419,8 @@
                                           Dashboard </a>
 
                               </div>
-                              <div class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative">
+                              <div
+                                   class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative">
                                     <img alt='Banking-1'
                                          src="/p1.jpg"
                                          class="w-full min-h-48 md:h-56 md:rounded">
@@ -337,7 +432,8 @@
                               </div>
 
 
-                              <div class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative">
+                              <div
+                                   class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative">
 
                                     <img alt='Banking-1'
                                          src="/p8.jpg"
@@ -349,7 +445,8 @@
 
                               </div>
 
-                              <div class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative">
+                              <div
+                                   class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative">
 
                                     <img alt='Banking-1'
                                          src="/p4.jpg"

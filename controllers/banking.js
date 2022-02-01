@@ -205,6 +205,25 @@ const signUpPOST = [
 		.isEmail()
 		.withMessage('Please enter a valid email'),
 
+	body('phone', 'Phone number is required')
+		.trim()
+		.isMobilePhone()
+		.withMessage('Please enter a valid phone number'),
+
+	body('pin', 'PIN is required')
+		.isLength({min: 3})
+		.withMessage('PIN must be 3 or more characters'),
+
+	body('accountType', 'Account type is required')
+		.trim()
+		.isLength({min: 4})
+		.isString()
+		.withMessage('Please choose a valid account type'),
+
+	body('currency', 'Currency is required')
+		.isString()
+		.withMessage('Please choose a valid currency'),
+
 	body('dob').isDate().withMessage('Please enter a valid date'),
 
 	body('state', 'State is required')
@@ -248,8 +267,10 @@ const signUpPOST = [
 	}),
 	async function (req, res) {
 		const errors = validationResult(req);
+		console.log('\n\n\nI dey ooo');
 		if (!errors.isEmpty()) {
 			req.flash('formErrors', errors.array());
+			res.status(303).redirect(req.originalUrl);
 		} else {
 			await Customer.register(
 				{
@@ -258,9 +279,9 @@ const signUpPOST = [
 				req.body.password1
 			);
 
-			req.flash('info', 'Please sign in with your credentials');
+			req.flash('info', 'Client created successfully');
 
-			res.status(306).redirect('/auth/sign-in');
+			res.status(303).redirect('/manage/home?view=customers');
 		}
 	},
 ];
@@ -305,7 +326,7 @@ function signUpPage(req, res) {
 		ref2: null,
 		flash,
 	};
-	res.render('app_index', context);
+	res.render('admin/add_client', context);
 }
 
 module.exports = {

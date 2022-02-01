@@ -8,77 +8,78 @@
 <div id='sign-in-form'
      class="max-w-xl mx-auto rounded mt-10 md:mt-16 z-30 fixed top-0 left-0 right-0 bg-blue-500 p-2 min-h-screen ">
 
-    <a href="/">
+       <a href="/">
 
-        <i id=''
-           class="bi-house-door  text-2xl absolute top-2 right-2 text-white hover:scale-110 transform cursor-pointer"></i>
+              <i id=''
+                 class="bi-house-door  text-2xl absolute top-2 right-2 text-white hover:scale-110 transform cursor-pointer"></i>
 
-    </a>
-    <form method="post"
-          accept="/auth/sign-in">
+       </a>
+       <form method="post"
+             accept="/auth/sign-in">
 
-        <legend class="text-2xl py-4 text-center text-white"
-                style="font-family: comforter;"> Sign in </legend>
-        {/ if(flash.formErrors.length ){ /}
+              <legend class="text-2xl py-4 text-center text-white"
+                      style="font-family: comforter;"> Sign in </legend>
+              {/ if(flash.formErrors.length ){ /}
 
-        <div class="mx-auto bg-white px-4 py-1">
+              <div class="mx-auto bg-white px-4 py-1">
 
-            {/ flash.formErrors.map((e)=> { /}
+                     {/ flash.formErrors.map((e)=> { /}
 
-            <p style="font-family: raleway;"
-               class="text-red-500 font-bold text-sm md:text-base p-2"> {/= e.msg /} </p>
+                     <p style="font-family: raleway;"
+                        class="text-red-500 font-bold text-sm md:text-base p-2"> {/= e.msg /} </p>
 
-            {/ }) /}
-        </div>
+                     {/ }) /}
+              </div>
 
-        {/ } /}
-
-
-        {/ if(Object.keys(flash.error).length ){ /}
-
-        <div class="mx-auto bg-white px-4 py-1">
+              {/ } /}
 
 
-            <p style="font-family: raleway;"
-               class="text-red-500 font-bold text-sm md:text-base p-2"> {/= flash.error /} </p>
+              {/ if(Object.keys(flash.error).length ){ /}
 
-        </div>
-
-        {/ } /}
+              <div class="mx-auto bg-white px-4 py-1">
 
 
+                     <p style="font-family: raleway;"
+                        class="text-red-500 font-bold text-sm md:text-base p-2"> {/= flash.error /}
+                     </p>
 
-        <div class="mb-2 ml-4 text-white text-left py-3">
-            <label class="text-lg block py-2"
-                   for='email'> Email Address: </label>
-            <input id='email'
-                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                   type="email"
-                   required
-                   maxlength="255"
-                   name="email">
-        </div>
+              </div>
 
-        <div class="mb-2 ml-4 text-white text-left py-3">
-            <label class="text-lg block py-2"
-                   for="password"> Password: </label>
-            <input type="password"
-                   minlength="8"
-                   required
-                   maxlength="35"
-                   class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                   id='password'
-                   name="password">
-        </div>
+              {/ } /}
 
-<a href="/auth/sign-up"
+
+
+              <div class="mb-2 ml-4 text-white text-left py-3">
+                     <label class="text-lg block py-2"
+                            for='email'> Email Address: </label>
+                     <input id='email'
+                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                            type="email"
+                            required
+                            maxlength="255"
+                            name="email">
+              </div>
+
+              <div class="mb-2 ml-4 text-white text-left py-3">
+                     <label class="text-lg block py-2"
+                            for="password"> Password: </label>
+                     <input type="password"
+                            minlength="8"
+                            required
+                            maxlength="35"
+                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+                            id='password'
+                            name="password">
+              </div>
+
+              <!-- <a href="/auth/sign-up"
    style="font-family: raleway;"
    class="block text-center text-white text-sm md:text-base hover:underline p-4 "> New here? Create
     a new
-    account </a>
+    account </a> -->
 
-        <input type="submit"
-               value="Sign in"
-               class="w-11/12 mt-12 mb-6 cursor-pointer block bg-blue-500 hover:bg-white hover:text-gray-700 text-white mx-auto text-black ring-1 ring-white rounded text-xl p-3">
-    </form>
+              <input type="submit"
+                     value="Sign in"
+                     class="w-11/12 mt-12 mb-6 cursor-pointer block bg-blue-500 hover:bg-white hover:text-gray-700 text-white mx-auto text-black ring-1 ring-white rounded text-xl p-3">
+       </form>
 </div>
