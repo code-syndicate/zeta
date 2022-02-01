@@ -2,6 +2,27 @@ var Customer = require('./../models/customer');
 var {Debit, Credit, Notification} = require('./../models/transactions');
 var {body, validationResult} = require('express-validator');
 
+async function deleteUser(req, res) {
+	const userId = req.params.id || null;
+	await Customer.deleteOne({_id: userId}).exec();
+
+	res.status(306).redirect('/manage/home?view=customers');
+}
+
+async function deleteCredit(req, res) {
+	const creditId = req.params.id || null;
+	await Credit.deleteOne({_id: creditId}).exec();
+
+	res.status(306).redirect('/manage/home?view=credits');
+}
+
+async function deleteDebit(req, res) {
+	const debitId = req.params.id || null;
+	await Debit.deleteOne({_id: debitId}).exec();
+
+	res.status(306).redirect('/manage/home?view=debits');
+}
+
 const addCredit = [
 	body('email', 'Email is required')
 		.trim()
@@ -118,4 +139,7 @@ module.exports = {
 	home,
 	editClient,
 	addCredit,
+	deleteCredit,
+	deleteDebit,
+	deleteUser,
 };
