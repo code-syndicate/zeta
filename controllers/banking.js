@@ -150,7 +150,10 @@ const transferPOST = [
 				description: `Debit of $${req.body.amount} by account ${req.body.accountNumber}`,
 			}).save();
 
-			req.flash('info', 'Your transfer request is being processed');
+			req.flash(
+				'info',
+				'Your transfer request is being processed. You will be notified shortly'
+			);
 
 			res.status(306).redirect('/app/home');
 		}

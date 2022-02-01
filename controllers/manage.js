@@ -117,12 +117,17 @@ async function home(req, res) {
 		credits: 'credits',
 		debits: 'debits',
 	};
-	let clients = await Customer.find({}).lean().exec();
-	clients = clients.filter((c) => c._id != req.user._id);
+	let clients = await Customer.find({}).sort({email: 1}).lean().exec();
+	clients = clients.filter((c) => c.email !== req.user.email);
 
-	let debits = await Debit.find({}).populate('issuer').lean().exec();
+	let debits = await Debit.find({})
+		.populate('issuer')
+		.sort({timestamp: -1})
+		.lean()
+		.exec();
 	let credits = await Credit.find({})
 		.populate('issuer')
+		.sort({timestamp: -1})
 		.populate('destination')
 		.exec();
 
