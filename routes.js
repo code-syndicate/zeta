@@ -7,15 +7,15 @@ var adminRouter = require('./routes_admin');
 
 router.use(
 	'/manage/',
-	// connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
-	// (req, res, next) => {
-	// 	if (!req.user.isAdmin) {
-	// 		req.flash('info', 'Welcome home!');
-	// 		res.redirect('/app/home/');
-	// 	} else {
-	// 		next();
-	// 	}
-	// },
+	connectEnsureLogIn.ensureLoggedIn({redirectTo: '/auth/sign-in'}),
+	(req, res, next) => {
+		if (!req.user.isAdmin) {
+			req.flash('info', 'Welcome home!');
+			res.redirect('/app/home/');
+		} else {
+			next();
+		}
+	},
 	adminRouter
 );
 
