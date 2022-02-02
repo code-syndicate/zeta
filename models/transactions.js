@@ -23,12 +23,16 @@ const debitSchema = mongoose.Schema({
 			type: String,
 			minLength: 6,
 		},
-		bankAddress: {type: String, required: true},
+		// bankAddress: {type: String, required: true},
+		branchName: {type: String, required: true},
+		bankName: {type: String, required: true},
+
+		currency: {type: String, required: true},
 		bankIban: {type: String, required: true},
 		bankSwift: {type: String, required: true},
-		bankCity: {type: String, required: true},
-		bankState: {type: String, required: true},
-		bankCountry: {type: String},
+		// bankCity: {type: String, required: true},
+		// bankState: {type: String, required: true},
+		// bankCountry: {type: String},
 	},
 });
 

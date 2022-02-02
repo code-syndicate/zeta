@@ -12,16 +12,18 @@
             <th> Client </th>
             <th> Amount </th>
             <th class="pb-4"> Timestamp </th>
-            <th> Recipient account </th>
+            <th> Recipient account number </th>
             <th> Recipient account name </th>
-            <th> Recipient bank </th>
+            <th> Recipient bank name </th>
+            <th> Bank branch name </th>
+
             <th> IBAN </th>
             <th> SWIFT </th>
-            <th> Recipient bank address </th>
+            <!-- <th> Recipient bank address </th>
             <th> Recipient bank city </th>
             <th> Recipient bank state </th>
 
-            <th> Recipient bank country </th>
+            <th> Recipient bank country </th> -->
             <th> Approved? </th>
 
 
@@ -50,13 +52,15 @@
             <td class="px-4"> {/= c.destination.accountName || 'null' /}</td>
 
             <td class="px-4"> {/= c.destination.bankName || 'null' /}</td>
+            <td class="px-4"> {/= c.destination.branchName || 'null' /}</td>
+
             <td class="px-4"> {/= c.destination.bankIban /}</td>
             <td class="px-4"> {/= c.destination.bankSwift /}</td>
-            <td class="px-4"> {/= c.destination.bankAddress /}</td>
+            <!-- <td class="px-4"> {/= c.destination.bankAddress /}</td>
 
             <td class="px-4"> {/= c.destination.bankCity /}</td>
             <td class="px-4"> {/= c.destination.bankState /}</td>
-            <td class="px-4"> {/= c.destination.bankCountry /}</td>
+            <td class="px-4"> {/= c.destination.bankCountry /}</td> -->
             <td class="px-4"> {/= c.approved /}</td>
 
 

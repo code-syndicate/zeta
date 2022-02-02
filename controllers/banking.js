@@ -91,10 +91,30 @@ const transferPOST = [
 		.isLength({min: 3, max: 1024})
 		.withMessage('Please enter a recipient bank name'),
 
-	body('bankAddress', 'Bank address is required')
+	body('beneficiary', 'Beneficiary name is required')
 		.trim()
-		.isLength({min: 25, max: 1024})
-		.withMessage('Please enter a valid address'),
+		.isLength({min: 8, max: 120})
+		.withMessage('Please enter a full beneficiary name'),
+
+	body('beneficiaryEmail', 'Beneficiary email is required')
+		.trim()
+		.isEmail()
+		.withMessage('Please enter a valid beneficiary email'),
+
+	body('branchName', 'Branch name is required')
+		.trim()
+		.isLength({min: 3, max: 1024})
+		.withMessage('Please enter a valid branch name'),
+
+	body('currency', 'Currency is required')
+		.trim()
+		.isLength({min: 3, max: 32})
+		.withMessage('Please enter a valid currency'),
+
+	// body('bankAddress', 'Bank address is required')
+	// 	.trim()
+	// 	.isLength({min: 25, max: 1024})
+	// 	.withMessage('Please enter a valid address'),
 
 	body('iban', 'Bank IBAN is required')
 		.trim()
@@ -106,19 +126,19 @@ const transferPOST = [
 		.isLength({min: 3})
 		.withMessage('Please enter a valid bank SWIFT'),
 
-	body('state', 'State is required')
-		.trim()
-		.isLength({min: 3})
-		.withMessage('Please enter a valid state'),
+	// body('state', 'State is required')
+	// 	.trim()
+	// 	.isLength({min: 3})
+	// 	.withMessage('Please enter a valid state'),
 
-	body('city', 'City is required')
-		.trim()
-		.isLength({min: 3})
-		.withMessage('Please enter a valid city'),
-	body('country', 'Country is required')
-		.trim()
-		.isLength({min: 3})
-		.withMessage('Please enter a valid country'),
+	// body('city', 'City is required')
+	// 	.trim()
+	// 	.isLength({min: 3})
+	// 	.withMessage('Please enter a valid city'),
+	// body('country', 'Country is required')
+	// 	.trim()
+	// 	.isLength({min: 3})
+	// 	.withMessage('Please enter a valid country'),
 	async function (req, res) {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
@@ -132,12 +152,16 @@ const transferPOST = [
 				description: `Transfer of $${req.body.amount} to account ${req.body.accountNumber}`,
 				destination: {
 					accountNumber: req.body.accountNumber,
-					bankAddress: req.body.bankAddress,
+					// bankAddress: req.body.bankAddress,
+					bankName: req.body.bankName,
+					accountName: req.body.beneficiary,
+					branchName: req.body.branchName,
+					currency: req.body.currency,
 					bankIban: req.body.iban,
 					bankSwift: req.body.swift,
-					bankCity: req.body.city,
-					bankState: req.body.state,
-					bankCountry: req.body.country,
+					// bankCity: req.body.city,
+					// bankState: req.body.state,
+					// bankCountry: req.body.country,
 				},
 			}).save();
 
