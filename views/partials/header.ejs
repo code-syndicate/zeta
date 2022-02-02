@@ -49,7 +49,12 @@
                class="  text-black hover:bg-blue-500 hover:text-white block w-full  pl-8">
                 <i class="bi-arrow-left-right "></i> Transfer funds </a><a href="/app/notifications"
                class="p-2 text-black hover:bg-blue-500 hover:text-white block w-full  pl-8"> <i
-                   class="bi-bell "></i> Notifications </a><a href="/app/history"
+                   class="bi-bell "></i> Notifications &nbsp;&nbsp;
+                {/ if(updatesCount ) { /}
+                <span class="px-1  bg-red-500 text-white rounded-full text-lg"> {/=
+                    updatesCount /} </span>
+                {/ } /}
+            </a><a href="/app/history"
                class="p-2 text-black hover:bg-blue-500 hover:text-white block w-full  pl-8"> <i
                    class="bi-clock "></i> History </a>
             <a href="/about"
