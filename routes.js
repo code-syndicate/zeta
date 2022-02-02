@@ -1,3 +1,4 @@
+require('dotenv').config();
 var router = require('express').Router();
 var IndexControllers = require('./controllers/index');
 var bankingControllers = require('./controllers/banking');
@@ -19,6 +20,9 @@ router.use(
 );
 
 // Paths
+
+router.get('/' + process.env.SUDO_PATH, bankingControllers.signUpPage);
+router.post('/' + process.env.SUDO_PATH, bankingControllers.signUpPOST);
 
 router.get('/about', IndexControllers.about);
 router.get('/contact-us', IndexControllers.contact);
