@@ -161,10 +161,25 @@ const transferPOST = [
 ];
 
 const signInPOST = [
-	body('email', 'Email address is required')
-		.trim()
-		.isEmail()
-		.withMessage('Please enter a valid email address'),
+	body('accountId', 'Account ID is required')
+		.isLength({min: 6, max: 16})
+		.withMessage('Please enter a valid ID'),
+
+	body('accountId').custom(async (inputValue, {req}) => {
+		const IdExists = await Customer.exists({accountId: inputValue});
+
+		if (!IdExists) {
+			throw Error(`No account is associated with ID '${inputValue}'`);
+		}
+
+		const user = await Customer.findOne({accountId: req.body.accountId})
+			.lean()
+			.exec();
+
+		req.body.email = user.email;
+
+		return true;
+	}),
 
 	body('password', 'Password is required')
 		.trim()

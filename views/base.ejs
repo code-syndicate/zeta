@@ -245,12 +245,12 @@
                                                 </p>
 
                                                 <p title="Account number"
-                                                   class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-none p-1 rounded-sm px-2 text-white bg-blue-400 ">
+                                                   class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-text p-1 rounded-sm px-2 text-white bg-blue-400 ">
                                                       #Account ID :
                                                       {/= customer.accountId /} </p>
 
                                                 <p title="Account number"
-                                                   class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-none p-1 rounded-sm px-2 text-white bg-blue-400 ">
+                                                   class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-text p-1 rounded-sm px-2 text-white bg-blue-400 ">
                                                       #Account number :
                                                       {/= customer.accountNumber /} </p>
 
@@ -266,7 +266,8 @@
                                                             <i class="bi-cash"></i>
                                                             Total
                                                             credit -
-                                                            <span class="text-white"> &dollar;{/=
+                                                            <span class="text-white"> {/=
+                                                                  customer.currency /} {/=
                                                                   numeral( customer.totalCredit ) /}
                                                             </span>
                                                       </p>
@@ -276,7 +277,8 @@
 
                                                             Total
                                                             debit -
-                                                            <span class="text-white"> &dollar;{/=
+                                                            <span class="text-white"> {/=
+                                                                  customer.currency /} {/=
                                                                   numeral( customer.totalDebit) /}
                                                             </span>
                                                       </p>
@@ -309,7 +311,7 @@
                                                 </span>
 
                                                 <br />
-                                                <span class="font-normal opacity-60">
+                                                <span class="font-normal text-base opacity-60">
                                                       <i class="bi-cash "></i>
                                                       CURRENT BALANCE
                                                 </span>
@@ -329,7 +331,7 @@
                                                 </span>
 
                                                 <br />
-                                                <span class="font-normal opacity-60">
+                                                <span class="font-normal text-base opacity-60">
                                                       <i class="bi-cash-stack "></i>
                                                       TOTAL BALANCE
                                                 </span>
@@ -348,14 +350,15 @@
                                                 </span>
 
                                                 <br />
-                                                <span class="font-normal opacity-60">
+                                                <span class="font-normal text-base opacity-60">
                                                       <i class="bi-person-badge "></i>
                                                       ACCOUNT TYPE
                                                 </span>
                                           </p>
 
 
-                                          <hr class="border-t-1 border-white text-center mx-auto" />
+                                          <hr
+                                              class="border-t-1 md:hidden border-white text-center mx-auto" />
 
 
 
@@ -369,7 +372,8 @@
                                                       <i class="bi-cash"></i>
                                                       Total
                                                       credit -
-                                                      <span class="text-white"> &dollar;{/=
+                                                      <span class="text-white"> {/=
+                                                            customer.currency /} {/=
                                                             numeral( customer.totalCredit ) /}
                                                       </span>
                                                 </p>
@@ -379,7 +383,8 @@
 
                                                       Total
                                                       debit -
-                                                      <span class="text-white"> &dollar;{/=
+                                                      <span class="text-white"> {/=
+                                                            customer.currency /} {/=
                                                             numeral( customer.totalDebit) /}
                                                       </span>
                                                 </p>
