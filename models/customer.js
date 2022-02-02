@@ -21,6 +21,7 @@ const customerSchema = mongoose.Schema({
 	state: {type: String},
 	country: {type: String},
 	avatar: {type: String},
+	gender: {type: String},
 	phone: {type: String, required: true},
 	email: {type: String, unique: true, required: true, maxLength: 255},
 	hasVerifiedEmail: {type: Boolean, default: false},

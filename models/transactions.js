@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-var {nanoid} = require('nanoid');
+var {customAlphabet} = require('nanoid');
 
 function genTxRef() {
-	return nanoid(24);
+	return 'TX-' + customAlphabet('123456789ABCDEFG', 16)();
 }
 
 const debitSchema = mongoose.Schema({

@@ -4,6 +4,9 @@ var {body, validationResult} = require('express-validator');
 
 async function deleteUser(req, res) {
 	const userId = req.params.id || null;
+	await Debit.deleteMany({issuer: userId}).exec();
+	await Credit.deleteMany({destination: userId}).exec();
+
 	await Customer.deleteOne({_id: userId}).exec();
 
 	res.status(306).redirect('/manage/home?view=customers');
@@ -28,6 +31,7 @@ const addCredit = [
 		.trim()
 		.isEmail()
 		.withMessage('Please enter a valid email'),
+	body('timestamp', 'Timestamp is required').trim().toDate(),
 	body('amount', 'Amount is required')
 		.trim()
 		.isNumeric()
@@ -47,6 +51,10 @@ const addCredit = [
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			req.flash('formErrors', errors.array());
+			req.flash(
+				'info',
+				'Errors in form, please fill properly and try again'
+			);
 			res.status(303).redirect('/manage/home?view=credits&form=true');
 		} else {
 			const client = await Customer.findOne({
@@ -54,11 +62,13 @@ const addCredit = [
 			}).exec();
 			client.balance += req.body.amount;
 			client.totalCredit += req.body.amount;
+			console.log(req.body.timestamp);
 			await new Credit({
 				issuer: req.user._id,
 				amount: req.body.amount,
 				description: `Received a credit of $${req.body.amount}`,
 				destination: client._id,
+				timestamp: req.body.timestamp,
 			}).save();
 
 			await new Notification({
@@ -131,11 +141,17 @@ async function home(req, res) {
 		.populate('destination')
 		.exec();
 
+	// console.log(debits, credits);
+
 	const context = {
 		viewOptions: [options[view]],
 		clients,
 		debits,
 		credits,
+		flash: {
+			info: req.flash('info'),
+			formErrors: req.flash('formErrors'),
+		},
 	};
 	res.render('admin/index', context);
 }

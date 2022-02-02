@@ -224,7 +224,7 @@ const signUpPOST = [
 		.isString()
 		.withMessage('Please choose a valid currency'),
 
-	body('dob').isDate().withMessage('Please enter a valid date'),
+	body('dob').isDate().withMessage('Please enter a valid date').toDate(),
 
 	body('state', 'State is required')
 		.trim()

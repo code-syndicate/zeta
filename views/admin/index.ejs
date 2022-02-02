@@ -15,6 +15,40 @@
 
     <body class="bg-black">
 
+        <script>
+            $(document).ready(() => {
+
+                $('#close-board').click(() => {
+                    $('#board').slideUp('fast');
+                    $('#board-overlay').fadeOut('slow');
+                })
+            })
+        </script>
+
+
+
+        {/ if(Object.keys(flash.info).length) { /}
+
+        <!-- Global Info Board  -->
+        <!-- Overlay  -->
+        <div id='board-overlay'
+             class="fixed  top-0 z-30 left-0 right-0 bottom-0 bg-gray-100 opacity-80"> </div>
+
+        <!-- Board  -->
+        <div id='board'
+             class="max-w-2xl fixed mx-auto z-40 top-2 md:top-8 right-0  left-0 bg-white shadow-xl rounded">
+            <div class=" relative">
+                <i id='close-board'
+                   class="top-2 right-2 absolute text-2xl text-gray-400 cursor-pointer bi-x"></i>
+
+                <p class="text-blue-500 text-base md:text-xl text-left px-6 py-4"> {/=
+                    flash.info /}
+                </p>
+            </div>
+        </div>
+
+        {/ } /}
+
 
         {/ if (viewOptions.includes('home')){ /}
 

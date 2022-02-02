@@ -14,19 +14,18 @@ async function context(req, res, next) {
 	};
 
 	if (req.isAuthenticated()) {
+		const notifications = await Notification.find({
+			listener: req.user._id,
+			status: 'unread',
+		})
+			.sort({timestamp: -1})
+			.lean()
+			.exec();
 
+		const updates = notifications.length;
 
-			const notifications = await Notification.find({
-				listener: req.user._id,
-				status: 'unread',
-			})
-				.lean()
-				.exec();
-
-			const updates = notifications.length;
-
-			res.locals.updatesCount = updates === 0 ? '' : updates;
-			res.locals.notifications = notifications;
+		res.locals.updatesCount = updates === 0 ? '' : updates;
+		res.locals.notifications = notifications;
 
 		if (req.user.gender === 'male') {
 			res.locals.avatar = '/user_m.png';
