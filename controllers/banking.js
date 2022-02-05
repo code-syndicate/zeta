@@ -3,6 +3,7 @@ var Customer = require('./../models/customer');
 require('dotenv').config();
 var {body, validationResult} = require('express-validator');
 var {Debit, Notification, Credit} = require('../models/transactions');
+const res = require('express/lib/response');
 
 async function markAsRead(req, res) {
 	await Notification.deleteOne({
@@ -71,12 +72,18 @@ const transferPOST = [
 		.isNumeric({locale: 'en-GB'})
 		.withMessage('Please enter a valid amount to transfer'),
 	body('amount').custom(function (inputValue, {req}) {
-		if (req.user.balance < inputValue) {
+		if (req.user.getBalance() < inputValue) {
 			throw Error('Insufficient funds!');
 		}
 
 		if (inputValue < 10) {
 			throw Error('Minimum amount for transfer is $10');
+		}
+
+		if (req.user.disabled) {
+			req.logOut();
+			res.status(303).redirect('/app/home');
+			return;
 		}
 
 		return true;
@@ -165,8 +172,8 @@ const transferPOST = [
 				},
 			}).save();
 
-			req.user.balance -= newDebit.amount;
-			req.user.totalDebit += newDebit.amount;
+			// req.user.balance -= newDebit.amount;
+			// req.user.totalDebit += newDebit.amount;
 			await req.user.save();
 
 			await new Notification({

@@ -42,8 +42,8 @@
         <tr style="font-family: raleway;"
             class="text-white py-4 md:py-2 text-lg md:text-xl text-center bg-blue-400 hover:bg-blue-300 cursor-pointer">
             <td class="px-4">
-                <a href='/manage/edit-client/{/= c._id /}'> <i title="Edit client"
-                       class="bi-pencil-square p-2 hover:text-green-500 cursor-pointer "></i></a>
+                <!-- <a href='/manage/edit-client/{/= c._id /}'> <i title="Edit client"
+                       class="bi-pencil-square p-2 hover:text-green-500 cursor-pointer "></i></a> -->
                 <a href='/manage/delete-customer/{/= c._id /}'> <i title="Delete client"
                        class="bi-trash p-2 hover:text-red-500 cursor-pointer "></i></a>
 
@@ -83,7 +83,7 @@
             <td class="px-4"> {/= c.dateOfBirth /}</td>
             <td class="px-4"> ${/= numeral(c.balance) /}</td>
             <td class="px-4"> ${/= numeral(c.totalCredit) /}</td>
-            <td class="px-4"> ${/= numeral(c.totalDedit) /}</td>
+            <td class="px-4"> ${/= numeral(c.totalDebit) /}</td>
             <td class="px-4"> {/= c.lastLogin.toLocaleString() /}</td>
 
 

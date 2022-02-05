@@ -62,28 +62,13 @@ const customerSchema = mongoose.Schema({
 	},
 });
 
-customerSchema.virtual('balance').get(async function () {
-	const debits = await Debit.find({issuer: this._id}).exec();
-	const credits = await Credit.find({destination: this._id}).exec();
-	let totalCredit = 0;
-	let totalDebit = 0;
-	// console.log('\n\n', debits, credits);
-	for (let item of debits) {
-		totalDebit += item.amount;
-	}
-	for (let item of credits) {
-		totalCredit += item.amount;
-	}
-
-	console.log(totalCredit - totalDebit);
-
-	this.totalCredit = totalCredit;
-	this.totalDebit = totalDebit;
-
-	return totalCredit - totalDebit;
-
-	// return Math.min(0, totalCredit - totalDebit);
+customerSchema.virtual('balance').get(function () {
+	return Math.max(0, this.totalCredit - this.totalDebit);
 });
+
+customerSchema.methods.getBalance = function () {
+	return this.totalCredit - this.totalDebit;
+};
 
 customerSchema.plugin(passportLocalMongoose, {
 	usernameField: 'email',

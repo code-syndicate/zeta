@@ -1,6 +1,7 @@
 require('dotenv').config();
 var {Notification} = require('./models/transactions');
 var numeral = require('numeral');
+const Customer = require('./models/customer');
 
 async function context(req, res, next) {
 	res.locals.sitename = process.env.SITENAME;
@@ -8,13 +9,15 @@ async function context(req, res, next) {
 	res.locals.numeral = function (number) {
 		return numeral(number).format('0,0.00');
 	};
-	res.locals.user = req.user || null;
-	res.locals.customer = req.user || {
+	let currentUser = await Customer.findById(req.user._id || null).exec({});
+	currentUser = currentUser.toObject({virtuals: true});
+	res.locals.user = currentUser;
+	res.locals.customer = currentUser || {
 		lastLogin: {},
 	};
 
 	if (req.isAuthenticated()) {
-		console.log(req.user);
+		// console.log(currentUser);
 		const notifications = await Notification.find({
 			listener: req.user._id,
 			status: 'unread',
