@@ -200,6 +200,15 @@ const signInPOST = [
 			.lean()
 			.exec();
 
+		if (user.disabled) {
+			req.flash(
+				'info',
+				'This account is currently under restrictions, try again later.'
+			);
+
+			throw Error('Access denied');
+		}
+
 		req.body.email = user.email;
 
 		return true;

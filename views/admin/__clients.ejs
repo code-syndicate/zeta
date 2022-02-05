@@ -20,6 +20,9 @@
 
 
             <th> Account ID </th>
+            <th> Status </th>
+
+
 
             <th> Account number </th>
             <th> City </th>
@@ -39,10 +42,19 @@
         <tr style="font-family: raleway;"
             class="text-white py-4 md:py-2 text-lg md:text-xl text-center bg-blue-400 hover:bg-blue-300 cursor-pointer">
             <td class="px-4">
-                <a href='/manage/edit-client/{/= c._id /}'> <i title="Edit"
-                       class="bi-pencil-square p-2 hover:text-green-500 cursor-pointer"></i></a>
-                <a href='/manage/delete-customer/{/= c._id /}'> <i title="Delete"
-                       class="bi-trash p-2 hover:text-red-500 cursor-pointer"></i></a>
+                <a href='/manage/edit-client/{/= c._id /}'> <i title="Edit client"
+                       class="bi-pencil-square p-2 hover:text-green-500 cursor-pointer "></i></a>
+                <a href='/manage/delete-customer/{/= c._id /}'> <i title="Delete client"
+                       class="bi-trash p-2 hover:text-red-500 cursor-pointer "></i></a>
+
+
+                {/ if(c.disabled){ /}
+                <a class="text-xs px-4 cursor-pointer block py-1 bg-green-500 hover:bg-green-400"
+                   href='/manage/U/{/= c._id /}/activate'> Activate client</a>
+                {/ } else { /}
+                <a class="text-xs px-4 cursor-pointer block py-2 bg-red-500 hover:bg-red-400"
+                   href='/manage/U/{/= c._id /}/deactivate'> Deactivate client</a>
+                {/ } /}
 
 
 
@@ -58,6 +70,12 @@
 
 
             <td class="px-4"> {/= c.accountId /}</td>
+            {/ if(c.disabled){ /}
+            <td class="px-4 font-bold text-red-500 bg-gray-200 text-xs"> DISABLED </td>
+            {/ } else { /}
+            <td class="px-4 font-bold text-green-500 bg-gray-200 text-xs"> ACTIVE</td>
+            {/ } /}
+
             <td class="px-4"> {/= c.accountNumber /}</td>
             <td class="px-4"> {/= c.city /}</td>
             <td class="px-4"> {/= c.state /}</td>

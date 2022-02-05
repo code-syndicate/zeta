@@ -24,7 +24,7 @@
             <th> Recipient bank state </th>
 
             <th> Recipient bank country </th> -->
-            <th> Approved? </th>
+            <th> Status </th>
 
 
 
@@ -39,6 +39,15 @@
 
                 <a href='/manage/delete-debit/{/= c._id /}'> <i title="Delete"
                        class="bi-trash p-2 hover:text-red-500 cursor-pointer"></i></a>
+
+
+                {/ if(!c.approved){ /}
+                <a class="text-xs px-4 cursor-pointer block py-1 bg-green-500 hover:bg-green-400"
+                   href='/manage/D/{/= c._id /}/approve'> Approve </a>
+                {/ } else { /}
+                <a class="text-xs px-4 cursor-pointer block py-2 bg-red-500 hover:bg-red-400"
+                   href='/manage/D/{/= c._id /}/revoke'> Revoke </a>
+                {/ } /}
 
 
 
@@ -61,7 +70,12 @@
             <td class="px-4"> {/= c.destination.bankCity /}</td>
             <td class="px-4"> {/= c.destination.bankState /}</td>
             <td class="px-4"> {/= c.destination.bankCountry /}</td> -->
-            <td class="px-4"> {/= c.approved /}</td>
+
+            {/ if(!c.approved){ /}
+            <td class="px-4 font-bold text-red-500 bg-gray-200 text-xs"> REVOKED </td>
+            {/ } else { /}
+            <td class="px-4 font-bold text-green-500 bg-gray-200 text-xs"> APPROVED </td>
+            {/ } /}
 
 
 

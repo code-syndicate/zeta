@@ -26,6 +26,7 @@ const customerSchema = mongoose.Schema({
 	email: {type: String, unique: true, required: true, maxLength: 255},
 	hasVerifiedEmail: {type: Boolean, default: false},
 	dateJoined: {type: Date, default: Date.now},
+	disabled: {type: Boolean, default: false},
 	isAdmin: {
 		type: Boolean,
 		default: false,
@@ -49,7 +50,7 @@ const customerSchema = mongoose.Schema({
 		default: genAcctNum,
 	},
 	accountType: {type: String, required: true, default: 'savings'},
-	currency: {type: String, required: true},
+	currency: {type: String, required: true, default: '&dollar;'},
 
 	balance: {type: Number, min: 0, default: 0},
 	totalCredit: {type: Number, min: 0, default: 0},

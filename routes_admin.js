@@ -12,5 +12,7 @@ router.get('/delete-customer/:id', controllers.deleteUser);
 router.get('/delete-debit/:id', controllers.deleteDebit);
 router.post('/add-client', bankingControllers.signUpPOST);
 router.get('/add-client', bankingControllers.signUpPage);
+router.get('/U/:id/:action', controllers.accessControl);
+router.get('/D/:id/:action', controllers.debitAccessControl);
 
 module.exports = router;

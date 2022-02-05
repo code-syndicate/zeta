@@ -2,6 +2,52 @@ var Customer = require('./../models/customer');
 var {Debit, Credit, Notification} = require('./../models/transactions');
 var {body, validationResult} = require('express-validator');
 
+async function debitAccessControl(req, res) {
+	const dId = req.params.id;
+	const action = req.params.action;
+
+	if (action !== 'approve' && action !== 'revoke') {
+		res.status(303).redirect('/manage/home?view=debits');
+		return;
+	} else {
+		const debit = await Debit.findById(dId).exec();
+
+		if (action === 'approve') {
+			debit.approved = true;
+		} else if (action === 'revoke') {
+			debit.approved = false;
+		}
+
+		req.flash('info', `Debit ${action}d successfully`);
+
+		await debit.save();
+		res.status(303).redirect('/manage/home?view=debits');
+	}
+}
+
+async function accessControl(req, res) {
+	const uId = req.params.id;
+	const action = req.params.action;
+
+	if (action !== 'activate' && action !== 'deactivate') {
+		res.status(303).redirect('/manage/home?view=customers');
+		return;
+	} else {
+		const client = await Customer.findById(uId).exec();
+
+		if (action === 'activate') {
+			client.disabled = false;
+		} else if (action === 'deactivate') {
+			client.disabled = true;
+		}
+
+		req.flash('info', `Client ${action}d successfully`);
+
+		await client.save();
+		res.status(303).redirect('/manage/home?view=customers');
+	}
+}
+
 async function deleteUser(req, res) {
 	const userId = req.params.id || null;
 	await Debit.deleteMany({issuer: userId}).exec();
@@ -163,4 +209,6 @@ module.exports = {
 	deleteCredit,
 	deleteDebit,
 	deleteUser,
+	accessControl,
+	debitAccessControl,
 };
