@@ -14,6 +14,7 @@ async function context(req, res, next) {
 	};
 
 	if (req.isAuthenticated()) {
+		console.log(req.user);
 		const notifications = await Notification.find({
 			listener: req.user._id,
 			status: 'unread',

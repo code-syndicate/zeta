@@ -174,7 +174,7 @@ async function home(req, res) {
 		debits: 'debits',
 	};
 	let clients = await Customer.find({}).sort({email: 1}).lean().exec();
-	clients = clients.filter((c) => c.email !== req.user.email);
+	// clients = clients.filter((c) => c.email !== req.user.email);
 
 	let debits = await Debit.find({})
 		.populate('issuer')

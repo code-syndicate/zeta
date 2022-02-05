@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 var {customAlphabet} = require('nanoid');
+const {Debit, Credit} = require('./transactions');
 
 function genAcctNum() {
 	const nanoid = customAlphabet('11123456789', 10);
@@ -52,7 +53,6 @@ const customerSchema = mongoose.Schema({
 	accountType: {type: String, required: true, default: 'savings'},
 	currency: {type: String, required: true, default: '&dollar;'},
 
-	balance: {type: Number, min: 0, default: 0},
 	totalCredit: {type: Number, min: 0, default: 0},
 	totalDebit: {type: Number, min: 0, default: 0},
 
@@ -60,6 +60,29 @@ const customerSchema = mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+});
+
+customerSchema.virtual('balance').get(async function () {
+	const debits = await Debit.find({issuer: this._id}).exec();
+	const credits = await Credit.find({destination: this._id}).exec();
+	let totalCredit = 0;
+	let totalDebit = 0;
+	// console.log('\n\n', debits, credits);
+	for (let item of debits) {
+		totalDebit += item.amount;
+	}
+	for (let item of credits) {
+		totalCredit += item.amount;
+	}
+
+	console.log(totalCredit - totalDebit);
+
+	this.totalCredit = totalCredit;
+	this.totalDebit = totalDebit;
+
+	return totalCredit - totalDebit;
+
+	// return Math.min(0, totalCredit - totalDebit);
 });
 
 customerSchema.plugin(passportLocalMongoose, {
