@@ -31,7 +31,7 @@ const sessionStore = new MongoDBStore({
 sessionStore.on('error', (err) => {
 	console.log(err);
 });
-const threeDays = 3 * 24 * 60 * 60 * 1000;
+const OneDay = 1 * 24 * 60 * 60 * 1000;
 app.use(
 	sessions({
 		secret: process.env.COOKIE_SECRET,
@@ -40,7 +40,7 @@ app.use(
 		store: sessionStore,
 		cookie: {
 			signed: true,
-			maxAge: threeDays,
+			maxAge: OneDay,
 		},
 	})
 );
