@@ -15,11 +15,19 @@ async function markAsRead(req, res) {
 }
 
 async function history(req, res) {
-	const debits = await Debit.find({issuer: req.user._id})
+	let options = {};
+
+	if (!req.user.isAdmin) {
+		options.issuer = req.user._id;
+	}
+	const debits = await Debit.find(options)
+		.populate('issuer')
 		.sort({timestamp: -1})
 		.limit(20)
 		.exec();
-	const credits = await Credit.find({issuer: req.user._id})
+	const credits = await Credit.find(options)
+		.populate('issuer')
+		.populate('destination')
 		.sort({timestamp: -1})
 		.limit(20)
 		.exec();

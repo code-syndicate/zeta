@@ -11,6 +11,7 @@
             <tr class="font-bold text-white text-center "
                 style="font-family: work sans;">
                 <th class="pb-3"> Reference </th>
+                <th> Sender </th>
                 <th> Amount </th>
                 <th> Date </th>
                 <th> Description </th>
@@ -22,6 +23,8 @@
             <tr style="font-family: raleway;"
                 class="text-white py-4 md:py-2 text-center bg-blue-400 hover:bg-blue-300 cursor-pointer">
                 <td class="px-4"> {/= d.ref /}</td>
+                <td class="px-4"> {/= d.issuer.email /}</td>
+
                 <td class="px-4"> ${/= numeral(d.amount) /}</td>
                 <td class="px-4"> {/= d.timestamp.toLocaleString()
                     /}</td>
@@ -54,6 +57,7 @@
             <tr class="font-bold text-white text-center "
                 style="font-family: work sans;">
                 <th class="pb-3"> Reference </th>
+                <th> Recipient </th>
                 <th> Amount </th>
                 <th> Date </th>
                 <th> Description </th>
@@ -64,6 +68,8 @@
             <tr style="font-family: raleway;"
                 class="text-white py-4 md:py-2 text-center bg-blue-400 hover:bg-blue-300 cursor-pointer">
                 <td class="px-4"> {/= d.ref /}</td>
+                <td class="px-4"> {/= d.destination.email /}</td>
+
                 <td class="px-4"> ${/= numeral(d.amount) /}</td>
                 <td class="px-4"> {/= d.timestamp.toLocaleString()
                     /}</td>
