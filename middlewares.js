@@ -9,15 +9,18 @@ async function context(req, res, next) {
 	res.locals.numeral = function (number) {
 		return numeral(number).format('0,0.00');
 	};
-	let currentUser = await Customer.findById(req.user._id || null).exec({});
-	currentUser = currentUser.toObject({virtuals: true});
-	res.locals.user = currentUser;
-	res.locals.customer = currentUser || {
+	res.locals.customer = req.user || {
 		lastLogin: {},
 	};
 
 	if (req.isAuthenticated()) {
 		// console.log(currentUser);
+		let currentUser = await Customer.findById(req.user._id || null).exec();
+		currentUser = currentUser.toObject({virtuals: true});
+		res.locals.user = currentUser;
+		res.locals.customer = currentUser || {
+			lastLogin: {},
+		};
 		const notifications = await Notification.find({
 			listener: req.user._id,
 			status: 'unread',
