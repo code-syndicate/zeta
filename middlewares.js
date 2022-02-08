@@ -47,6 +47,9 @@ async function context(req, res, next) {
 		res.locals.avatar = '/user_m.png';
 		res.locals.updatesCount = 0;
 		res.locals.notifications = [];
+		res.locals.user = {
+			avatar: null,
+		};
 	}
 
 	next();
