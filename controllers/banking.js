@@ -1,9 +1,61 @@
+require('dotenv').config();
 var passport = require('passport');
 var Customer = require('./../models/customer');
-require('dotenv').config();
 var {body, validationResult} = require('express-validator');
 var {Debit, Notification, Credit} = require('../models/transactions');
-const res = require('express/lib/response');
+var {nanoid} = require('nanoid');
+var multer = require('multer');
+var multerS3 = require('multer-s3');
+var aws = require('aws-sdk');
+
+const s3 = new aws.S3({});
+const ALLOWED_IMAGE_EXTENSIONS = process.env.ALLOWED_IMAGE_EXTENSIONS;
+
+aws.config.update({
+	secretAccessKey: process.env.S3_SECRET_KEY,
+	accessKeyId: process.env.S3_ACCESS_KEY,
+	region: 'af-south-1',
+});
+
+let storage;
+const fileFilter = (req, file, cb) => {
+	const extension = file.mimetype.split('/')[1];
+	if (!ALLOWED_IMAGE_EXTENSIONS.includes(extension)) {
+		cb(new Error('Invalid file type, only JPEG and PNG is allowed'), false);
+	} else {
+		cb(null, true);
+	}
+};
+
+if (process.env.NODE_ENV === 'development') {
+	storage = multer.diskStorage({
+		destination: 'public/media',
+		filename: function (req, file, cb) {
+			const extension = file.mimetype.split('/')[1];
+			const fn = nanoid(16);
+			cb(null, 'atlantic' + fn + '.' + extension);
+		},
+	});
+} else if (process.env.NODE_ENV === 'production') {
+	storage = multerS3({
+		s3,
+		bucket: 'shared-testing-bucket',
+		acl: 'public-read',
+		contentType: multerS3.AUTO_CONTENT_TYPE,
+		key: function (req, file, cb) {
+			const fn = nanoid(16);
+			cb(null, 'atlantic' + fn);
+		},
+	});
+}
+
+const photographUpload = multer({
+	fileFilter,
+	storage,
+	limits: {fileSize: 1024 * 1024 * 2},
+}).single('photograph');
+
+// amazon ends
 
 async function markAsRead(req, res) {
 	await Notification.deleteOne({
@@ -253,6 +305,19 @@ const signInPOST = [
 ];
 
 const signUpPOST = [
+	function (req, res, next) {
+		photographUpload(req, res, function (uploadError) {
+			if (uploadError instanceof multer.MulterError) {
+				req.flash('formErrors', [{msg: uploadError.message}]);
+				req.flash('info', uploadError.message);
+				res.status(303).redirect(req.originalUrl);
+				return;
+			}
+
+			next();
+		});
+	},
+
 	body('firstname', 'Firstname is required')
 		.trim()
 		.isLength({min: 3, max: 25})
@@ -328,16 +393,26 @@ const signUpPOST = [
 
 		return true;
 	}),
+
 	async function (req, res) {
 		const errors = validationResult(req);
-		console.log('\n\n\nI dey ooo');
+
 		if (!errors.isEmpty()) {
 			req.flash('formErrors', errors.array());
 			res.status(303).redirect(req.originalUrl);
+			return;
 		} else {
+			let fileUrl;
+			if (process.env.NODE_ENV === 'development') {
+				fileUrl = req.file ? req.file.path : null;
+			} else if (process.env.NODE_ENV === 'production') {
+				fileUrl = req.file ? req.file.location : null;
+			}
+			console.log('\n\n', fileUrl);
 			await Customer.register(
 				{
 					...req.body,
+					avatar: fileUrl,
 				},
 				req.body.password1
 			);

@@ -34,11 +34,15 @@ async function context(req, res, next) {
 		res.locals.updatesCount = updates === 0 ? '' : updates;
 		res.locals.notifications = notifications;
 
+		let altAvatar;
+
 		if (req.user.gender === 'male') {
-			res.locals.avatar = '/user_m.png';
+			altAvatar = '/user_m.png';
 		} else if (req.user.gender === 'female') {
-			res.locals.avatar = '/user_f.png';
+			altAvatar = '/user_f.png';
 		}
+
+		res.locals.avatar = req.user.avatar || altAvatar;
 	} else {
 		res.locals.avatar = '/user_m.png';
 		res.locals.updatesCount = 0;
