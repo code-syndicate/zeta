@@ -9,8 +9,10 @@ var flashMessages = require('connect-flash');
 var middlewares = require('./middlewares');
 var routes = require('./routes');
 var connectDB = require('./models/connect');
+var cors = require('cors');
 
 const app = express();
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.static('public'));
 app.use('/public', express.static('public'));
