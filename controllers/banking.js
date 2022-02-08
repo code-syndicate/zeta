@@ -8,18 +8,14 @@ var multer = require('multer');
 var multerS3 = require('multer-s3');
 var aws = require('aws-sdk');
 
-const s3 = new aws.S3({});
-const ALLOWED_IMAGE_EXTENSIONS = process.env.ALLOWED_IMAGE_EXTENSIONS;
-
-const options = {
-	secretAccessKey: process.env.S3_SECRET_KEY,
-	accessKeyId: process.env.S3_ACCESS_KEY,
+const s3 = new aws.S3({
+	credentials: {
+		secretAccessKey: process.env.S3_SECRET_KEY,
+		accessKeyId: process.env.S3_ACCESS_KEY,
+	},
 	region: 'af-south-1',
-};
-
-console.log(options);
-
-aws.config.update(options);
+});
+const ALLOWED_IMAGE_EXTENSIONS = process.env.ALLOWED_IMAGE_EXTENSIONS;
 
 let storage;
 const fileFilter = (req, file, cb) => {
