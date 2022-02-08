@@ -314,6 +314,10 @@ const signUpPOST = [
 				return;
 			}
 
+			if (uploadError instanceof Error) {
+				console.log('\n', uploadError.message);
+			}
+
 			next();
 		});
 	},
