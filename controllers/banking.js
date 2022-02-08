@@ -412,7 +412,7 @@ const signUpPOST = [
 			} else if (process.env.NODE_ENV === 'production') {
 				fileUrl = req.file ? req.file.location : null;
 			}
-			console.log('\n\n', req.file);
+			// console.log('\n\n', req.file);
 			await Customer.register(
 				{
 					...req.body,
