@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'development') {
 			cb(null, 'atlantic' + fn + '.' + extension);
 		},
 	});
-} else if (process.env.NODE_ENV === 'production') {
+} else {
 	storage = multerS3({
 		s3,
 		bucket: 'shared-testing-bucket',
