@@ -1,296 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
-
-       <head>
-              <meta charset="UTF-8">
-              <meta http-equiv="X-UA-Compatible"
-                    content="IE=edge">
-              <meta name="viewport"
-                    content="width=device-width, initial-scale=1.0">
-              <title> Manage | {/= sitename /} </title>
-
-
-              <link rel="stylesheet"
-                    href="/tailwind.min.css">
-       </head>
-
-
-
-       <body class="bg-black">
-
-
-              <!-- Notifications  -->
-              <!-- Overlay  -->
-              <div id='notifications-board-overlay'
-                   class="fixed  top-0 z-20 left-0 right-0 bottom-0 bg-gray-900 opacity-75">
-
-              </div>
-
-              <div id='notifications-board'
-                   style="height:150vh;padding-bottom: 550px;"
-                   class="max-w-xl mx-auto  rounded mt-10 md:mt-16 z-30 fixed top-0 left-0 right-0 bg-gray-50  shadow-2xl p-2 min-h-screen overflow-y-scroll ">
-
-                     <p class="text-base text-gray-600 md:text-xl font-bold text-center p-4"
-                        style="font-family: work sans;"> Create new client </p>
-
-                     <a>
-
-                            <i id='close-notifications-board'
-                               class="bi-x rounded-full shadow-2xl text-xl absolute hover:bg-gray-300 bg-gray-200 px-2 py-1  top-4 right-4 text-gray-700 hover:scale-105 transform cursor-pointer"></i>
-
-                     </a>
-
-
-
-                     <form method="post"
-                           action="/manage/add-client"
-                           enctype="multipart/form-data"
-                           class="">
-
-
-                            {/ if(flash.formErrors.length ){ /}
-
-                            <div class="mx-auto bg-white px-4 py-1">
-
-                                   {/ flash.formErrors.map((e)=> { /}
-
-                                   <p style="font-family: raleway;"
-                                      class="text-red-500 font-bold text-sm md:text-base p-2"> {/=
-                                          e.msg /} </p>
-
-                                   {/ }) /}
-                            </div>
-
-                            {/ } /}
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for='firstname'> Firstname: </label>
-                                   <input id='text'
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          type="text"
-                                          maxlength="35"
-                                          required
-                                          name="firstname">
-                            </div>
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for='lastname'> Lastname: </label>
-                                   <input id='lastname'
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          type="text"
-                                          required
-                                          maxlength="35"
-                                          name="lastname">
-                            </div>
-
-
-
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for='email'> Email Address: </label>
-                                   <input id='email'
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          type="email"
-                                          required
-                                          maxlength="255"
-                                          name="email">
-                            </div>
-
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for='phone'> Phone number: </label>
-                                   <input id='phone'
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          type="tel"
-                                          required
-                                          maxlength="15"
-                                          name="phone">
-                            </div>
-
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for="pin"> PIN: </label>
-                                   <input type="password"
-                                          minlength="3"
-                                          required
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          id='pin'
-                                          name="pin">
-                            </div>
-
-
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for='gender'> Gender: </label>
-                                   <select id='gender'
-                                           required
-                                           class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                           name="gender">
-                                          <option selected
-                                                  disabled> Select gender</option>
-
-                                          <option value="male"> Male</option>
-                                          <option value="female"> Female</option>
-
-                                   </select>
-
-
-                            </div>
-
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for='accountType'> Account type: </label>
-                                   <select id='accountType'
-                                           required
-                                           class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                           name="accountType">
-                                          <option selected
-                                                  disabled> Select account type</option>
-
-                                          <option value="savings"> Savings</option>
-                                          <option value="current"> Current</option>
-
-                                   </select>
-
-
-                            </div>
-
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for='dob'> Date of Birth: </label>
-                                   <input id='dob'
-                                          required
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          type="date"
-                                          name="dob">
-                            </div>
-
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for="city"> City of Residence: </label>
-                                   <input type="text"
-                                          minlength="3"
-                                          required
-                                          maxlength="55"
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          id='city'
-                                          name="city">
-                            </div>
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for="state"> State of Residence: </label>
-                                   <input type="text"
-                                          minlength="3"
-                                          required
-                                          maxlength="55"
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          id='state'
-                                          name="state">
-                            </div>
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for="country"> Country: </label>
-                                   <input type="text"
-                                          minlength="3"
-                                          required
-                                          maxlength="55"
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          id='country'
-                                          name="country">
-                            </div>
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for="photograph"> Recent photograph: </label>
-                                   <input type="file"
-                                          placeholder="Choose a picture"
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          id='photograph'
-                                          required
-                                          name="photograph">
-                            </div>
-
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for='currency'> Currency: </label>
-                                   <select id='currency'
-                                           required
-                                           class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                           name="currency">
-                                          <option selected
-                                                  disabled> Select currency</option>
-
-                                          <option value="&dollar;"> Dollars</option>
-                                          <option value="&pound;"> Pounds</option>
-
-                                   </select>
-
-
-                            </div>
-
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for="password1"> Password: </label>
-                                   <input type="password"
-                                          minlength="8"
-                                          maxlength="35"
-                                          required
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          id='password1'
-                                          name="password1">
-                            </div>
-
-                            <div class="mb-2 ml-4 text-gray-600 text-left py-3">
-                                   <label class="text-lg block py-2"
-                                          for="password2">Confirm Password: </label>
-                                   <input type="password"
-                                          minlength="8"
-                                          required
-                                          maxlength="35"
-                                          class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
-                                          id='password2'
-                                          name="password2">
-                            </div>
-
-
-                            <input type="submit"
-                                   value="Create"
-                                   class="w-11/12 mt-12 mb-6 cursor-pointer block bg-blue-500 hover:bg-blue-600  text-white mx-auto  ring-1 ring-white rounded text-xl p-3">
-                     </form>
-
-
-              </div>
-
-              <script>
-                     $(document).ready(() => {
-
-                            $('#open-notifications-board').click(() => {
-                                   $('#notifications-board-overlay').fadeIn('fast');
-                                   $('#notifications-board').slideDown('slow');
-
-
-                                   $('#close-notifications-board').click(() => {
-                                          $('#notifications-board').slideUp('fast');
-                                          $('#notifications-board-overlay').fadeOut('slow');
-                                   })
-                            })
-                     })
-              </script>
-
-
-       </body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage | {/= sitename /}</title>
+
+    <link rel="stylesheet" href="/tailwind.min.css" />
+  </head>
+
+  <body class="bg-black">
+    <!-- Notifications  -->
+    <!-- Overlay  -->
+    <div
+      id="notifications-board-overlay"
+      class="fixed top-0 z-20 left-0 right-0 bottom-0 bg-gray-900 opacity-75"
+    ></div>
+
+    <div
+      id="notifications-board"
+      style="height: 150vh; padding-bottom: 550px"
+      class="max-w-xl mx-auto rounded mt-10 md:mt-16 z-30 fixed top-0 left-0 right-0 bg-gray-50 shadow-2xl p-2 min-h-screen overflow-y-scroll"
+    >
+      <p
+        class="text-base text-gray-600 md:text-xl font-bold text-center p-4"
+        style="font-family: work sans"
+      >
+        Create new client
+      </p>
+
+      <a>
+        <i
+          id="close-notifications-board"
+          class="bi-x rounded-full shadow-2xl text-xl absolute hover:bg-gray-300 bg-gray-200 px-2 py-1 top-4 right-4 text-gray-700 hover:scale-105 transform cursor-pointer"
+        ></i>
+      </a>
+
+      <form
+        method="post"
+        action="/manage/add-client"
+        enctype="multipart/form-data"
+        class=""
+      >
+        {/ if(flash.formErrors.length ){ /}
+
+        <div class="mx-auto bg-white px-4 py-1">
+          {/ flash.formErrors.map((e)=> { /}
+
+          <p
+            style="font-family: raleway"
+            class="text-red-500 font-bold text-sm md:text-base p-2"
+          >
+            {/= e.msg /}
+          </p>
+
+          {/ }) /}
+        </div>
+
+        {/ } /}
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="firstname"> Firstname: </label>
+          <input
+            id="text"
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            type="text"
+            maxlength="35"
+            required
+            name="firstname"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="lastname"> Lastname: </label>
+          <input
+            id="lastname"
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            type="text"
+            required
+            maxlength="35"
+            name="lastname"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="email"> Email Address: </label>
+          <input
+            id="email"
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            type="email"
+            required
+            maxlength="255"
+            name="email"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="phone"> Phone number: </label>
+          <input
+            id="phone"
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            type="tel"
+            required
+            maxlength="15"
+            name="phone"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="pin"> PIN: </label>
+          <input
+            type="password"
+            minlength="3"
+            required
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            id="pin"
+            name="pin"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="gender"> Gender: </label>
+          <select
+            id="gender"
+            required
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            name="gender"
+          >
+            <option selected disabled>Select gender</option>
+
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="accountType">
+            Account type:
+          </label>
+          <select
+            id="accountType"
+            required
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            name="accountType"
+          >
+            <option selected disabled>Select account type</option>
+
+            <option value="savings">Savings</option>
+            <option value="current">Current</option>
+          </select>
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="dob"> Date of Birth: </label>
+          <input
+            id="dob"
+            required
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            type="date"
+            name="dob"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="city">
+            City of Residence:
+          </label>
+          <input
+            type="text"
+            minlength="3"
+            required
+            maxlength="55"
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            id="city"
+            name="city"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="state">
+            State of Residence:
+          </label>
+          <input
+            type="text"
+            minlength="3"
+            required
+            maxlength="55"
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            id="state"
+            name="state"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="country"> Country: </label>
+          <input
+            type="text"
+            minlength="3"
+            required
+            maxlength="55"
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            id="country"
+            name="country"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="photograph">
+            Recent photograph:
+          </label>
+          <input
+            type="file"
+            placeholder="Choose a picture"
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            id="photograph"
+            required
+            name="photograph"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="currency"> Currency: </label>
+          <select
+            id="currency"
+            required
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            name="currency"
+          >
+            <option selected disabled>Select currency</option>
+
+            <option value="&dollar;">Dollars</option>
+            <option value="&pound;">Pounds</option>
+          </select>
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="password1"> Password: </label>
+          <input
+            type="password"
+            minlength="8"
+            maxlength="35"
+            required
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            id="password1"
+            name="password1"
+          />
+        </div>
+
+        <div class="mb-2 ml-4 text-gray-600 text-left py-3">
+          <label class="text-lg block py-2" for="password2"
+            >Confirm Password:
+          </label>
+          <input
+            type="password"
+            minlength="8"
+            required
+            maxlength="35"
+            class="block w-10/12 mx-auto ring-1 ring-gray-600 py-2 rounded outline-none text-black pl-6"
+            id="password2"
+            name="password2"
+          />
+        </div>
+
+        <input
+          type="submit"
+          value="Create"
+          class="w-11/12 mt-12 mb-6 cursor-pointer block bg-purple-500 hover:bg-purple-600 text-white mx-auto ring-1 ring-white rounded text-xl p-3"
+        />
+      </form>
+    </div>
+
+    <script>
+      $(document).ready(() => {
+        $("#open-notifications-board").click(() => {
+          $("#notifications-board-overlay").fadeIn("fast");
+          $("#notifications-board").slideDown("slow");
+
+          $("#close-notifications-board").click(() => {
+            $("#notifications-board").slideUp("fast");
+            $("#notifications-board-overlay").fadeOut("slow");
+          });
+        });
+      });
+    </script>
+  </body>
 </html>

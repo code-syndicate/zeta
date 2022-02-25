@@ -1,175 +1,178 @@
 <!-- Sign up Form  -->
 <!-- Overlay  -->
-<div id='overlay'
-     class="fixed top-0 z-20 left-0 right-0 bottom-0 bg-gray-50 opacity-75  ">
+<div
+  id="overlay"
+  class="fixed top-0 z-20 left-0 right-0 bottom-0 bg-gray-50 opacity-75"
+></div>
+<div
+  id="sign-up-form"
+  style="height: 150vh; padding-bottom: 550px"
+  class="max-w-xl mx-auto rounded mt-10 z-30 fixed top-0 left-0 right-0 bottom-0 bg-purple-500 p-2 overflow-y-scroll min-h-screen"
+>
+  <a href="/">
+    <i
+      id=""
+      class="bi-house-door text-2xl absolute top-2 right-2 text-white hover:scale-110 transform cursor-pointer"
+    ></i>
+  </a>
+  <form method="post" action="/auth/sign-up" class="">
+    <legend
+      class="text-2xl py-4 text-center text-white"
+      style="font-family: comforter"
+    >
+      Sign up
+    </legend>
 
-</div>
-<div id='sign-up-form'
-     style="height:150vh;padding-bottom: 550px;"
-     class="max-w-xl mx-auto rounded mt-10 z-30 fixed top-0 left-0 right-0 bottom-0 bg-blue-500 p-2 overflow-y-scroll min-h-screen ">
+    {/ if(flash.formErrors.length ){ /}
 
-       <a href="/">
+    <div class="mx-auto bg-white px-4 py-1">
+      {/ flash.formErrors.map((e)=> { /}
 
-              <i id=''
-                 class="bi-house-door  text-2xl absolute top-2 right-2 text-white hover:scale-110 transform cursor-pointer"></i>
+      <p
+        style="font-family: raleway"
+        class="text-red-500 font-bold text-sm md:text-base p-2"
+      >
+        {/= e.msg /}
+      </p>
 
-       </a>
-       <form method="post"
-             action="/auth/sign-up"
-             class="">
+      {/ }) /}
+    </div>
 
-              <legend class="text-2xl py-4 text-center text-white"
-                      style="font-family: comforter;"> Sign up </legend>
+    {/ } /}
 
-              {/ if(flash.formErrors.length ){ /}
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="firstname"> Firstname: </label>
+      <input
+        id="text"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        type="text"
+        maxlength="35"
+        required
+        name="firstname"
+      />
+    </div>
 
-              <div class="mx-auto bg-white px-4 py-1">
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="lastname"> Lastname: </label>
+      <input
+        id="lastname"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        type="text"
+        required
+        maxlength="35"
+        name="lastname"
+      />
+    </div>
 
-                     {/ flash.formErrors.map((e)=> { /}
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="email"> Email Address: </label>
+      <input
+        id="email"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        type="email"
+        required
+        maxlength="255"
+        name="email"
+      />
+    </div>
 
-                     <p style="font-family: raleway;"
-                        class="text-red-500 font-bold text-sm md:text-base p-2"> {/= e.msg /} </p>
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="gender"> Gender: </label>
+      <select
+        id="gender"
+        required
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        name="gender"
+      >
+        <option selected disabled>Select gender</option>
 
-                     {/ }) /}
-              </div>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
 
-              {/ } /}
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="dob"> Date of birth: </label>
+      <input
+        id="dob"
+        required
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        type="date"
+        name="dob"
+      />
+    </div>
 
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='firstname'> Firstname: </label>
-                     <input id='text'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            type="text"
-                            maxlength="35"
-                            required
-                            name="firstname">
-              </div>
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="city"> City </label>
+      <input
+        type="text"
+        minlength="3"
+        required
+        maxlength="55"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        id="city"
+        name="city"
+      />
+    </div>
 
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='lastname'> Lastname: </label>
-                     <input id='lastname'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            type="text"
-                            required
-                            maxlength="35"
-                            name="lastname">
-              </div>
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="state"> State </label>
+      <input
+        type="text"
+        minlength="3"
+        required
+        maxlength="55"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        id="state"
+        name="state"
+      />
+    </div>
 
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="country"> Country </label>
+      <input
+        type="text"
+        minlength="3"
+        required
+        maxlength="55"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        id="country"
+        name="country"
+      />
+    </div>
 
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="password1"> Password: </label>
+      <input
+        type="password"
+        minlength="8"
+        maxlength="35"
+        required
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        id="password1"
+        name="password1"
+      />
+    </div>
 
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="password2"
+        >Confirm Password:
+      </label>
+      <input
+        type="password"
+        minlength="8"
+        required
+        maxlength="35"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        id="password2"
+        name="password2"
+      />
+    </div>
 
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='email'> Email Address: </label>
-                     <input id='email'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            type="email"
-                            required
-                            maxlength="255"
-                            name="email">
-              </div>
-
-
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='gender'> Gender: </label>
-                     <select id='gender'
-                             required
-                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                             name="gender">
-                            <option selected
-                                    disabled> Select gender</option>
-
-                            <option value="male"> Male</option>
-                            <option value="female"> Female</option>
-
-                     </select>
-
-
-              </div>
-
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='dob'> Date of birth: </label>
-                     <input id='dob'
-                            required
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            type="date"
-                            name="dob">
-              </div>
-
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for="city"> City </label>
-                     <input type="text"
-                            minlength="3"
-                            required
-                            maxlength="55"
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            id='city'
-                            name="city">
-              </div>
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for="state"> State </label>
-                     <input type="text"
-                            minlength="3"
-                            required
-                            maxlength="55"
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            id='state'
-                            name="state">
-              </div>
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for="country"> Country </label>
-                     <input type="text"
-                            minlength="3"
-                            required
-                            maxlength="55"
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            id='country'
-                            name="country">
-              </div>
-
-
-
-
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for="password1"> Password: </label>
-                     <input type="password"
-                            minlength="8"
-                            maxlength="35"
-                            required
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            id='password1'
-                            name="password1">
-              </div>
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for="password2">Confirm Password: </label>
-                     <input type="password"
-                            minlength="8"
-                            required
-                            maxlength="35"
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            id='password2'
-                            name="password2">
-              </div>
-
-
-              <input type="submit"
-                     value="Sign up"
-                     class="w-11/12 mt-12 mb-6 cursor-pointer block bg-blue-500 hover:bg-white hover:text-gray-700 text-white mx-auto text-black ring-1 ring-white rounded text-xl p-3">
-       </form>
+    <input
+      type="submit"
+      value="Sign up"
+      class="w-11/12 mt-12 mb-6 cursor-pointer block bg-purple-500 hover:bg-white hover:text-gray-700 text-white mx-auto text-black ring-1 ring-white rounded text-xl p-3"
+    />
+  </form>
 </div>

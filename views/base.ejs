@@ -1,483 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{/= sitename /}</title>
 
-      <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible"
-                  content="IE=edge">
-            <meta name="viewport"
-                  content="width=device-width, initial-scale=1.0">
-            <title>{/= sitename /}</title>
+    {/- include('partials/includes') /}
+  </head>
 
-            {/- include('partials/includes') /}
-      </head>
+  <body>
+    <script>
+      $(document).ready(() => {
+        $("#close-sign-in-form").click(() => {
+          $("#sign-in-form").slideUp();
+          $("#overlay").fadeOut("slow");
+        });
 
-      <body>
+        $(".open-sign-in-form").click(() => {
+          $("#overlay").fadeIn("fast");
+          $("#sign-in-form").slideDown();
+        });
 
-            <script>
-                  $(document).ready(() => {
-                        $('#close-sign-in-form').click(() => {
-                              $('#sign-in-form').slideUp();
-                              $('#overlay').fadeOut('slow');
-                        })
+        $("#close-sign-up-form").click(() => {
+          $("#sign-up-form").slideUp("fast");
+          $("#overlay").fadeOut("slow");
+        });
 
+        $(".open-sign-up-form").click(() => {
+          $("#overlay").fadeIn("fast");
+          $("#sign-up-form").slideDown();
+        });
 
-                        $('.open-sign-in-form').click(() => {
-                              $('#overlay').fadeIn('fast');
-                              $('#sign-in-form').slideDown();
-                        })
+        $("#open-notifications-board").click(() => {
+          $("#notifications-board-overlay").fadeIn("fast");
+          $("#notifications-board").slideDown("slow");
+        });
 
+        $("#close-transfer-form").click(() => {
+          $("#transfer-form").slideUp("fast");
+          $("#overlay").fadeOut("slow");
+        });
 
-                        $('#close-sign-up-form').click(() => {
-                              $('#sign-up-form').slideUp('fast');
-                              $('#overlay').fadeOut('slow');
-                        })
+        $(".open-transfer-form").click(() => {
+          $("#overlay").fadeIn("fast");
+          $("#transfer-form").slideDown();
+        });
 
+        $("#close-board").click(() => {
+          $("#board").slideUp("fast");
+          $("#board-overlay").fadeOut("slow");
+        });
 
-                        $('.open-sign-up-form').click(() => {
-                              $('#overlay').fadeIn('fast');
-                              $('#sign-up-form').slideDown();
-                        })
+        $("#close-notifications-board").click(() => {
+          $("#notifications-board").slideUp("fast");
+          $("#notifications-board-overlay").fadeOut("slow");
+        });
+      });
+    </script>
 
-                        $('#open-notifications-board').click(() => {
-                              $('#notifications-board-overlay').fadeIn('fast');
-                              $('#notifications-board').slideDown('slow');
-                        })
+    {/ if(Object.keys(flash.info).length) { /}
 
+    <!-- Global Info Board  -->
+    <!-- Overlay  -->
+    <div
+      id="board-overlay"
+      class="fixed top-0 z-30 left-0 right-0 bottom-0 bg-gray-100 opacity-80"
+    ></div>
 
-                        $('#close-transfer-form').click(() => {
-                              $('#transfer-form').slideUp('fast');
-                              $('#overlay').fadeOut('slow');
-                        })
+    <!-- Board  -->
+    <div
+      id="board"
+      class="max-w-2xl fixed mx-auto z-40 top-2 md:top-8 right-0 left-0 bg-white shadow-xl rounded"
+    >
+      <div class="relative">
+        <i
+          id="close-board"
+          class="top-2 right-2 absolute text-2xl text-gray-400 cursor-pointer bi-x"
+        ></i>
 
+        <p class="text-purple-500 text-base md:text-xl text-left px-6 py-4">
+          {/= flash.info /}
+        </p>
+      </div>
+    </div>
 
-                        $('.open-transfer-form').click(() => {
-                              $('#overlay').fadeIn('fast');
-                              $('#transfer-form').slideDown();
-                        })
+    {/ } /} {/ if(ref1 === 'SI'){ /} {/- include('partials/sign_in')/} {/ } else
+    if( ref1 === 'SU') { /} {/- include('partials/sign_up')/} {/ } /} {/ if(ref2
+    === 'TX'){ /} {/- include('partials/transfer')/} {/ } /} {/-
+    include('partials/header')/}
 
+    <!-- Notifications Board  -->
 
-                        $('#close-board').click(() => {
-                              $('#board').slideUp('fast');
-                              $('#board-overlay').fadeOut('slow');
-                        })
+    {/- include('partials/notifications') /}
 
-                        $('#close-notifications-board').click(() => {
-                              $('#notifications-board').slideUp('fast');
-                              $('#notifications-board-overlay').fadeOut('slow');
-                        })
+    <main
+      class="bg-gray-300 min-h-screen flex flex-row items-start justify-start"
+    >
+      <div
+        class="min-w-2/12 w-1/12 max-w-4/12 bg-gray-800 h-screen relative pt-10 hidden md:block"
+      >
+        {/ if (customer.isAdmin ){ /}
 
+        <a
+          href="/manage/home"
+          class="absolute top-1 right-2 text-red-500 hover:underline text-sm"
+        >
+          Visit admin
+          <i
+            title="Expand menu right"
+            id="expand-menu-right"
+            class="bi-box-arrow-right text-xl hover:cursor-pointer text-red-500"
+          ></i>
+        </a>
 
+        {/ } /}
 
-                  })
-            </script>
+        <a
+          href="/"
+          title="Home"
+          class="text-center block py-8 hover:bg-purple-500 text-2xl text-white border-b border-t border-gray-500"
+        >
+          <i class="bi-house-door"></i>
+          <span class="hidden menu-items-expand"> Home</span>
+        </a>
 
-            {/ if(Object.keys(flash.info).length) { /}
+        <a
+          href="/app/home"
+          title="Dashboard"
+          class="text-center block py-8 hover:bg-purple-500 text-2xl text-white border-b border-gray-500"
+        >
+          <i class="bi-speedometer2"></i>
+          <span class="hidden menu-items-expand"> Dashboard</span>
+        </a>
 
-            <!-- Global Info Board  -->
-            <!-- Overlay  -->
-            <div id='board-overlay'
-                 class="fixed  top-0 z-30 left-0 right-0 bottom-0 bg-gray-100 opacity-80"> </div>
+        <a
+          href="/app/home?ref2=TX"
+          title="Transfer funds"
+          class="cursor-pointer text-center block py-8 hover:bg-purple-500 text-2xl text-white border-b border-gray-500"
+        >
+          <i class="bi-arrow-left-right"></i>
+          <span class="hidden menu-items-expand"> Transfer </span>
+        </a>
 
-            <!-- Board  -->
-            <div id='board'
-                 class="max-w-2xl fixed mx-auto z-40 top-2 md:top-8 right-0  left-0 bg-white shadow-xl rounded">
-                  <div class=" relative">
-                        <i id='close-board'
-                           class="top-2 right-2 absolute text-2xl text-gray-400 cursor-pointer bi-x"></i>
+        <a
+          id="open-notifications-board"
+          title="Notifications"
+          class="text-center cursor-pointer block py-8 hover:bg-purple-500 text-2xl text-white border-b border-gray-500 relative"
+          >; <i class="bi-bell"></i> {/ if(updatesCount ) { /}
+          <i
+            style="font-family: work sans"
+            class="bg-red-500 text-white rounded-full px-2 py-1 font-bold absolute top-6 left-22 text-sm"
+          >
+            {/= updatesCount /}</i
+          >
+          {/ } /}
+          <span class="hidden menu-items-expand"> Notifications</span>
+        </a>
 
-                        <p class="text-blue-500 text-base md:text-xl text-left px-6 py-4"> {/=
-                              flash.info /}
-                        </p>
-                  </div>
+        <a
+          href="/app/history"
+          title="History"
+          class="text-center block py-8 hover:bg-purple-500 text-2xl text-white border-b border-gray-500"
+        >
+          <i class="bi-clock"></i>
+          <span class="hidden menu-items-expand"> History</span>
+        </a>
+
+        <a
+          href="/contact-us"
+          title="Contact us"
+          class="text-center block py-8 hover:bg-purple-500 text-2xl text-white border-b border-gray-500"
+        >
+          <i class="bi-envelope"></i>
+          <span class="hidden menu-items-expand"> Contact us</span>
+        </a>
+
+        <a
+          href="/about"
+          title="About us"
+          class="text-center block py-8 hover:bg-purple-500 text-2xl text-white border-b border-gray-500"
+        >
+          <i class="bi-info-circle"></i>
+          <span class="hidden menu-items-expand"> About us</span>
+        </a>
+      </div>
+
+      <!-- Section  -->
+      <div class="w-full md:w-11/12 min-h-screen">
+        {/ if(!ref3) { /}
+        <div
+          class="flex flex-col md:flex-row md:items-start space-y-1 md:space-y-0 md:space-x-8 md:justify-center md:p-4 md:mt-8"
+        >
+          <div
+            class="bg-purple-500 pb-12 md:pb-0 md:w-6/12 min-h-48 md:h- self-stretch md:rounded relative md:shadow-xl mx-1 md:mx-0"
+          >
+            <i
+              class="bi-bank text-2xl top-1 bg-black text-white px-2 pb-2 left-1 text-black absolute"
+            ></i>
+
+            <div
+              class="flex flex-col md:flex-row items-center justify-around md:space-x-38"
+            >
+              <img
+                src='{/= user.avatar || "/user_m.png" /}'
+                title="Customer Profile"
+                alt="avatar"
+                class="rounded-full h-24 w-24 md:h-36 md:w-36 bg-black mt-4 ml-4"
+              />
+
+              <div
+                style="font-family: roboto"
+                class="flex md:mt-6 flex-col items-start justify-center pt-8 md:pt-0 space-y-2"
+              >
+                <p
+                  class="md:font-bold text-base text-center md:text-left md:text-lg font-serif uppercase text-white"
+                >
+                  <i class="bi-person-circle"></i>
+                  {/= customer.firstname + " " + customer.lastname /}
+                </p>
+
+                <p
+                  class="md:font-bold text-center md:text-left text-base md:text-lg font-serif text-white"
+                >
+                  <i class="bi-envelope"></i>
+                  {/= customer.email /}
+                </p>
+
+                <p
+                  title="Account number"
+                  class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-text p-1 rounded-sm px-2 text-white bg-purple-400"
+                >
+                  #Account ID : {/= customer.accountId /}
+                </p>
+
+                <p
+                  title="Account number"
+                  class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-text p-1 rounded-sm px-2 text-white bg-purple-400"
+                >
+                  #Account number : {/= customer.accountNumber /}
+                </p>
+
+                <div
+                  style="font-family: 'work sans'"
+                  class="ml-16 hidden md:block md:ml-0 my-2 md:font-semibold py-8 md:py-4 md:py-0 text-left"
+                >
+                  <p class="text-lg text-white pt-2 md:pt-3">
+                    <i class="bi-cash"></i>
+                    Total credit -
+                    <span class="text-white">
+                      {/= customer.currency /} {/= numeral( customer.totalCredit
+                      ) /}
+                    </span>
+                  </p>
+
+                  <p class="text-lg text-white pt-2 md:pt-3">
+                    <i class="bi-cash"></i>
+
+                    Total debit -
+                    <span class="text-white">
+                      {/= customer.currency /} {/= numeral( customer.totalDebit)
+                      /}
+                    </span>
+                  </p>
+                  <p class="text-lg text-white pt-2 md:pt-3">
+                    <i class="bi-clock"></i>
+                    Last login -
+                    <span class="text-white">
+                      {/= customer.lastLogin.toLocaleString() /}
+                    </span>
+                  </p>
+                </div>
+              </div>
             </div>
-
-            {/ } /}
-
-
-
-            {/ if(ref1 === 'SI'){ /}
-
-            {/- include('partials/sign_in')/}
-
-            {/ } else if( ref1 === 'SU') { /}
-            {/- include('partials/sign_up')/}
-            {/ } /}
-
-            {/ if(ref2 === 'TX'){ /}
-
-            {/- include('partials/transfer')/}
-
-            {/ } /}
-
-            {/- include('partials/header')/}
-
-
-            <!-- Notifications Board  -->
-
-            {/- include('partials/notifications') /}
-
-            <main class="bg-gray-300 min-h-screen flex flex-row items-start justify-start">
-
-
-
-
-                  <div
-                       class="min-w-2/12 w-1/12 max-w-4/12 bg-gray-800 h-screen relative pt-10 hidden md:block ">
-
-                        {/ if (customer.isAdmin ){ /}
-
-                        <a href='/manage/home'
-                           class="absolute top-1 right-2 text-red-500 hover:underline text-sm">
-
-                              Visit admin
-                              <i title="Expand menu right"
-                                 id='expand-menu-right'
-                                 class="bi-box-arrow-right text-xl hover:cursor-pointer  text-red-500 "></i>
-                        </a>
-
-
-                        {/ } /}
-
-
-                        <a href='/'
-                           title="Home"
-                           class="text-center block py-8 hover:bg-blue-500 text-2xl  text-white border-b border-t border-gray-500">
-                              <i class="bi-house-door  "></i>
-                              <span class="hidden menu-items-expand">
-                                    Home</span> </a>
-
-                        <a href='/app/home'
-                           title="Dashboard"
-                           class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
-                              <i class="bi-speedometer2  "></i>
-                              <span class="hidden menu-items-expand">
-                                    Dashboard</span> </a>
-
-
-                        <a href='/app/home?ref2=TX'
-                           title="Transfer funds"
-                           class="  cursor-pointer text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
-                              <i class="bi-arrow-left-right  "></i>
-                              <span class="hidden menu-items-expand">
-                                    Transfer </span> </a>
-
-                        <a id='open-notifications-board'
-                           title="Notifications"
-                           class="text-center cursor-pointer block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500 relative">
-                              <i class="bi-bell  "></i> {/ if(updatesCount ) { /} <i
-                                 style="font-family: work sans;"
-                                 class="bg-red-500 text-white rounded-full px-2 py-1 font-bold absolute top-6 left-22 text-sm">
-                                    {/= updatesCount
-                                    /}</i> {/ } /}
-                              <span class="hidden menu-items-expand">
-                                    Notifications</span>
-                        </a>
-
-                        <a href='/app/history'
-                           title="History"
-                           class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
-                              <i class="bi-clock  "></i>
-                              <span class="hidden menu-items-expand">
-                                    History</span> </a>
-
-                        <a href='/contact-us'
-                           title="Contact us"
-                           class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
-                              <i class="bi-envelope  "></i>
-                              <span class="hidden menu-items-expand">
-                                    Contact us</span> </a>
-
-
-                        <a href='/about'
-                           title="About us"
-                           class="text-center block py-8 hover:bg-blue-500 text-2xl text-white border-b border-gray-500">
-                              <i class="bi-info-circle  "></i>
-                              <span class="hidden menu-items-expand">
-                                    About us</span> </a>
-
-
-
-                  </div>
-
-
-
-
-
-                  <!-- Section  -->
-                  <div class=" w-full md:w-11/12 min-h-screen">
-                        {/ if(!ref3) { /}
-                        <div
-                             class="flex flex-col md:flex-row md:items-start space-y-1 md:space-y-0  md:space-x-8  md:justify-center md:p-4 md:mt-8 ">
-
-
-                              <div
-                                   class="bg-blue-500 pb-12 md:pb-0 md:w-6/12 min-h-48 md:h- self-stretch md:rounded  relative md:shadow-xl mx-1 md:mx-0 ">
-
-                                    <i
-                                       class="bi-bank text-2xl top-1 bg-black text-white  px-2 pb-2 left-1 text-black absolute"></i>
-
-                                    <div
-                                         class="flex flex-col md:flex-row items-center justify-around md:space-x-38 ">
-
-                                          <img src='{/= user.avatar || "/user_m.png" /}'
-                                               title="Customer Profile"
-                                               alt='avatar'
-                                               class="rounded-full h-24 w-24  md:h-36 md:w-36 bg-black mt-4  ml-4">
-
-
-
-                                          <div style="font-family: roboto;"
-                                               class=" flex md:mt-6 flex-col items-start justify-center pt-8 md:pt-0 space-y-2">
-                                                <p
-                                                   class="md:font-bold text-base text-center md:text-left  md:text-lg font-serif uppercase text-white">
-                                                      <i class="bi-person-circle"></i>
-                                                      {/= customer.firstname + " " +
-                                                      customer.lastname /}
-                                                </p>
-
-
-
-                                                <p
-                                                   class="md:font-bold text-center md:text-left text-base md:text-lg font-serif text-white">
-
-                                                      <i class="bi-envelope"></i>
-                                                      {/= customer.email /}
-                                                </p>
-
-                                                <p title="Account number"
-                                                   class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-text p-1 rounded-sm px-2 text-white bg-blue-400 ">
-                                                      #Account ID :
-                                                      {/= customer.accountId /} </p>
-
-                                                <p title="Account number"
-                                                   class="text-lg text-center md:text-left md:font-bold cursor-default shadow-lg select-text p-1 rounded-sm px-2 text-white bg-blue-400 ">
-                                                      #Account number :
-                                                      {/= customer.accountNumber /} </p>
-
-
-
-                                                <div style="font-family: 'work sans';"
-                                                     class="ml-16 hidden md:block md:ml-0 my-2 md:font-semibold py-8 md:py-4 md:py-0 text-left">
-
-
-                                                      <p
-                                                         class="text-lg text-white   pt-2 md:pt-3  ">
-
-                                                            <i class="bi-cash"></i>
-                                                            Total
-                                                            credit -
-                                                            <span class="text-white"> {/=
-                                                                  customer.currency /} {/=
-                                                                  numeral( customer.totalCredit ) /}
-                                                            </span>
-                                                      </p>
-
-                                                      <p class="text-lg text-white  pt-2 md:pt-3  ">
-                                                            <i class="bi-cash"></i>
-
-                                                            Total
-                                                            debit -
-                                                            <span class="text-white"> {/=
-                                                                  customer.currency /} {/=
-                                                                  numeral( customer.totalDebit) /}
-                                                            </span>
-                                                      </p>
-                                                      <p class="text-lg text-white  pt-2 md:pt-3  ">
-                                                            <i class="bi-clock"></i>
-                                                            Last
-                                                            login -
-                                                            <span class="text-white"> {/=
-                                                                  customer.lastLogin.toLocaleString()
-                                                                  /}
-                                                            </span>
-                                                      </p>
-                                                </div>
-                                          </div>
-
-                                    </div>
-                              </div>
-                              <div
-                                   class="bg-blue-500 md:w-6/12 min-h-48 md:h- md:rounded  md:shadow-xl    mx-1 md:mx-0 ">
-
-
-                                    <div style="font-family: roboto;"
-                                         class="md:ml-4 md:ml-0">
-                                          <p style="font-family: comfortaa;"
-                                             class="text-2xl  md:text-3xl  text-white px-6 py-12 md:py-8 md:pt-4 md:pb-2  md:font-bold text-center md:text-left ">
-
-                                                <span class="text-white py-2 inline-block">
-                                                      {/= customer.currency /} {/=
-                                                      numeral(customer.balance) /}
-                                                </span>
-
-                                                <br />
-                                                <span class="font-normal text-base opacity-60">
-                                                      <i class="bi-cash "></i>
-                                                      CURRENT BALANCE
-                                                </span>
-                                          </p>
-
-
-                                          <hr class="border-t-1 border-white text-center mx-auto" />
-
-
-
-                                          <p style="font-family: comfortaa;"
-                                             class="text-2xl  md:text-3xl  text-white px-6 py-12 md:py-8 md:pt-4 md:pb-2  md:font-bold text-center md:text-left ">
-
-                                                <span class="text-white py-2 inline-block">
-                                                      {/= customer.currency /} {/=
-                                                      numeral(customer.balance) /}
-                                                </span>
-
-                                                <br />
-                                                <span class="font-normal text-base opacity-60">
-                                                      <i class="bi-cash-stack "></i>
-                                                      TOTAL BALANCE
-                                                </span>
-                                          </p>
-
-
-                                          <hr class="border-t-1 border-white text-center mx-auto" />
-
-
-                                          <p style="font-family: comfortaa;"
-                                             class="text-2xl  md:text-3xl  text-white px-6 py-12 md:py-8 md:pt-4 md:pb-2  md:font-bold text-center md:text-left ">
-
-                                                <span
-                                                      class="text-white py-2 capitalize inline-block">
-                                                      {/= customer.accountType /}
-                                                </span>
-
-                                                <br />
-                                                <span class="font-normal text-base opacity-60">
-                                                      <i class="bi-person-badge "></i>
-                                                      ACCOUNT TYPE
-                                                </span>
-                                          </p>
-
-
-                                          <hr
-                                              class="border-t-1 md:hidden border-white text-center mx-auto" />
-
-
-
-
-                                          <div style="font-family: 'work sans';"
-                                               class=" md:hidden md:ml-4 my-2 md:font-semibold py-8 md:py-4 md:py-0 text-center md:text-left">
-
-
-                                                <p class="text-xl text-white   pt-2 md:pt-3  ">
-
-                                                      <i class="bi-cash"></i>
-                                                      Total
-                                                      credit -
-                                                      <span class="text-white"> {/=
-                                                            customer.currency /} {/=
-                                                            numeral( customer.totalCredit ) /}
-                                                      </span>
-                                                </p>
-
-                                                <p class="text-xl text-white  pt-2 md:pt-3  ">
-                                                      <i class="bi-cash"></i>
-
-                                                      Total
-                                                      debit -
-                                                      <span class="text-white"> {/=
-                                                            customer.currency /} {/=
-                                                            numeral( customer.totalDebit) /}
-                                                      </span>
-                                                </p>
-                                                <p class="text-xl text-white  pt-2 md:pt-3  ">
-                                                      <i class="bi-clock"></i>
-                                                      Last
-                                                      login -
-                                                      <span class="text-white"> {/=
-                                                            customer.lastLogin.toLocaleString() /}
-                                                      </span>
-                                                </p>
-                                          </div>
-                                    </div>
-
-                              </div>
-                        </div>
-
-                        {/ } else { /}
-
-                        {/- include('partials/history') /}
-
-
-                        {/ } /}
-
-                        <div
-                             class="flex flex-col md:flex-row md:items-start md:space-x-8 md:justify-around md:p-4 mt-2 md:mt-16 ">
-
-                              <div style="font-family: work sans;"
-                                   class="bg-blue-500 md:w-6/12 min-h-48 h-92 md:h-56 md:rounded border-b-2 border-gray-600 relative">
-
-                                    <img alt='Banking-1'
-                                         src="/p7.jpg"
-                                         class="w-full min-h-48 md:h-56 md:rounded ">
-
-
-                                    <a href="/app/home"
-                                       class="absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow-2xl bg-white text-gray-600 font-bold ">
-                                          Dashboard </a>
-
-                              </div>
-                              <div
-                                   class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative">
-                                    <img alt='Banking-1'
-                                         src="/p1.jpg"
-                                         class="w-full min-h-48 md:h-56 md:rounded">
-
-                                    <a href="/app/history"
-                                       class="absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow-2xl bg-white text-gray-600 font-bold ">
-                                          Track your transactions </a>
-
-                              </div>
-
-
-                              <div
-                                   class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative">
-
-                                    <img alt='Banking-1'
-                                         src="/p8.jpg"
-                                         class="w-full min-h-48 md:h-56 md:rounded">
-
-                                    <a href='/app/home?ref2=TX'
-                                       class="  cursor-pointer  absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow-2xl bg-white text-gray-600 font-bold ">
-                                          Transfer funds </a>
-
-                              </div>
-
-                              <div
-                                   class="bg-blue-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative">
-
-                                    <img alt='Banking-1'
-                                         src="/p4.jpg"
-                                         class="w-full min-h-48 md:h-56 md:rounded">
-
-                                    <a href="/our-services"
-                                       class="absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow bg-white text-gray-600 font-bold ">
-                                          Services</a>
-
-                              </div>
-
-                        </div>
-
-
-
-                        {/- include('partials/footer') /}
-                  </div>
-
-                  <!-- End of section  -->
-
-
-            </main>
-
-
-      </body>
-
+          </div>
+          <div
+            class="bg-purple-500 md:w-6/12 min-h-48 md:h- md:rounded md:shadow-xl mx-1 md:mx-0"
+          >
+            <div style="font-family: roboto" class="md:ml-4 md:ml-0">
+              <p
+                style="font-family: comfortaa"
+                class="text-2xl md:text-3xl text-white px-6 py-12 md:py-8 md:pt-4 md:pb-2 md:font-bold text-center md:text-left"
+              >
+                <span class="text-white py-2 inline-block">
+                  {/= customer.currency /} {/= numeral(customer.balance) /}
+                </span>
+
+                <br />
+                <span class="font-normal text-base opacity-60">
+                  <i class="bi-cash"></i>
+                  CURRENT BALANCE
+                </span>
+              </p>
+
+              <hr class="border-t-1 border-white text-center mx-auto" />
+
+              <p
+                style="font-family: comfortaa"
+                class="text-2xl md:text-3xl text-white px-6 py-12 md:py-8 md:pt-4 md:pb-2 md:font-bold text-center md:text-left"
+              >
+                <span class="text-white py-2 inline-block">
+                  {/= customer.currency /} {/= numeral(customer.balance) /}
+                </span>
+
+                <br />
+                <span class="font-normal text-base opacity-60">
+                  <i class="bi-cash-stack"></i>
+                  TOTAL BALANCE
+                </span>
+              </p>
+
+              <hr class="border-t-1 border-white text-center mx-auto" />
+
+              <p
+                style="font-family: comfortaa"
+                class="text-2xl md:text-3xl text-white px-6 py-12 md:py-8 md:pt-4 md:pb-2 md:font-bold text-center md:text-left"
+              >
+                <span class="text-white py-2 capitalize inline-block">
+                  {/= customer.accountType /}
+                </span>
+
+                <br />
+                <span class="font-normal text-base opacity-60">
+                  <i class="bi-person-badge"></i>
+                  ACCOUNT TYPE
+                </span>
+              </p>
+
+              <hr
+                class="border-t-1 md:hidden border-white text-center mx-auto"
+              />
+
+              <div
+                style="font-family: 'work sans'"
+                class="md:hidden md:ml-4 my-2 md:font-semibold py-8 md:py-4 md:py-0 text-center md:text-left"
+              >
+                <p class="text-xl text-white pt-2 md:pt-3">
+                  <i class="bi-cash"></i>
+                  Total credit -
+                  <span class="text-white">
+                    {/= customer.currency /} {/= numeral( customer.totalCredit )
+                    /}
+                  </span>
+                </p>
+
+                <p class="text-xl text-white pt-2 md:pt-3">
+                  <i class="bi-cash"></i>
+
+                  Total debit -
+                  <span class="text-white">
+                    {/= customer.currency /} {/= numeral( customer.totalDebit)
+                    /}
+                  </span>
+                </p>
+                <p class="text-xl text-white pt-2 md:pt-3">
+                  <i class="bi-clock"></i>
+                  Last login -
+                  <span class="text-white">
+                    {/= customer.lastLogin.toLocaleString() /}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/ } else { /} {/- include('partials/history') /} {/ } /}
+
+        <div
+          class="flex flex-col md:flex-row md:items-start md:space-x-8 md:justify-around md:p-4 mt-2 md:mt-16"
+        >
+          <div
+            style="font-family: work sans"
+            class="bg-purple-500 md:w-6/12 min-h-48 h-92 md:h-56 md:rounded border-b-2 border-gray-600 relative"
+          >
+            <img
+              alt="Banking-1"
+              src="/p7.jpg"
+              class="w-full min-h-48 md:h-56 md:rounded"
+            />
+
+            <a
+              href="/app/home"
+              class="absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow-2xl bg-white text-gray-600 font-bold"
+            >
+              Dashboard
+            </a>
+          </div>
+          <div
+            class="bg-purple-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative"
+          >
+            <img
+              alt="Banking-1"
+              src="/p1.jpg"
+              class="w-full min-h-48 md:h-56 md:rounded"
+            />
+
+            <a
+              href="/app/history"
+              class="absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow-2xl bg-white text-gray-600 font-bold"
+            >
+              Track your transactions
+            </a>
+          </div>
+
+          <div
+            class="bg-purple-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative"
+          >
+            <img
+              alt="Banking-1"
+              src="/p8.jpg"
+              class="w-full min-h-48 md:h-56 md:rounded"
+            />
+
+            <a
+              href="/app/home?ref2=TX"
+              class="cursor-pointer absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow-2xl bg-white text-gray-600 font-bold"
+            >
+              Transfer funds
+            </a>
+          </div>
+
+          <div
+            class="bg-purple-500 md:w-6/12 min-h-48 md:h-56 md:rounded border-b-2 border-gray-600 relative"
+          >
+            <img
+              alt="Banking-1"
+              src="/p4.jpg"
+              class="w-full min-h-48 md:h-56 md:rounded"
+            />
+
+            <a
+              href="/our-services"
+              class="absolute bottom-6 left-6 hover:bg-gray-600 hover:text-white text-left p-2 px-4 rounded shadow bg-white text-gray-600 font-bold"
+            >
+              Services</a
+            >
+          </div>
+        </div>
+
+        {/- include('partials/footer') /}
+      </div>
+
+      <!-- End of section  -->
+    </main>
+  </body>
 </html>

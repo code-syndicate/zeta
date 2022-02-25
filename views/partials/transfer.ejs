@@ -1,171 +1,167 @@
 <!-- Transfer funds Form  -->
 <!-- Overlay  -->
-<div id='overlay'
-     class="fixed top-0 z-20 left-0 right-0 bottom-0 bg-gray-50 opacity-75  ">
+<div
+  id="overlay"
+  class="fixed top-0 z-20 left-0 right-0 bottom-0 bg-gray-50 opacity-75"
+></div>
+<div
+  id="transfer-form"
+  style="height: 150vh; padding-bottom: 550px"
+  class="max-w-xl mx-auto rounded mt-10 z-30 fixed top-0 left-0 right-0 bottom-0 bg-purple-500 p-2 overflow-y-scroll"
+>
+  <i
+    id="close-transfer-form"
+    class="bi-x text-3xl absolute top-2 right-2 text-white hover:scale-110 transform cursor-pointer"
+  ></i>
+  <form method="post" action="/app/transfer" class="">
+    <legend
+      class="text-2xl py-4 text-center text-white"
+      style="font-family: comforter"
+    >
+      <i class="bi-arrow-left-right"></i> Transfer funds
+    </legend>
 
-</div>
-<div id='transfer-form'
-     style="height:150vh;padding-bottom: 550px;"
-     class="max-w-xl mx-auto rounded mt-10 z-30 fixed top-0 left-0 right-0 bottom-0 bg-blue-500 p-2 overflow-y-scroll  ">
+    {/ if(flash.formErrors.length ){ /}
 
-       <i id='close-transfer-form'
-          class="bi-x  text-3xl absolute top-2 right-2 text-white hover:scale-110 transform cursor-pointer"></i>
-       <form method="post"
-             action="/app/transfer"
-             class="">
+    <div class="mx-auto bg-white px-4 py-1">
+      {/ flash.formErrors.map((e)=> { /}
 
-              <legend class="text-2xl py-4 text-center text-white"
-                      style="font-family: comforter;"> <i class="bi-arrow-left-right"></i> Transfer
-                     funds
-              </legend>
+      <p
+        style="font-family: raleway"
+        class="text-red-500 font-bold text-sm md:text-base p-2"
+      >
+        {/= e.msg /}
+      </p>
 
+      {/ }) /}
+    </div>
 
-              {/ if(flash.formErrors.length ){ /}
+    {/ } /}
 
-              <div class="mx-auto bg-white px-4 py-1">
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="amount"> Amount </label>
+      <input
+        id="amount"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        type="text"
+        pattern="^(\d+(\.\d{0,9})?|\.?\d{1,2})$"
+        max="{/=customer.balance/}"
+        required
+        min="10"
+        name="amount"
+      />
+    </div>
 
-                     {/ flash.formErrors.map((e)=> { /}
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="beneficiary">
+        Beneficiary name:
+      </label>
+      <input
+        id="beneficiary"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        required
+        maxlength="35"
+        type="text"
+        name="beneficiary"
+      />
+    </div>
 
-                     <p style="font-family: raleway;"
-                        class="text-red-500 font-bold text-sm md:text-base p-2"> {/= e.msg /} </p>
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="beneficiaryEmail">
+        Beneficiary email:
+      </label>
+      <input
+        id="beneficiaryEmail"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        required
+        maxlength="35"
+        type="text"
+        name="beneficiaryEmail"
+      />
+    </div>
 
-                     {/ }) /}
-              </div>
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="accountNumber">
+        Account number:
+      </label>
+      <input
+        id="text"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        type="text"
+        required
+        maxlength="35"
+        pattern="^[0-9]+$"
+        name="accountNumber"
+      />
+    </div>
 
-              {/ } /}
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="bankName"> Bank name: </label>
+      <input
+        id="text"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        type="text"
+        required
+        maxlength="35"
+        name="bankName"
+      />
+    </div>
 
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='amount'> Amount </label>
-                     <input id='amount'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            type="text"
-                            pattern="^(\d+(\.\d{0,9})?|\.?\d{1,2})$"
-                            max='{/=customer.balance/}'
-                            required
-                            min="10"
-                            name="amount">
-              </div>
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="branchName"> Branch name: </label>
+      <input
+        id="branchName"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        required
+        type="text"
+        maxlength="35"
+        name="branchName"
+      />
+    </div>
 
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="swift"> Bank SWIFT code: </label>
+      <input
+        id="swift"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        type="text"
+        required
+        maxlength="35"
+        minlength="2"
+        name="swift"
+      />
+    </div>
 
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='beneficiary'> Beneficiary name: </label>
-                     <input id='beneficiary'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            required
-                            maxlength="35"
-                            type="text"
-                            name="beneficiary">
-              </div>
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="iban"> Bank IBAN: </label>
+      <input
+        id="iban"
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        type="text"
+        maxlength="35"
+        required
+        minlength="2"
+        name="iban"
+      />
+    </div>
 
+    <div class="mb-2 ml-4 text-white text-left py-3">
+      <label class="text-lg block py-2" for="currency"> Currency: </label>
+      <select
+        id="currency"
+        required
+        class="block w-10/12 py-2 rounded outline-none text-black pl-6"
+        name="currency"
+      >
+        <option selected disabled>Select currency</option>
 
+        <option value="dollars">Dollars</option>
+        <option value="pounds">Pounds</option>
+        <option value="euros">Euros</option>
+      </select>
+    </div>
 
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='beneficiaryEmail'> Beneficiary email: </label>
-                     <input id='beneficiaryEmail'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            required
-                            maxlength="35"
-                            type="text"
-                            name="beneficiaryEmail">
-              </div>
-
-
-
-
-              <div class="mb-2
-                            ml-4
-                            text-white
-                            text-left
-                            py-3">
-                     <label class="text-lg block py-2"
-                            for='accountNumber'> Account number: </label>
-                     <input id='text'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            type="text"
-                            required
-                            maxlength="35"
-                            pattern="^[0-9]+$"
-                            name="accountNumber">
-              </div>
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='bankName'> Bank name: </label>
-                     <input id='text'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            type="text"
-                            required
-                            maxlength="35"
-                            name="bankName">
-              </div>
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='branchName'> Branch name: </label>
-                     <input id='branchName'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            required
-                            type="text"
-                            maxlength="35"
-                            name="branchName">
-              </div>
-
-
-
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='swift'> Bank SWIFT code: </label>
-                     <input id='swift'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            type="text"
-                            required
-                            maxlength="35"
-                            minlength="2"
-                            name="swift">
-              </div>
-
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='iban'> Bank IBAN: </label>
-                     <input id='iban'
-                            class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                            type="text"
-                            maxlength="35"
-                            required
-                            minlength="2"
-                            name="iban">
-              </div>
-
-
-              <div class="mb-2 ml-4 text-white text-left py-3">
-                     <label class="text-lg block py-2"
-                            for='currency'> Currency: </label>
-                     <select id='currency'
-                             required
-                             class="block w-10/12 py-2 rounded outline-none text-black pl-6"
-                             name="currency">
-                            <option selected
-                                    disabled> Select currency</option>
-
-                            <option value="dollars"> Dollars</option>
-                            <option value="pounds"> Pounds</option>
-                            <option value="euros"> Euros</option>
-
-
-                     </select>
-
-
-              </div>
-
-
-
-
-              <!-- <div class="mb-2 ml-4 text-white text-left py-3">
+    <!-- <div class="mb-2 ml-4 text-white text-left py-3">
                      <label class="text-lg block py-2"
                             for="city"> City </label>
                      <input type="text"
@@ -201,11 +197,10 @@
                             name="country">
               </div> -->
 
-
-
-
-              <input type="submit"
-                     value="Proceed"
-                     class="w-11/12 mt-12 mb-6 cursor-pointer block bg-blue-500 hover:bg-white hover:text-gray-700 text-white mx-auto text-black ring-1 ring-white rounded text-xl p-3">
-       </form>
+    <input
+      type="submit"
+      value="Proceed"
+      class="w-11/12 mt-12 mb-6 cursor-pointer block bg-purple-500 hover:bg-white hover:text-gray-700 text-white mx-auto text-black ring-1 ring-white rounded text-xl p-3"
+    />
+  </form>
 </div>

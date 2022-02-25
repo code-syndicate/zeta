@@ -1,93 +1,92 @@
 <div class="overflow-x-scroll overflow-y-scroll mt-12">
+  <p
+    style="font-family: raleway"
+    class="font-bold text-center text-white py-2 text-xl"
+  >
+    Manage debits
+  </p>
 
-    <p style="font-family: raleway;"
-       class="font-bold text-center text-white py-2 text-xl "> Manage debits </p>
+  <table class="w-full mx-1 md:mx-auto">
+    <tr
+      class="font-bold text-white text-center bg-gray-800"
+      style="font-family: work sans"
+    >
+      <th>Actions</th>
 
+      <th>Client</th>
+      <th>Amount</th>
+      <th class="pb-4">Timestamp</th>
+      <th>Recipient account number</th>
+      <th>Recipient account name</th>
+      <th>Recipient bank name</th>
+      <th>Bank branch name</th>
 
-    <table class="w-full mx-1 md:mx-auto">
-        <tr class="font-bold text-white text-center bg-gray-800"
-            style="font-family: work sans;">
-            <th> Actions </th>
-
-            <th> Client </th>
-            <th> Amount </th>
-            <th class="pb-4"> Timestamp </th>
-            <th> Recipient account number </th>
-            <th> Recipient account name </th>
-            <th> Recipient bank name </th>
-            <th> Bank branch name </th>
-
-            <th> IBAN </th>
-            <th> SWIFT </th>
-            <!-- <th> Recipient bank address </th>
+      <th>IBAN</th>
+      <th>SWIFT</th>
+      <!-- <th> Recipient bank address </th>
             <th> Recipient bank city </th>
             <th> Recipient bank state </th>
 
             <th> Recipient bank country </th> -->
-            <th> Status </th>
+      <th>Status</th>
+    </tr>
+    {/ debits.map((c)=>{ /}
 
+    <tr
+      style="font-family: raleway"
+      class="text-white py-4 md:py-2 text-lg md:text-xl text-center bg-purple-400 hover:bg-purple-300 cursor-pointer"
+    >
+      <td class="px-4">
+        <a href="/manage/delete-debit/{/= c._id /}">
+          <i
+            title="Delete"
+            class="bi-trash p-2 hover:text-red-500 cursor-pointer"
+          ></i
+        ></a>
 
+        {/ if(!c.approved){ /}
+        <a
+          class="text-xs px-4 cursor-pointer block py-1 bg-green-500 hover:bg-green-400"
+          href="/manage/D/{/= c._id /}/approve"
+        >
+          Approve
+        </a>
+        {/ } else { /}
+        <a
+          class="text-xs px-4 cursor-pointer block py-2 bg-red-500 hover:bg-red-400"
+          href="/manage/D/{/= c._id /}/revoke"
+        >
+          Revoke
+        </a>
+        {/ } /}
+      </td>
 
+      <td class="px-4">{/= c.issuer.email /}</td>
+      <td class="px-4">${/= numeral(c.amount) /}</td>
+      <td class="px-4">{/= c.timestamp.toLocaleString() /}</td>
+      <td class="px-4">{/= c.destination.accountNumber /}</td>
+      <td class="px-4">{/= c.destination.accountName || 'null' /}</td>
 
+      <td class="px-4">{/= c.destination.bankName || 'null' /}</td>
+      <td class="px-4">{/= c.destination.branchName || 'null' /}</td>
 
-        </tr>
-        {/ debits.map((c)=>{ /}
-
-        <tr style="font-family: raleway;"
-            class="text-white py-4 md:py-2 text-lg md:text-xl text-center bg-blue-400 hover:bg-blue-300 cursor-pointer">
-            <td class="px-4">
-
-                <a href='/manage/delete-debit/{/= c._id /}'> <i title="Delete"
-                       class="bi-trash p-2 hover:text-red-500 cursor-pointer"></i></a>
-
-
-                {/ if(!c.approved){ /}
-                <a class="text-xs px-4 cursor-pointer block py-1 bg-green-500 hover:bg-green-400"
-                   href='/manage/D/{/= c._id /}/approve'> Approve </a>
-                {/ } else { /}
-                <a class="text-xs px-4 cursor-pointer block py-2 bg-red-500 hover:bg-red-400"
-                   href='/manage/D/{/= c._id /}/revoke'> Revoke </a>
-                {/ } /}
-
-
-
-
-            </td>
-
-            <td class="px-4"> {/= c.issuer.email /}</td>
-            <td class="px-4"> ${/= numeral(c.amount) /}</td>
-            <td class="px-4"> {/= c.timestamp.toLocaleString() /}</td>
-            <td class="px-4"> {/= c.destination.accountNumber /}</td>
-            <td class="px-4"> {/= c.destination.accountName || 'null' /}</td>
-
-            <td class="px-4"> {/= c.destination.bankName || 'null' /}</td>
-            <td class="px-4"> {/= c.destination.branchName || 'null' /}</td>
-
-            <td class="px-4"> {/= c.destination.bankIban /}</td>
-            <td class="px-4"> {/= c.destination.bankSwift /}</td>
-            <!-- <td class="px-4"> {/= c.destination.bankAddress /}</td>
+      <td class="px-4">{/= c.destination.bankIban /}</td>
+      <td class="px-4">{/= c.destination.bankSwift /}</td>
+      <!-- <td class="px-4"> {/= c.destination.bankAddress /}</td>
 
             <td class="px-4"> {/= c.destination.bankCity /}</td>
             <td class="px-4"> {/= c.destination.bankState /}</td>
             <td class="px-4"> {/= c.destination.bankCountry /}</td> -->
 
-            {/ if(!c.approved){ /}
-            <td class="px-4 font-bold text-red-500 bg-gray-200 text-xs"> REVOKED </td>
-            {/ } else { /}
-            <td class="px-4 font-bold text-green-500 bg-gray-200 text-xs"> APPROVED </td>
-            {/ } /}
+      {/ if(!c.approved){ /}
+      <td class="px-4 font-bold text-red-500 bg-gray-200 text-xs">REVOKED</td>
+      {/ } else { /}
+      <td class="px-4 font-bold text-green-500 bg-gray-200 text-xs">
+        APPROVED
+      </td>
+      {/ } /}
+    </tr>
 
-
-
-
-
-        </tr>
-
-        {/ }) /}
-
-
-    </table>
-
-
-
+    {/ }) /}
+  </table>
 </div>
