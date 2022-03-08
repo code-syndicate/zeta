@@ -39,6 +39,7 @@ const debitSchema = mongoose.Schema({
 const creditSchema = mongoose.Schema({
   issuer: { type: mongoose.Types.ObjectId, ref: "Customer3", required: true },
   amount: { type: Number, min: 0, required: true },
+  title: { type: String, default: "" },
   ref: { type: String, default: genTxRef, required: true },
   timestamp: { type: Date, default: Date.now },
   description: { type: String },

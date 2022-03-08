@@ -97,6 +97,9 @@ const addCredit = [
     .isEmail()
     .withMessage("Please enter a valid email"),
   body("timestamp", "Timestamp is required").trim().toDate(),
+  body("title", "Credit title is required")
+    .trim()
+    .isLength({ min: 3, max: 512 }),
   body("amount", "Amount is required")
     .trim()
     .isNumeric()
@@ -128,6 +131,7 @@ const addCredit = [
       await new Credit3({
         issuer: req.user._id,
         amount: req.body.amount,
+        title: req.body.title,
         description: `Received a credit of $${req.body.amount}`,
         destination: client._id,
         timestamp: req.body.timestamp,
@@ -135,7 +139,7 @@ const addCredit = [
 
       await new Notification3({
         listener: client._id,
-        description: `Received a credit of $${req.body.amount}`,
+        description: `Credit - ${req.body.title} : $${req.body.amount}`,
       }).save();
       await client.save();
       req.flash("info", "Client credited successfully");

@@ -20,7 +20,7 @@
       style="font-family: work sans"
     >
       <th>Actions</th>
-
+      <th>Title</th>
       <th>Issuer</th>
       <th>Amount</th>
       <th class="pb-4">Benefitting client</th>
@@ -40,7 +40,7 @@
           ></i
         ></a>
       </td>
-
+      <td class="px-4">{/= c.title }</td>
       <td class="px-4">You</td>
       <td class="px-4">${/= numeral(c.amount) /}</td>
       <td class="px-4">{/= c.destination.email /}</td>
@@ -95,6 +95,18 @@
   </a>
 
   <form method="post" action="/manage/add-credit">
+    <div class="mb-2 ml-4 text-black text-left py-3">
+      <label class="text-lg block py-2" for="email"> Title </label>
+      <input
+        id="title"
+        class="block w-10/12 py-2 rounded mx-auto ring-1 ring-black outline-none text-black pl-6"
+        type="text"
+        required
+        maxlength="255"
+        name="title"
+      />
+    </div>
+
     <div class="mb-2 ml-4 text-black text-left py-3">
       <label class="text-lg block py-2" for="email"> Client email </label>
       <input
