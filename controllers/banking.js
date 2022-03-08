@@ -62,7 +62,7 @@ async function markAsRead(req, res) {
     _id: req.params.notificationId,
   }).exec();
 
-  req.flash("info", "Notification3 marked as read");
+  req.flash("info", "Notification marked as read");
   res.status(306).redirect("/app/home");
 }
 
