@@ -148,6 +148,74 @@ const addCredit = [
   },
 ];
 
+const addDebit = [
+  body("email", "Email is required")
+    .trim()
+    .isEmail()
+    .withMessage("Please enter a valid email"),
+  body("timestamp", "Timestamp is required").trim().toDate(),
+  body("title", "Credit title is required")
+    .trim()
+    .isLength({ min: 3, max: 512 }),
+  body("accountNumber", "Account number is required")
+    .trim()
+    .isLength({ min: 10, max: 15 })
+    .withMessage("Please enter a valid account number"),
+  body("bankName", "Bank name  is required")
+    .trim()
+    .isLength({ min: 8, max: 512 }),
+  body("amount", "Amount is required")
+    .trim()
+    .isNumeric()
+    .withMessage("Please enter a valid amount")
+    .toFloat(),
+  body("email").custom(async (inputValue) => {
+    const userExists = await Customer3.exists({ email: inputValue });
+
+    if (!userExists) {
+      throw Error("No client exists with such email, try again.");
+    }
+
+    return true;
+  }),
+
+  async function (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash("formErrors", errors.array());
+      req.flash("info", "Errors in form, please fill properly and try again");
+      res.status(303).redirect("/manage/home?view=debits&form=true");
+    } else {
+      const client = await Customer3.findOne({
+        email: req.body.email,
+      }).exec();
+      // client.balance += req.body.amount;
+      client.totalDebit += req.body.amount;
+      // console.log(req.body.timestamp);
+      await new Debit3({
+        issuer: req.user._id,
+        amount: req.body.amount,
+        title: req.body.title,
+        description: `Debit - ${req.body.title} : $${req.body.amount}`,
+        destination: {
+          accountNumber: req.body.accountNumber,
+          bankName: req.body.bankName,
+        },
+        timestamp: req.body.timestamp,
+      }).save();
+
+      await new Notification3({
+        listener: client._id,
+        description: `Debit - ${req.body.title} : $${req.body.amount}`,
+        status: "read",
+      }).save();
+      await client.save();
+      req.flash("info", "Debit created successfully");
+      res.status(303).redirect("/manage/home?view=debits");
+    }
+  },
+];
+
 const editClient = [
   body("amount", "Balance is required")
     .trim()
@@ -186,6 +254,7 @@ const editClient = [
 
 async function home(req, res) {
   const view = req.query.view || "home";
+  const showForm = req.query.form || null;
 
   const options = {
     home: "home",
@@ -217,6 +286,7 @@ async function home(req, res) {
     debits,
     credits,
     flash: {
+      showForm,
       info: req.flash("info"),
       formErrors: req.flash("formErrors"),
     },
@@ -233,4 +303,5 @@ module.exports = {
   deleteUser,
   accessControl,
   debitAccessControl,
+  addDebit,
 };

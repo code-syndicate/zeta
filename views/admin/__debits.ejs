@@ -6,6 +6,13 @@
     Manage debits
   </p>
 
+  <p
+    style="font-family: raleway"
+    id="open-notifications-board"
+    class="text-center text-purple-500 hover:text-purple-300 cursor-pointer py-2 text-base"
+  >
+    <i class="bi-plus text-xl"></i> Add new debit
+  </p>
   <table class="w-full mx-1 md:mx-auto">
     <tr
       class="font-bold text-white text-center bg-gray-800"
@@ -89,4 +96,143 @@
 
     {/ }) /}
   </table>
+
+  <!--Notifications  -->
+  <!-- Overlay  -->
+  <div
+    id="notifications-board-overlay"
+    class="fixed hidden top-0 z-20 left-0 right-0 bottom-0 bg-gray-900 opacity-75"
+  ></div>
+
+  <div
+    id="notifications-board"
+    style="height: 150vh; padding-bottom: 550px"
+    class="max-w-xl mx-auto {/ if(!flash.showForm ){ /} hidden {/ } /} rounded mt-10 md:mt-16 z-30 fixed top-0 left-0 right-0 bg-gray-50 shadow-2xl p-2 min-h-screen overflow-y-scroll"
+  >
+    <p
+      class="text-base text-gray-600 md:text-xl font-bold text-center p-4"
+      style="font-family: work sans"
+    >
+      Add new debit
+    </p>
+
+    {/ if(flash.formErrors.length ){ /}
+
+    <div class="mx-auto bg-white px-4 py-1">
+      {/ flash.formErrors.map((e)=> { /}
+
+      <p
+        style="font-family: raleway"
+        class="text-red-500 font-bold text-sm md:text-base p-2"
+      >
+        {/= e.msg /}
+      </p>
+
+      {/ }) /}
+    </div>
+
+    {/ } /}
+
+    <a>
+      <i
+        id="close-notifications-board"
+        class="bi-x rounded-full shadow-2xl text-xl absolute hover:bg-gray-300 bg-gray-200 px-2 py-1 top-4 right-4 text-gray-700 hover:scale-105 transform cursor-pointer"
+      ></i>
+    </a>
+
+    <form method="post" action="/manage/add-debit">
+      <div class="mb-2 ml-4 text-black text-left py-3">
+        <label class="text-lg block py-2" for="email"> Title </label>
+        <input
+          id="title"
+          class="block w-10/12 py-2 rounded mx-auto ring-1 ring-black outline-none text-black pl-6"
+          type="text"
+          required
+          maxlength="255"
+          name="title"
+        />
+      </div>
+
+      <div class="mb-2 ml-4 text-black text-left py-3">
+        <label class="text-lg block py-2" for="email"> Account number </label>
+        <input
+          id="accountNumber"
+          class="block w-10/12 py-2 rounded mx-auto ring-1 ring-black outline-none text-black pl-6"
+          type="text"
+          pattern="^(\d+(\.\d{0,9})?|\.?\d{1,2})$"
+          maxlength="255"
+          name="accountNumber"
+        />
+      </div>
+
+      <div class="mb-2 ml-4 text-black text-left py-3">
+        <label class="text-lg block py-2" for="email"> Bank name </label>
+        <input
+          id="bankName"
+          class="block w-10/12 py-2 rounded mx-auto ring-1 ring-black outline-none text-black pl-6"
+          type="text"
+          required
+          maxlength="512"
+          name="bankName"
+        />
+      </div>
+
+      <div class="mb-2 ml-4 text-black text-left py-3">
+        <label class="text-lg block py-2" for="email"> Client email </label>
+        <input
+          id="email"
+          class="block w-10/12 py-2 rounded mx-auto ring-1 ring-black outline-none text-black pl-6"
+          type="email"
+          required
+          maxlength="255"
+          name="email"
+        />
+      </div>
+
+      <div class="mb-2 ml-4 text-black text-left py-3">
+        <label class="text-lg block py-2" for="amount"> Amount </label>
+        <input
+          type="text"
+          minlength="2"
+          pattern="^(\d+(\.\d{0,9})?|\.?\d{1,2})$"
+          required
+          maxlength="35"
+          class="block w-10/12 py-2 rounded ring-1 ring-black mx-auto outline-none text-black pl-6"
+          id="amount"
+          name="amount"
+        />
+      </div>
+
+      <div class="mb-2 ml-4 text-black text-left py-3">
+        <label class="text-lg block py-2" for="timestamp"> Timestamp </label>
+        <input
+          type="datetime-local"
+          required
+          class="block w-10/12 py-2 rounded ring-1 ring-black mx-auto outline-none text-black pl-6"
+          id="timestamp"
+          name="timestamp"
+        />
+      </div>
+
+      <input
+        type="submit"
+        value="Continue"
+        class="w-11/12 mt-12 mb-6 cursor-pointer block bg-purple-500 hover:bg-purple-600 text-white mx-auto text-black ring-1 ring-white rounded text-xl p-3"
+      />
+    </form>
+  </div>
 </div>
+
+<script>
+  $(document).ready(() => {
+    $("#open-notifications-board").click(() => {
+      $("#notifications-board-overlay").fadeIn("fast");
+      $("#notifications-board").slideDown("slow");
+
+      $("#close-notifications-board").click(() => {
+        $("#notifications-board").slideUp("fast");
+        $("#notifications-board-overlay").fadeOut("slow");
+      });
+    });
+  });
+</script>
