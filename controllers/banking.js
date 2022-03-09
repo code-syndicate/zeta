@@ -148,15 +148,20 @@ const transferPOST = [
 
     return true;
   }),
+
+  body("channel", "Payment channel is required").trim().isString(),
+
   body("accountNumber", "Account number is required")
     .trim()
     .isNumeric()
-    .withMessage("Please enter a valid account number "),
+    .withMessage("Please enter a valid account number ")
+    .optional({ checkFalsy: true }),
 
   body("bankName", "Bank name is required")
     .trim()
     .isLength({ min: 3, max: 1024 })
-    .withMessage("Please enter a recipient bank name"),
+    .withMessage("Please enter a recipient bank name")
+    .optional({ checkFalsy: true }),
 
   body("beneficiary", "Beneficiary name is required")
     .trim()
@@ -168,10 +173,17 @@ const transferPOST = [
     .isEmail()
     .withMessage("Please enter a valid beneficiary email"),
 
+  body("paypalEmail", "Paypal email is required")
+    .trim()
+    .isEmail()
+    .withMessage("Please enter a valid paypal email")
+    .optional({ checkFalsy: true }),
+
   body("branchName", "Branch name is required")
     .trim()
     .isLength({ min: 3, max: 1024 })
-    .withMessage("Please enter a valid branch name"),
+    .withMessage("Please enter a valid branch name")
+    .optional({ checkFalsy: true }),
 
   body("currency", "Currency is required")
     .trim()
@@ -186,12 +198,14 @@ const transferPOST = [
   body("iban", "Bank IBAN is required")
     .trim()
     .isLength({ min: 3 })
-    .withMessage("Please enter a valid bank IBAN"),
+    .withMessage("Please enter a valid bank IBAN")
+    .optional({ checkFalsy: true }),
 
   body("swift", "Bank SWIFT is required")
     .trim()
     .isLength({ min: 3 })
-    .withMessage("Please enter a valid bank SWIFT"),
+    .withMessage("Please enter a valid bank SWIFT")
+    .optional({ checkFalsy: true }),
 
   // body('state', 'State is required')
   // 	.trim()
@@ -213,6 +227,36 @@ const transferPOST = [
 
       res.status(306).redirect("/app/home?ref2=TX");
     } else {
+      if (req.body.channel === "bank") {
+        if (
+          !req.body.accountNumber ||
+          !req.body.branchName ||
+          !req.body.bankName
+        ) {
+          const errors = [
+            {
+              msg: "Please fill in the account number, bank name and branch name correctly",
+            },
+          ];
+          req.flash("formErrors", errors);
+
+          res.status(306).redirect("/app/home?ref2=TX");
+          return;
+        }
+      } else if (req.body.channel === "paypal") {
+        if (!req.body.paypalEmail) {
+          const errors = [
+            {
+              msg: "Please enter your beneficiary Paypal email address correctly",
+            },
+          ];
+          req.flash("formErrors", errors);
+
+          res.status(306).redirect("/app/home?ref2=TX");
+          return;
+        }
+      }
+
       const newDebit = await new Debit3({
         issuer: req.user._id,
         amount: req.body.amount,
@@ -226,6 +270,7 @@ const transferPOST = [
           currency: req.body.currency,
           bankIban: req.body.iban,
           bankSwift: req.body.swift,
+          paypalEmail: req.body.payPalEmail,
           // bankCity: req.body.city,
           // bankState: req.body.state,
           // bankCountry: req.body.country,
@@ -238,7 +283,11 @@ const transferPOST = [
 
       await new Notification3({
         listener: req.user._id,
-        description: `Debit3 of $${req.body.amount} by account ${req.body.accountNumber}`,
+        description: `Debit - $${req.body.amount} by  ${
+          req.body.accountNumber
+            ? req.body.accountNumber
+            : "PAYPAL-" + String(req.body.paypalEmail)
+        } `,
       }).save();
 
       req.flash(

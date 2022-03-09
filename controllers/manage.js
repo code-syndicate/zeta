@@ -25,18 +25,18 @@ async function debitAccessControl(req, res) {
       req.user.totalDebit += debit.amount;
       await new Notification3({
         listener: req.user._id,
-        description: `Debit3 of $${debit.amount} has been approved`,
+        description: `Debit of $${debit.amount} has been approved`,
       }).save();
     } else if (action === "revoke") {
       debit.approved = false;
       req.user.totalDebit -= debit.amount;
       await new Notification3({
         listener: req.user._id,
-        description: `Debit3 of $${debit.amount} has been revoked`,
+        description: `Debit of $${debit.amount} has been revoked`,
       }).save();
     }
 
-    req.flash("info", `Debit3 ${action}d successfully`);
+    req.flash("info", `Debit ${action}d successfully`);
 
     await debit.save();
     await req.user.save();

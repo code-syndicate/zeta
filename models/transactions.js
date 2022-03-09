@@ -16,9 +16,6 @@ const debitSchema = mongoose.Schema({
   destination: {
     accountNumber: {
       type: String,
-      minLength: 8,
-      maxLength: 20,
-      required: true,
     },
     accountName: {
       type: String,
@@ -27,6 +24,7 @@ const debitSchema = mongoose.Schema({
     // bankAddress: {type: String, required: true},
     branchName: { type: String },
     bankName: { type: String },
+    paypalEmail: { type: String },
 
     currency: { type: String },
     bankIban: { type: String },
