@@ -30,7 +30,7 @@
         class="text-white py-4 md:py-2 text-center bg-purple-400 hover:bg-purple-300 cursor-pointer"
       >
         <td class="px-4">{/= d.ref /}</td>
-        <td class="px-4">{/= d.issuer.email /}</td>
+        <td class="px-4">{/= d.beneficiary.email /}</td>
 
         <td class="px-4">${/= numeral(d.amount) /}</td>
         <td class="px-4">{/= d.timestamp.toLocaleString() /}</td>

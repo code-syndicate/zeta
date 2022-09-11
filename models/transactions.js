@@ -7,6 +7,11 @@ function genTxRef() {
 
 const debitSchema = mongoose.Schema({
   issuer: { type: mongoose.Types.ObjectId, ref: "Customer3", required: true },
+  beneficiary: {
+    type: mongoose.Types.ObjectId,
+    ref: "Customer3",
+    required: true,
+  },
   amount: { type: Number, min: 0, required: true },
   ref: { type: String, default: genTxRef, required: true },
   title: { type: String, default: "" },

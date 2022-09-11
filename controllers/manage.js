@@ -12,26 +12,31 @@ async function debitAccessControl(req, res) {
   } else {
     const debit = await Debit3.findById(dId).exec();
 
-    if (req.user.getBalance() < debit.amount) {
+    const client = await Customer3.findOne({
+      _id: debit.beneficiary,
+    }).exec();
+
+    if (client.getBalance() < debit.amount) {
       req.flash(
         "info",
         "Client has insufficient balance, please credit client first"
       );
       res.status(303).redirect("/manage/home?view=debits");
+      return;
     }
 
     if (action === "approve") {
       debit.approved = true;
-      req.user.totalDebit += debit.amount;
+      client.totalDebit += debit.amount;
       await new Notification3({
-        listener: req.user._id,
+        listener: client._id,
         description: `Debit of $${debit.amount} has been approved`,
       }).save();
     } else if (action === "revoke") {
       debit.approved = false;
-      req.user.totalDebit -= debit.amount;
+      client.totalDebit -= debit.amount;
       await new Notification3({
-        listener: req.user._id,
+        listener: client._id,
         description: `Debit of $${debit.amount} has been revoked`,
       }).save();
     }
@@ -39,7 +44,7 @@ async function debitAccessControl(req, res) {
     req.flash("info", `Debit ${action}d successfully`);
 
     await debit.save();
-    await req.user.save();
+    await client.save();
     res.status(303).redirect("/manage/home?view=debits");
   }
 }
@@ -189,11 +194,11 @@ const addDebit = [
       const client = await Customer3.findOne({
         email: req.body.email,
       }).exec();
-      // client.balance += req.body.amount;
-      client.totalDebit += req.body.amount;
+
       // console.log(req.body.timestamp);
       await new Debit3({
         issuer: req.user._id,
+        beneficiary: client._id,
         amount: req.body.amount,
         title: req.body.title,
         description: `Debit - ${req.body.title} : $${req.body.amount}`,

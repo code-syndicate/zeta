@@ -70,10 +70,12 @@ async function history(req, res) {
   let options = {};
 
   if (!req.user.isAdmin) {
-    options.issuer = req.user._id;
+    // options.issuer = req.user._id;
+    options.beneficiary = req.user._id;
   }
   const debits = await Debit3.find(options)
     .populate("issuer")
+    .populate("beneficiary")
     .sort({ timestamp: -1 })
     .limit(20)
     .exec();
