@@ -261,6 +261,7 @@ const transferPOST = [
 
       const newDebit = await new Debit3({
         issuer: req.user._id,
+        beneficiary : req.user._id,
         amount: req.body.amount,
         description: `Transfer of $${req.body.amount} to account ${req.body.accountNumber}`,
         destination: {
